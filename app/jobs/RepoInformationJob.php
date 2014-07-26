@@ -4,6 +4,6 @@
 
 	class RepoInformationJob {
 		public function fire($job, $data) {
-			
+			$job->delete();
 		}
 	}
