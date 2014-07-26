@@ -36,6 +36,8 @@
 
 				Session::put('github.token', $Token->accessToken);
 
+				Queue::push('RepoSynchronizationJob', array('github_token' => $Token->accessToken));
+
 				return Redirect::to('user');
 			}else{
 				return Redirect::to('/')->with('error', 'Expired signin session.');

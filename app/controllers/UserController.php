@@ -1,5 +1,7 @@
 <?php
 
+	use \Github;
+
 	class UserController extends BaseController {
 
 		public function showIndex() {
