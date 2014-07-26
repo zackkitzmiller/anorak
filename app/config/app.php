@@ -188,6 +188,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'GitHubOAuth'     => 'League\OAuth2\Client\Provider\Github',
+		'Uuid'            => 'Webpatser\Uuid\Uuid',
 
 	),
 

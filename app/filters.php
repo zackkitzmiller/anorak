@@ -33,6 +33,10 @@ App::after(function($request, $response)
 |
 */
 
+Route::filter('nobody', function() {
+	return !Auth::check();
+});
+
 Route::filter('auth', function()
 {
 	if (Auth::guest())
@@ -43,7 +47,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::to('/');
 		}
 	}
 });
