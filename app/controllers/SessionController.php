@@ -1,11 +1,8 @@
 <?php 
 
 	use \League\OAuth2\Client\Provider\GitHub as OAuth;
-	use \GitHub\Client;
 
 	class SessionController extends BaseController {
-		const USER_AGENT = 'Anorak';
-
 		private $Provider;
 
 		public function __construct() {
@@ -36,6 +33,8 @@
 				));
 
 				Auth::login($User);
+
+				Session::put('github.token', $Token->accessToken);
 
 				return Redirect::to('user');
 			}else{
