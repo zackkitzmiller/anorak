@@ -20,6 +20,13 @@
 					'private'          => $aRepo['private'] == 1 ? 1 : 0,
 					'in_organization'  => $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0
 				));
+
+				$RepoID = DB::getPdo()->lastInsertId();
+
+				Membership::firstOrCreate(array(
+					'repo_id' => $RepoID,
+					'user_id' => $data['user_id']
+				));
 			}
 
 			$job->delete();

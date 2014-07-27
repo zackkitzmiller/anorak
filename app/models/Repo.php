@@ -1,7 +1,16 @@
 <?php 
 
+	use \Github\Client as GithubClient;
+
 	class Repo extends Eloquent {
 		protected $fillable = array('github_id', 'full_github_name', 'private', 'active', 'hook_id', 'in_organization');
+
+		protected $Client;
+
+		public function __construct() {
+			$this->Client = new GithubClient;
+			$this->Client->authenticate($_ENV['GITHUB_CLIENT_ID'], Session::get('github.token'));
+		}
 
 		public function users() {
 			return $this->hasManyThrough('User', 'Memberships', 'user_id', 'id');
@@ -13,6 +22,31 @@
 
 		public function builds() {
 			return $this->hasMany('Build', 'build_id', 'id');
+		}
+
+		public function addAnorakToRepo($Repo) {
+			list($Username, $RepoName) = explode('/', $Repo);
+
+			return $this->Client->api('repo')->collaborators()->add($Username, $RepoName, 'anorakci');
+		}
+
+		public function addBuildHookToRepo($Repo) {
+			list($Username, $RepoName) = explode('/', $Repo);
+
+			return $this->Client->api('repo')->hooks()->create($Username, $RepoName, array(
+				'name' => 'web',
+				'config' => array(
+					'url' => Config::get('app.url') . '/build/' . $this->id,
+					'content_type' => 'json',
+				),
+				'events' => array('pull_request')
+			));
+		}
+
+		public function activate($HookID) {
+			$this->active = 1;
+			$this->hook_id = $HookID;
+			return $this->update();
 		}
 
 		public function deactivate() {

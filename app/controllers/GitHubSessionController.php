@@ -36,7 +36,7 @@
 
 				Session::put('github.token', $Token->accessToken);
 
-				Queue::push('RepoSynchronizationJob', array('github_token' => $Token->accessToken));
+				Queue::push('RepoSynchronizationJob', array('github_token' => $Token->accessToken, 'user_id' => Auth::user()->id));
 
 				return Redirect::to('user');
 			}else{

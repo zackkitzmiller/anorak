@@ -14,11 +14,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $fillable = array('github_username', 'email_address');
 
 	public function memberships() {
-		return $this->hasMany('Membership', 'agent_id', 'id');
+		return $this->hasMany('Membership', 'user_id', 'id');
 	}
 
 	public function repos() {
-		return $this->hasManyThrough('Repo', 'Membership', 'agent_id', 'id');
+		return $this->hasManyThrough('Repo', 'Membership', 'user_id', 'id');
 	}
 
 	public function createGitHubRepo($Attr) {

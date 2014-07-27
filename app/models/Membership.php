@@ -1,6 +1,8 @@
 <?php 
 
 	class Membership extends Eloquent {
+		protected $fillable = array('user_id', 'repo_id');
+
 		public function user() {
 			return $this->belongsTo('User', 'user_id', 'id');
 		}
