@@ -1,6 +1,7 @@
 <?php 
 
 	use \Github\Client as GithubClient;
+	use \PHP_CodeSniffer as Sniffer;
 
 	class BuildController extends BaseController {
 		protected $Client;
@@ -22,8 +23,6 @@
 					'ping' => 'OK'
 				));
 			}
-			
-			// return $Payload['pull_request'];
 
 			// Get the files changed by the pull request.
 			// @TODO: Parse these files and keep the "violations"
@@ -32,35 +31,29 @@
 				$FileName = $File['filename'];
 				$SHA      = $File['sha'];
 
-				/*$ContentsURL = 'repos/'.rawurlencode($User).'/'.rawurlencode($RepoName).'/contents/'.$FileName;
-				$this->Client->getHttpClient()->setHeaders(['Accept' => 'application/vnd.github.v3.raw']);
-				$FileRequest = $this->Client->getHttpClient()->get($ContentsURL, array(
-		            'ref' => $Payload['pull_request']['head']['ref']
-		        ));
-		        $FileContents = Github\HttpClient\Message\ResponseMediator::getContent($FileRequest);
-
-				return $FileContents;*/
-
-				// return $Payload['pull_request'];
-
 				$FileContents = $this->Client->api('repos')->contents()->download($User, $RepoName, $FileName, $Payload['pull_request']['head']['ref']);
 
-				return $FileContents;
+				$TMPFileName = '/tmp/' . date('U') . sha1($FileName) . '.cs.php';
+				file_put_contents($TMPFileName, $FileContents);
 
-				// dd(base64_decode($FileContents['content']));
+				$Sniff = new Sniffer;
+				$Results = $Sniff->process($TMPFileName, 'Generic');
+				dd($Results);
+
+				try {
+
+					$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload['number'], array(
+						// 'pull_request_number' => $Payload['number'],
+						'body'                => 'Testing replying on a commit from Anorak!',
+						'commit_id'           => $Payload['pull_request']['head']['sha'],
+						'path'                => $FileName,
+						'position'            => 4
+					));
+				} catch (Exception $e) {
+					Log::error($e);
+				}
 			}
 
-			try {
-				$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload['number'], array(
-					// 'pull_request_number' => $Payload['number'],
-					'body'                => 'Testing replying on a commit from Anorak!',
-					'commit_id'           => $Payload['pull_request']['head']['sha'],
-					'path'                => 'app/jobs/LargeBuildJob.php',
-					'position'            => 2
-				));
-			} catch (Exception $e) {
-				Log::error($e);
-			}
 
 			if($Payload['pull_request']['changed_files'] < $_ENV['CHANGED_FILES_THRESHOLD']) {
 				// Queue::push('SmallBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'high');
