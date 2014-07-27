@@ -8,8 +8,12 @@
 		protected $Client;
 
 		public function __construct() {
-			$this->Client = new GithubClient;
-			$this->Client->authenticate($_ENV['GITHUB_CLIENT_ID'], Session::get('github.token'));
+			try {
+				$this->Client = new GithubClient;
+				$this->Client->authenticate($_ENV['GITHUB_CLIENT_ID'], Session::get('github.token'));
+			} catch (Exception $e) {
+				
+			}
 		}
 
 		public function users() {
