@@ -3,6 +3,8 @@
 	use \Github;
 
 	class RepoSynchronizationJob {
+		const ORGANIZATION_TYPE = 'Organization';
+
 		public function fire($job, $data) {
 			$Client= new GitHub\Client();
 			$Client->authenticate($_ENV['GITHUB_CLIENT_ID'], $data['github_token']);
@@ -15,7 +17,8 @@
 				Repo::firstOrCreate(array(
 					'github_id'        => $aRepo['id'],
 					'full_github_name' => $aRepo['full_name'],
-					'private'          => $aRepo['private'] == 1 ? 1 : 0
+					'private'          => $aRepo['private'] == 1 ? 1 : 0,
+					'in_organization'  => $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0
 				));
 			}
 
