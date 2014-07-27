@@ -50,7 +50,7 @@ return array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
 			'database'  => 'anorak',
-			'username'  => 'anorakci',
+			'username'  => 'anorak',
 			'password'  => 'btbcwfibtywc!',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
