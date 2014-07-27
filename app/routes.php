@@ -8,3 +8,5 @@
 		Route::get('user', 'UserController@showIndex');
 		Route::get('user/logout', 'UserController@logoutAction');
 	});
+
+	Route::resource('build', 'BuildController');
