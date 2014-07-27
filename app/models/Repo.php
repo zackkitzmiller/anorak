@@ -43,6 +43,18 @@
 			));
 		}
 
+		public function removeAnorakFromRepo($Repo) {
+			list($Username, $RepoName) = explode('/', $Repo);
+
+			return $this->Client->api('repo')->collaborators()->remove($Username, $RepoName, 'anorakci');
+		}
+
+		public function removeBuildHookFromRepo($Repo) {
+			list($Username, $RepoName) = explode('/', $Repo);
+
+			return $this->Client->api('repo')->hooks()->remove($Username, $RepoName, $this->hook_id);
+		}
+
 		public function activate($HookID) {
 			$this->active = 1;
 			$this->hook_id = $HookID;

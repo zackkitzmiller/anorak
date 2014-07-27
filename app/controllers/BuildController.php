@@ -1,31 +1,7 @@
 <?php 
 
 	class BuildController extends BaseController {
-		public function index() {
-			
-		}
-
-		public function create() {
-			
-		}
-
-		public function store() {
-			
-		}
-
-		public function show() {
-			
-		}
-
-		public function edit() {
-			
-		}
-
-		public function update() {
-			
-		}
-
-		public function destroy() {
+		public function build(Repo $Repo) {
 			
 		}
 	}

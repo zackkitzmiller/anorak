@@ -1,5 +1,7 @@
 <?php
 
+	Route::model('repo_id', 'Repo');
+
 	Route::get('/', 'HomeController@showIndex');
 	Route::get('auth/github', 'GitHubSessionController@authAction');
 	Route::get('auth/github/callback', 'GitHubSessionController@authCallbackAction');
@@ -8,9 +10,8 @@
 		Route::get('user', 'UserController@showIndex');
 		Route::get('user/logout', 'UserController@logoutAction');
 
-		Route::model('repo_id', 'Repo');
 		Route::get('repo/{repo_id}/activate', 'RepoController@activate');
 		Route::get('repo/{repo_id}/deactivate', 'RepoController@deactivate');
 	});
 
-	Route::resource('build', 'BuildController');
+	Route::post('build/{repo_id}', 'BuildController@build');
