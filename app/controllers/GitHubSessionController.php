@@ -2,7 +2,7 @@
 
 	use \League\OAuth2\Client\Provider\GitHub as OAuth;
 
-	class SessionController extends BaseController {
+	class GitHubSessionController extends BaseController {
 		private $Provider;
 
 		public function __construct() {
