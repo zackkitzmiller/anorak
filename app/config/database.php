@@ -51,7 +51,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'anorak',
 			'username'  => 'anorak',
-			'password'  => 'btbcwfibtywc!',
+			'password'  => 'btbcwfibtbywc!',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
