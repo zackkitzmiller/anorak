@@ -82,7 +82,7 @@
 				}
 			}
 
-			if($Payload['pull_request']['changed_files'] < getenv('CHANGED_FILES_THRESHOLD'])) {
+			if($Payload['pull_request']['changed_files'] < getenv('CHANGED_FILES_THRESHOLD')) {
 				// Queue::push('SmallBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'high');
 			}else{
 				// Queue::push('LargeBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'medium');
