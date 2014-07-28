@@ -8,7 +8,7 @@
 
 		public function __construct(GithubClient $Client) {
 			$this->Client = $Client;
-			$this->Client->authenticate($_ENV['ANORAK_GITHUB_TOKEN'], NULL, GithubClient::AUTH_HTTP_TOKEN);
+			$this->Client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), NULL, GithubClient::AUTH_HTTP_TOKEN);
 		}
 
 		public function build(Repo $Repo) {
@@ -82,7 +82,7 @@
 				}
 			}
 
-			if($Payload['pull_request']['changed_files'] < $_ENV['CHANGED_FILES_THRESHOLD']) {
+			if($Payload['pull_request']['changed_files'] < getenv('CHANGED_FILES_THRESHOLD'])) {
 				// Queue::push('SmallBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'high');
 			}else{
 				// Queue::push('LargeBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'medium');

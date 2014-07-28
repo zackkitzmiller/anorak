@@ -19,8 +19,8 @@ return array(
 	'consumers' => array(
 
         'GitHub' => array(
-            'client_id'     => $_ENV['CLIENT_ID'],
-            'client_secret' => $_ENV['CLIENT_SECRET'],
+            'client_id'     => getenv('CLIENT_ID'),
+            'client_secret' => getenv('CLIENT_SECRET'),
             'scope'         => array(),
         ),		
 

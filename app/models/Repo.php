@@ -10,7 +10,7 @@
 		public function __construct() {
 			try {
 				$this->Client = new GithubClient;
-				$this->Client->authenticate($_ENV['GITHUB_CLIENT_ID'], Session::get('github.token'));
+				$this->Client->authenticate(getenv('GITHUB_CLIENT_ID'), Session::get('github.token'));
 			} catch (Exception $e) {
 				
 			}

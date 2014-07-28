@@ -7,7 +7,7 @@
 
 		public function fire($job, $data) {
 			$Client= new GitHub\Client();
-			$Client->authenticate($_ENV['GITHUB_CLIENT_ID'], $data['github_token']);
+			$Client->authenticate(getenv('GITHUB_CLIENT_ID'), $data['github_token']);
 
 			$CurrentUserAPI = $Client->api('current_user');
 			$Paginator      = new Github\ResultPager($Client);
