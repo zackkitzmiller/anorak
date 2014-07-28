@@ -13,8 +13,6 @@
 			$Paginator      = new Github\ResultPager($Client);
 			$Repos          = $Paginator->fetchAll($CurrentUserAPI, 'repositories');
 
-			Log::info('Repos', array('context' => $Repos));
-
 			foreach($Repos as $aRepo) {
 				Repo::firstOrCreate(array(
 					'github_id'        => $aRepo['id'],
