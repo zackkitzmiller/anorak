@@ -14,12 +14,12 @@
 			$Repos          = $Paginator->fetchAll($CurrentUserAPI, 'repositories');
 
 			foreach($Repos as $aRepo) {
-				Repo::firstOrCreate(array(
-					'github_id'        => $aRepo['id'],
-					'full_github_name' => $aRepo['full_name'],
-					'private'          => $aRepo['private'] == 1 ? 1 : 0,
-					'in_organization'  => $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0
-				));
+				$Repo                   = new Repo;
+				$Repo->github_id        = $aRepo['id'];
+				$Repo->full_github_name = $aRepo['full_name'];
+				$Repo->private          = $aRepo['private'] == 1 ? 1 : 0;
+				$Repo->in_organization  = $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0;
+				$Repo->save();
 
 				$RepoID = DB::getPdo()->lastInsertId();
 
