@@ -114,6 +114,10 @@
 					));
 				}
 			}
+
+			return Response::make(array(
+				'success' => TRUE
+			));
 		}
 
 		public function parseResults($Result) {
