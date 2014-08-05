@@ -97,7 +97,7 @@
 				if(count($Violations) === 0) continue;
 
 				foreach($Violations as $LineNo => $Violation) {
-					$Msg = join("\n", $Violation);
+					$Msg = join("<br>", $Violation);
 
 					// Store the violation.
 					$Build = new Build;
