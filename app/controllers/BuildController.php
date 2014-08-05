@@ -25,7 +25,7 @@
 				));
 			}
 
-			if($Payload['action'] !== 'opened') {
+			if($Payload['action'] !== 'opened' || $Payload['action'] !== 'synchronize') {
 				return Response::make(array(
 					'success' => FALSE,
 					'sniffed' => FALSE
