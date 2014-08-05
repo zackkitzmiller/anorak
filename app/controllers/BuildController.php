@@ -37,7 +37,7 @@
 				file_put_contents($TMPFileName, $FileContents);
 
 				$phpcs    = new PHP_CodeSniffer_CLI;
-				$standard = 'PSR1';
+				$standard = 'PSR2';
 				$files    = array($TMPFileName);
 				$ignored  = array();
 
