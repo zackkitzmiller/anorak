@@ -9,7 +9,8 @@
 		"knplabs/github-api": "*",
 		"webpatser/laravel-uuid": "dev-master",
 		"squizlabs/php_codesniffer": "*",
-		"pda/pheanstalk": "2.0.*"
+		"pda/pheanstalk": "2.0.*",
+		"symfony/yaml": "~2.1"
 	},
 	"autoload": {
 		"classmap": [
