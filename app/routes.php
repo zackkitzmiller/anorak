@@ -11,7 +11,8 @@
 		Route::get('user/logout', 'UserController@logoutAction');
 	});
 
-	Route::group(array('before' => 'auth|csrf'), function() {
+	// TODO: Put the CSRF filter back in once the website is working
+	Route::group(array('before' => 'auth'), function() {
 		Route::get('repo/{repo_id}/activate', 'RepoController@activate');
 		Route::get('repo/{repo_id}/deactivate', 'RepoController@deactivate');
 	});
