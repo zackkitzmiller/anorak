@@ -53,6 +53,7 @@
 					'reportWidth' => 500
 				);
 
+				// TODO: Replace this with whatever is used in #19
 				ob_start();
 				$numErrors = $phpcs->process($options);
 				$Errors = ob_get_contents();
@@ -62,9 +63,8 @@
 				$Violations = $this->parseResults($Errors);
 				if(count($Violations) === 0) continue;
 
-				foreach($Violations as $Violation) {
-					// $Msg = ucwords($Violation['type']) . ': ' . $Violation['message'];
-					$Msg = $Violation['message'];
+				foreach($Violations as $LineNo => $Violation) {
+					$Msg = join("\n", $Violation);
 
 					// Store the violation.
 					$Build = new Build;
@@ -77,7 +77,7 @@
 						'body'                => $Msg,
 						'commit_id'           => $Payload['pull_request']['head']['sha'],
 						'path'                => $FileName,
-						'position'            => $Violation['line']
+						'position'            => $LineNo
 					));
 				}
 			}
@@ -105,11 +105,7 @@
 				if(empty(trim($Violation[0]))) continue;
 				if(!isset($Violation[0], $Violation[1], $Violation[2])) continue;
 
-				$Violations[] = array(
-					'line'    => trim($Violation[0]),
-					'type'    => strtolower(trim($Violation[1])),
-					'message' => trim($Violation[2])
-				);
+				$Violations[trim($Violation[0])][] = trim($Violation[2]);
 			}
 
 			return $Violations;
