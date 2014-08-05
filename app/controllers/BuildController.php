@@ -25,6 +25,13 @@
 				));
 			}
 
+			if($Payload['action'] !== 'opened') {
+				return Response::make(array(
+					'success' => FALSE,
+					'sniffed' => FALSE
+				));
+			}
+
 			// Get the files changed by the pull request.
 			// @TODO: Parse these files and keep the "violations"
 			$Files = $this->Client->api('pull_request')->files($User, $RepoName, $Payload['number']);
