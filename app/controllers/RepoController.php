@@ -10,9 +10,20 @@
 				$Hook = $Repo->addBuildHookToRepo($Repo->full_github_name);
 
 				// Save the hook in the repo table.
-				$Repo->activate($Hook['id']);
+				if($Repo->activate($Hook['id'])) {
+					return array(
+						'type' => 'success'
+					);
+				}else{
+					return array(
+						'type' => 'error'
+					);
+				}
 			} catch (Exception $e) {
-				throw $e;
+				return array(
+					'message' => 'Unable to activate repository',
+					'type'    => 'error'
+				);
 			}
 		}
 
@@ -23,9 +34,20 @@
 				$Repo->removeBuildHookFromRepo($Repo->full_github_name);
 
 				// Remove the hook_id and deactivate from the repo table.
-				$Repo->deactivate();
+				if($Repo->deactivate()) {
+					return array(
+						'type' => 'success'
+					);
+				}else{
+					return array(
+						'type' => 'error'
+					);
+				}
 			} catch (Exception $e) {
-				throw $e;
+				return array(
+					'message' => 'Unable to activate repository',
+					'type'    => 'error'
+				);
 			}
 		}
 	}
