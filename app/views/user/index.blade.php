@@ -3,7 +3,7 @@
 @section('content')
 <h1>Anorak<small>CI</small></h1>
 
-<p>Hey {{ Auth::getUser()->github_username }}. <a href='/user/logout'>Logout</a>.</p>
+<p>Hey <a href='https://github.com/{{ Auth::getUser()->github_username }}'>{{ Auth::getUser()->github_username }}</a>. <a href='/user/logout'>Logout</a>.</p>
 
 <h1>Getting started</h1>
 <p>To get started, activate a repository. Then create a new <code>.anorak.yml</code> file to the root of your directory.</p>
