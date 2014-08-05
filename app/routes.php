@@ -9,7 +9,9 @@
 	Route::group(array('before' => 'auth'), function() {
 		Route::get('user', 'UserController@showIndex');
 		Route::get('user/logout', 'UserController@logoutAction');
+	});
 
+	Route::group(array('before' => 'auth|csrf'), function() {
 		Route::get('repo/{repo_id}/activate', 'RepoController@activate');
 		Route::get('repo/{repo_id}/deactivate', 'RepoController@deactivate');
 	});
