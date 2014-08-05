@@ -30,7 +30,9 @@
 			$Files = $this->Client->api('pull_request')->files($User, $RepoName, $Payload['number']);
 			if(count($Files) === 0) continue;
 
-			Queue::push(function($Job) use ($Files, $User, $RepoName, $Payload, $Event) {
+			// Queue::push(function($Job) use ($Files, $User, $RepoName, $Payload, $Event) {
+				// $Config = $this->Client->
+
 				foreach($Files as $File) {
 					$FileName = $File['filename'];
 					$SHA      = $File['sha'];
@@ -88,7 +90,7 @@
 
 				$Job->delete();
 			});
-
+// 
 			/*if($Payload['pull_request']['changed_files'] < getenv('CHANGED_FILES_THRESHOLD')) {
 				// Queue::push('SmallBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'high');
 			}else{
