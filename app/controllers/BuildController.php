@@ -52,6 +52,9 @@
 			foreach($Files as $File) {
 				$FileName = $File['filename'];
 
+				// Don't run on removed files.
+				if($File['status'] === 'removed') continue;
+
 				if(!isset($Payload['pull_request']['head']['ref'])) continue;
 
 				try {
