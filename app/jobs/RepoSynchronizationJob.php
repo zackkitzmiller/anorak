@@ -13,20 +13,25 @@
 			$Paginator      = new Github\ResultPager($Client);
 			$Repos          = $Paginator->fetchAll($CurrentUserAPI, 'repositories');
 
-			foreach($Repos as $aRepo) {
-				$Repo                   = new Repo;
-				$Repo->github_id        = $aRepo['id'];
-				$Repo->full_github_name = $aRepo['full_name'];
-				$Repo->private          = $aRepo['private'] == 1 ? 1 : 0;
-				$Repo->in_organization  = $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0;
-				$Repo->save();
+			// Clear out existing repositories before syncing.
+			if(count($Repos) > 0) {
+				User::find($data['user_id'])->repos()->delete();
 
-				$RepoID = DB::getPdo()->lastInsertId();
+				foreach($Repos as $aRepo) {
+					$Repo                   = new Repo;
+					$Repo->github_id        = $aRepo['id'];
+					$Repo->full_github_name = $aRepo['full_name'];
+					$Repo->private          = $aRepo['private'] == 1 ? 1 : 0;
+					$Repo->in_organization  = $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0;
+					$Repo->save();
 
-				Membership::firstOrCreate(array(
-					'repo_id' => $RepoID,
-					'user_id' => $data['user_id']
-				));
+					$RepoID = DB::getPdo()->lastInsertId();
+
+					Membership::firstOrCreate(array(
+						'repo_id' => $RepoID,
+						'user_id' => $data['user_id']
+					));
+				}
 			}
 
 			$job->delete();
