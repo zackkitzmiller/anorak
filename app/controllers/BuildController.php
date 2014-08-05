@@ -30,72 +30,80 @@
 			$Files = $this->Client->api('pull_request')->files($User, $RepoName, $Payload['number']);
 			if(count($Files) === 0) continue;
 
-			// Queue::push(function($Job) use ($Files, $User, $RepoName, $Payload, $Event) {
-				// $Config = $this->Client->
+			try {
+				$Config = $this->Client->api('repo')->contents()->download($User, $RepoName, '.anorak.yml');
+				$ymlParser = new YamlParser();
+				$BuildConfig = $ymlParser->parse($Config);
+			}catch(Exception $e) {
+				// Something went wrong, let's just stop.
+				return Response::make(array(
+					'error' => TRUE,
+					'message' => 'No .anorak.yml file found in the root of the ' . $User . '/' . $RepoName . ' repository.'
+				));
+			}
 
-				foreach($Files as $File) {
-					$FileName = $File['filename'];
-					$SHA      = $File['sha'];
+			foreach($Files as $File) {
+				$FileName = $File['filename'];
 
-					$FileContents = $this->Client->api('repos')->contents()->download($User, $RepoName, $FileName, $Payload['pull_request']['head']['ref']);
+				if(!isset($Payload['pull_request']['head']['ref'])) continue;
 
-					$TMPFileName = '/tmp/' . date('U') . sha1($FileName) . '.cs.php';
-					file_put_contents($TMPFileName, $FileContents);
-
-					$phpcs    = new PHP_CodeSniffer_CLI;
-					$standard = 'PSR2';
-					$files    = array($TMPFileName);
-					$ignored  = array();
-
-					$options = array(
-						'standard'      => array($standard),
-						'files'         => $files,
-						'ignored'       => $ignored,
-						'verbosity'     => 0,
-						// 'extensions' => array('php'),
-						'restrictions'  => array(
-							// 'Generic.Files.LineLength' => 10
-						),
-						'reportWidth' => 500
-					);
-
-					// TODO: Replace this with whatever is used in #19
-					ob_start();
-					$numErrors = $phpcs->process($options);
-					$Errors = ob_get_contents();
-					unlink($TMPFileName);
-					ob_end_clean();
-
-					$Violations = $this->parseResults($Errors);
-					if(count($Violations) === 0) continue;
-
-					foreach($Violations as $LineNo => $Violation) {
-						$Msg = join("\n", $Violation);
-
-						// Store the violation.
-						$Build = new Build;
-						$Build->violations = $Msg;
-						$Build->repo_id = $Repo->id;
-						$Build->uuid = $Payload['pull_request']['head']['sha'];
-						$Build->save();
-
-						$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload['number'], array(
-							'body'                => $Msg,
-							'commit_id'           => $Payload['pull_request']['head']['sha'],
-							'path'                => $FileName,
-							'position'            => $LineNo
-						));
-					}
+				try {
+					$FileContents = $this->Client->api('repo')->contents()->download($User, $RepoName, $FileName, $Payload['pull_request']['head']['ref']);
+				} catch (Exception $e) {
+					return Response::make(array(
+						'error' => TRUE,
+						'message' => 'Something went wrong when fetching "'.$User.'/'.$RepoName.'/'.$FileName.'" contents.'
+					));
 				}
 
-				$Job->delete();
-			});
-// 
-			/*if($Payload['pull_request']['changed_files'] < getenv('CHANGED_FILES_THRESHOLD')) {
-				// Queue::push('SmallBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'high');
-			}else{
-				// Queue::push('LargeBuildJob', array('payload' => $Payload, 'repo_id' => $Repo->id), 'medium');
-			}*/
+				$TMPFileName = storage_path() . '/files/' . $File['sha'] . '.cs.php';
+				file_put_contents($TMPFileName, $FileContents);
+
+				$phpcs    = new PHP_CodeSniffer_CLI;
+				// $phpcs->reporting = new PHP_CodeSniffer_Reports_Json;
+				$standard = array_get($BuildConfig, 'standard', 'PSR2');
+				$files    = array($TMPFileName);
+
+				$options = array(
+					'standard'      => array($standard),
+					'files'         => $TMPFileName,
+					'ignored'       => array(),
+					'verbosity'     => 1,
+					// 'extensions' => array('php'),
+					'restrictions'  => array(
+						// 'Generic.Files.LineLength' => 10
+					),
+					'reportWidth' => 1024
+				);
+
+				// TODO: Replace this with whatever is used in #19
+				ob_start();
+				$phpcs->process($options, $standard);
+				$Errors = ob_get_contents();
+				unlink($TMPFileName);
+				ob_end_clean();
+
+				$Violations = $this->parseResults($Errors);
+				if(count($Violations) === 0) continue;
+
+				foreach($Violations as $LineNo => $Violation) {
+					$Msg = join("\n", $Violation);
+
+					// Store the violation.
+					$Build = new Build;
+					$Build->violations = $Msg;
+					$Build->repo_id = $Repo->id;
+					$Build->uuid = $Payload['pull_request']['head']['sha'];
+					$Build->save();
+
+					$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload['number'], array(
+						'body'      => $Msg,
+						'commit_id' => $Payload['pull_request']['head']['sha'],
+						'path'      => $FileName,
+						'position'  => $LineNo
+					));
+				}
+			}
 		}
 
 		public function parseResults($Result) {
