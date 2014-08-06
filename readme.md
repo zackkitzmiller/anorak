@@ -1,4 +1,4 @@
-![Anorak](https://raw.githubusercontent.com/jbrooksuk/anorak/master/public/images/AnorakFull.png)
+![Anorak](http://anorakci.com/images/AnorakFull.png)
 
 PHP code reviews with Anorak. 
 
