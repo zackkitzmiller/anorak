@@ -15,7 +15,11 @@
 
 			// Clear out existing repositories before syncing.
 			if(count($Repos) > 0) {
-				User::find($data['user_id'])->repos()->delete();
+				try {
+					User::find($data['user_id'])->repos()->delete();
+				}catch(Exception $e) {
+					// Do nothing since there may be no repo's to delete.
+				}
 
 				foreach($Repos as $aRepo) {
 					$Repo                   = new Repo;

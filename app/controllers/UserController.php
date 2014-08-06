@@ -14,4 +14,8 @@
 			return Redirect::to('/');
 		}
 
+		public function showSetup() {
+			return View::make('user.setup');
+		}
+
 	}
