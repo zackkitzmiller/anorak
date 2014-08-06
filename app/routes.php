@@ -9,6 +9,7 @@
 	Route::group(array('before' => 'auth'), function() {
 		Route::get('user', 'UserController@showIndex');
 		Route::get('user/logout', 'UserController@logoutAction');
+		Route::get('user/setup', 'UserController@showSetup');
 	});
 
 	// TODO: Put the CSRF filter back in once the website is working

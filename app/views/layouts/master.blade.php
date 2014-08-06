@@ -7,21 +7,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<title>Anorak</title>
-	<style type='text/css'>
-	html {
-		height: 100%;
-	}
-	body {
-		font-family: 'Helvetica Neue', 'Open Sans', Arial, sans-serif;
-		font-size: 14px;
-		font-weight: 300;
-		color:#666;
-		min-height:100%;
-	}
-	</style>
+	<link rel='stylesheet' href='/stylesheets/css/styles.css' />
 </head>
 <body>
-@section('content')
-@show
+	<div class="container">
+		<div class="header">
+		@include('nav')
+		</div>
+
+		@section('content')
+		@show
+
+		<div class="footer">
+			<p>&copy; <a href='http://james-brooks.uk'>James Brooks</a> {{ date('Y') }}</p>
+		</div>
+	</div>
 </body>
 </html>

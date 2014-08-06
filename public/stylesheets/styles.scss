@@ -1,0 +1,131 @@
+@import 'bootstrap';
+
+$primary-green: #87D47C;
+$darker-green: darken($primary-green, 7.5%);
+$primary-grey: #6C7A89;
+
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5 {
+	color: $primary-grey !important;
+	text-transform: uppercase;
+}
+
+.header,
+.marketing,
+.footer {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.header {
+	h3 {
+		padding-bottom: 19px;
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: 40px;
+	}
+}
+
+.footer {
+	padding-top: 19px;
+	color: #777;
+	border-top: 1px solid #e5e5e5;
+	text-transform: uppercase;	
+	a {
+		color: $primary-green;
+	}
+}
+
+@media (min-width: 768px) {
+	.container {
+		max-width: 730px;
+	}
+}
+.container-narrow > hr {
+	margin: 30px 0;
+}
+
+.jumbotron {
+	text-align: center;
+	// border-bottom: 1px solid #e5e5e5;
+	background: transparent;
+	padding: 0;
+	// background-color: #fafafa;
+
+	h1 {
+		font-size: 50px;
+	}
+
+	p.lead {
+		font-size: 18px;
+	}
+
+	.btn {
+		background-color: $primary-green;
+		border: none;
+		padding: 14px 24px;
+		font-size: 21px;
+	}
+}
+
+.nav {
+	ul {
+		height: 100%;
+		li {
+			a {
+				font-size: 20px;
+				&:hover {
+					background: transparent;
+				}
+			}
+		}
+	}
+}
+
+.marketing {
+	margin: 40px 0;
+
+	p + h4 {
+		margin-top: 28px;
+	}
+}
+
+.list-group-item {
+	&.active {
+		background-color: $primary-green;
+		border: {
+			top: $primary-green;
+			bottom: $primary-green;
+		}
+		&:hover {
+			background-color: $darker-green;
+		}
+		a {
+			color: white;
+		}
+	}
+	&.inactive {
+		&:hover {
+			background-color: #fafafa;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.header,
+	.marketing,
+	.footer {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	.header {
+		margin-bottom: 30px;
+	}
+	.jumbotron {
+		border-bottom: 0;
+	}
+}

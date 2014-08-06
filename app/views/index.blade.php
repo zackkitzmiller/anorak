@@ -1,13 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
-<h1>Anorak<small>CI</small></h1>
+<div class="jumbotron">
+	<h1>PHP Code Reviews</h1>
+	<p class="lead">Connect your PHP project, hosted on GitHub to Anorak and get inline code reviews on pull requests.</p>
+	<p><a class="btn btn-lg btn-primary" href="/auth/github" role="button">Login with GitHub</a></p>
+</div>
 
-@if(Auth::check())
-<a href='/user'>Account</a>
-@else
-<a href='/auth/github'>Signin with GitHub</a>
-@endif
-<p>Copyright &copy; <a href='http://james-brooks.uk'>James Brooks</a>, @jbrooksuk {{ date('Y') }}</p>
-
+<div class="row marketing">
+	<div class="col-lg-12">
+		
+	</div>
+</div>
 @stop
