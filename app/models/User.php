@@ -18,7 +18,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function repos() {
-		return $this->hasManyThrough('Repo', 'Membership', 'user_id', 'repo_id');
+		return $this->hasManyThrough('Repo', 'Membership', 'user_id', 'id');
 	}
 
 	public function createGitHubRepo($Attr) {
