@@ -19,7 +19,7 @@
 		@show
 
 		<div class="footer">
-			<p>&copy; <a href='http://james-brooks.uk'>James Brooks</a> {{ date('Y') }}</p>
+			<p>Anorak is maintained by <a href='http://james-brooks.uk'>James Brooks</a>. Anorak is Copyright &copy; {{ date('Y') }} James Brooks.</p>
 		</div>
 	</div>
 </body>
