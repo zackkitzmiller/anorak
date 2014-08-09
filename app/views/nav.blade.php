@@ -6,4 +6,4 @@
 	<li style='margin-top: 15px;'><a class="btn btn-lg btn-green" href="/auth/github" role="button"><i class='fa fa-github'></i> Sign in with GitHub</a></li>
 	@endif
 </ul>
-<h3 class="text-muted"><img src='/images/AnorakFull.png' style='max-width: 420px' alt='Anorak' /></h3>
+<img src='/images/AnorakFull.png' style='max-width: 420px' alt='Anorak' />

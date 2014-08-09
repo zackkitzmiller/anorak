@@ -14,10 +14,19 @@
 	@endif
 	</div>
 	<ul class='list-group'>
-		@forelse(Auth::user()->repos()->orderBy('full_github_name')->get() as $Repo)
-		<li class='list-group-item {{ $Repo->active ? "active" : "inactive" }}'><i class='fa {{ $Repo->private ? "fa-lock" : "fa-unlock" }}'></i> <a href='/repo/{{ $Repo->id }}/{{ $Repo->active ? "deactivate" : "activate" }}'>{{ $Repo->full_github_name }}</a></li>
-		@empty
-		@endforelse
+		<form name='repos'>
+			@forelse(Auth::user()->repos()->orderBy('full_github_name')->get() as $Repo)
+			<li class='list-group-item'>
+				<i class='fa {{ $Repo->private ? "fa-lock" : "fa-unlock" }}'></i> <a href='/repo/{{ $Repo->id }}/{{ $Repo->active ? "deactivate" : "activate" }}'>{{ $Repo->full_github_name }}</a>
+				<div class='btn-group btn-group-xs pull-right'>
+					<button type='button' class='btn {{ $Repo->active ? "btn-success" : "btn-default" }}' {{ $Repo->active ? "disabled" : "" }}>On</button>
+					<button type='button' class='btn {{ !$Repo->active ? "btn-success" : "btn-default" }}' {{ !$Repo->active ? "disabled" : "" }}>Off</button>
+				</div>
+			</li>
+			@empty
+			@endforelse
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		</form>
 	</ul>
 </div>
 @stop

@@ -17,6 +17,7 @@
 			"app/commands",
 			"app/providers",
 			"app/controllers",
+			"app/policies",
 			"app/models",
 			"app/jobs",
 			"app/database/migrations",
