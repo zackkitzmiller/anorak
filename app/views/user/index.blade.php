@@ -3,7 +3,12 @@
 @section('content')
 <div class='panel panel-default'>
 	<div class='panel-heading'>
-		Repositories
+		<div class='row'>
+			<div class='span10'>Repositories</div>
+			<div class='span2'>
+				<a href='javascript: void(0)' data-action='repo_sync' class='btn btn-info pull-right'><i class='fa fa-refresh'></i></a>
+			</div>
+		</div>
 	</div>
 	<div class='panel-body'>
 	@if(Auth::user()->repos()->count() === 0)
