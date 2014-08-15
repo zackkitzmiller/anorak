@@ -21,7 +21,7 @@
 		}
 
 		public function memberships() {
-			return $this->hasMany('Memberships', 'user_id', 'id');
+			return $this->hasMany('Membership', 'user_id', 'id');
 		}
 
 		public function builds() {

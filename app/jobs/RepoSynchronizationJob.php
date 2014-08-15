@@ -16,7 +16,10 @@
 			// Clear out existing repositories before syncing.
 			if(count($Repos) > 0) {
 				try {
-					User::find($data['user_id'])->repos()->delete();
+					User::find($data['user_id'])->repos->each(function($Repo) {
+						$Repo->memberships()->delete();
+						$Repo->delete();
+					});
 				}catch(Exception $e) {
 					// Do nothing since there may be no repo's to delete.
 				}
