@@ -17,7 +17,7 @@
 			if(count($Repos) > 0) {
 				try {
 					User::find($data['user_id'])->repos->each(function($Repo) {
-						// $Repo->memberships()->delete();
+						$Repo->memberships()->delete();
 						$Repo->delete();
 					});
 				}catch(Exception $e) {
@@ -25,17 +25,21 @@
 				}
 
 				foreach($Repos as $aRepo) {
-					$Repo = Repo::firstOrCreate(array(
+					$Repo = Repo::updateOrCreate(array(
 						'github_id'        => $aRepo['id'],
+					), array(
 						'full_github_name' => $aRepo['full_name'],
 						'private'          => (int)$aRepo['private'] === 1 ? 1 : 0,
 						'in_organization'  => $aRepo['owner']['type'] == self::ORGANIZATION_TYPE ? 1 : 0,
 					));
 
-					Membership::firstOrCreate(array(
-						'repo_id' => $Repo->id,
-						'user_id' => $data['user_id']
-					));
+					$Repo->creating(function() use ($Repo, $data) {
+						Membership::firstOrCreate(array(
+							'repo_id' => $Repo->id,
+							'user_id' => $data['user_id']
+						));
+					});
+
 				}
 			}
 
