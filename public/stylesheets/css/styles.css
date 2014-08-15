@@ -6624,6 +6624,20 @@ h1, h2, h3, h4, h5 {
 @media (min-width: 768px) {
   .container {
     max-width: 730px; } }
+.header .logo {
+  max-width: 360px; }
+  @media (max-width: 480px) {
+    .header .logo {
+      max-width: 200px; } }
+.header .nav ul {
+  height: 100%; }
+  .header .nav ul li.login-btn {
+    margin-top: 15px; }
+  .header .nav ul li a {
+    font-size: 20px; }
+    .header .nav ul li a:hover {
+      background: transparent; }
+
 a {
   text-transform: uppercase;
   color: #87d47c; }
@@ -6640,13 +6654,6 @@ a {
   .btn-green:hover {
     background-color: #99da8f !important;
     color: white !important; }
-
-.nav ul {
-  height: 100%; }
-  .nav ul li a {
-    font-size: 20px; }
-    .nav ul li a:hover {
-      background: transparent; }
 
 .panel .panel-heading {
   text-transform: uppercase; }

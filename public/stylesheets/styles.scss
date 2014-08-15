@@ -23,6 +23,31 @@ h1, h2, h3, h4, h5 {
 	}
 }
 
+.header {
+	.logo {
+		max-width: 360px;
+		@media(max-width: 480px) {
+			max-width: 200px;
+		}
+	}
+	.nav {
+		ul {
+			height: 100%;
+			li {
+				&.login-btn {
+					margin-top: 15px;
+				}
+				a {
+					font-size: 20px;
+					&:hover {
+						background: transparent;
+					}
+				}
+			}
+		}
+	}
+}
+
 a {
 	text-transform: uppercase;
 	color: $primary-green;
@@ -42,20 +67,6 @@ a {
 	&:hover {
 		background-color: lighten($primary-green, 5%) !important;
 		color: white !important;
-	}
-}
-
-.nav {
-	ul {
-		height: 100%;
-		li {
-			a {
-				font-size: 20px;
-				&:hover {
-					background: transparent;
-				}
-			}
-		}
 	}
 }
 
