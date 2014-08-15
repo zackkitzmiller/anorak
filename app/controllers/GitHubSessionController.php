@@ -39,7 +39,7 @@
 				// If the user currently has repositories, don't sync.
 				if(Auth::user()->repos->count() === 0) {
 					Queue::push('RepoSynchronizationJob', array('github_token' => $Token->accessToken, 'user_id' => Auth::user()->id));
-				}			
+				}
 
 				return Redirect::to('user');
 			}else{
