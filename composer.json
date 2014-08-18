@@ -8,7 +8,7 @@
 			"type": "package",
 			"package": {
 				"name": "phpcheckstyle/phpcheckstyle",
-				"version": "0.6.2",
+				"version": "V0.13.1",
 				"source": {
 					"url": "http://phpcheckstyle.googlecode.com/svn",
 					"type": "svn",
