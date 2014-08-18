@@ -3,6 +3,20 @@
 	"description": "PHP code reviews with Anorak. .",
 	"keywords": ["code", "reviews", "anorak"],
 	"license": "MIT",
+	"repositories": {
+		"phpcheckstyle": {
+			"type": "package",
+			"package": {
+				"name": "phpcheckstyle/phpcheckstyle",
+				"version": "0.6.2",
+				"source": {
+					"url": "http://phpcheckstyle.googlecode.com/svn",
+					"type": "svn",
+					"reference": "tags/V0.13.1"
+				}
+			}
+		}
+	},
 	"require": {
 		"laravel/framework": "4.2.*",
 		"league/oauth2-client": "~0.3",
@@ -11,7 +25,7 @@
 		"squizlabs/php_codesniffer": "*",
 		"pda/pheanstalk": "2.0.*",
 		"symfony/yaml": "~2.1",
-		"phpcheckstyle/phpcheckstyle": "dev-trunk",
+		"phpcheckstyle/phpcheckstyle": "*",
 		"laravel/cashier": "~2.0"
 	},
 	"autoload": {
