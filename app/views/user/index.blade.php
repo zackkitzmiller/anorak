@@ -12,8 +12,8 @@
 							<div class='col-md-10'><h3 style="margin-top: 0;">Repositories - <small>@if(Auth::user()->repos()->count() === 0)
 									Your repositories may still be syncing. &ndash; If you've just signed up to Anorak, refresh in a few seconds.
 									@else
-									<strong class="text-danger">Anorak is still in beta and as such, may not always be responsive.</span>
-									@endif</strong></h3></div>
+									<strong class="text-danger">Anorak is still in beta and as such, may not always be responsive.</strong>
+									@endif</small></h3></div>
 							<div class='col-md-2'>
 								<a href='javascript: void(0)' data-action='repo_sync' class='btn btn-info pull-right'><i class='fa fa-refresh'></i></a>
 							</div>
