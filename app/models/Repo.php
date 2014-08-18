@@ -75,6 +75,10 @@
 			return $this->update();
 		}
 
+		public function price() {
+			return Config::get('subscriptions')[$this->plan];
+		}
+
 		public function plan() {
 			if($this->private === 1) {
 				if($this->in_organization === 1) {
