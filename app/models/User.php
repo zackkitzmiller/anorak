@@ -25,6 +25,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasMany('Subscription', 'user_id', 'id');
 	}
 
+	public function githubRepo($GithubID = NULL) {
+		return Repo::where('github_id', $GithubID);
+	}
+
 	public function createGitHubRepo($Attr) {
 		return new Repo($Attr);
 	}
