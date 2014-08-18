@@ -10,7 +10,8 @@
 		"webpatser/laravel-uuid": "dev-master",
 		"squizlabs/php_codesniffer": "*",
 		"pda/pheanstalk": "2.0.*",
-		"symfony/yaml": "~2.1"
+		"symfony/yaml": "~2.1",
+		"phpcheckstyle/phpcheckstyle": "*"
 	},
 	"autoload": {
 		"classmap": [
