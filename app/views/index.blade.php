@@ -4,10 +4,10 @@
 <section id="intro" class="intro-section">
 	<div class='container'>
 		<div class='row hero-section'>
-			<h1>PHP Code Checking</h1>
-			<p>Get your PHP pull requests checked on.</p>
+			<h1>Review your PHP code against custom style guides.</h1>
 
 			@if(!Auth::check())
+			<p>Login to get started!</p>
 			<a class="btn btn-green btn-outline-light" href="/auth/github"><i class='fa fa-github'></i>  Sign in with GitHub</a>
 			@endif
 
