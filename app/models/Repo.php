@@ -28,6 +28,10 @@
 			return $this->hasMany('Build', 'build_id', 'id');
 		}
 
+		public function scopeAction($query) {
+			return $query->where('active', 1);
+		}
+
 		public function addAnorakToRepo($Repo) {
 			list($Username, $RepoName) = explode('/', $Repo);
 
@@ -69,5 +73,17 @@
 			$this->active = 0;
 			$this->hook_id = NULL;
 			return $this->update();
+		}
+
+		public function plan() {
+			if($this->private === 1) {
+				if($this->in_organization === 1) {
+					return "organization";
+				}else{
+					return "personal";
+				}
+			}else{
+				return "free";
+			}
 		}
 	}
