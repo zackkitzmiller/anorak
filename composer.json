@@ -11,7 +11,7 @@
 		"squizlabs/php_codesniffer": "*",
 		"pda/pheanstalk": "2.0.*",
 		"symfony/yaml": "~2.1",
-		"phpcheckstyle/phpcheckstyle": "*",
+		"phpcheckstyle/phpcheckstyle": "dev-trunk",
 		"laravel/cashier": "~2.0"
 	},
 	"autoload": {
