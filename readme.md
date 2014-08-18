@@ -31,7 +31,8 @@ Developing Anorak is fairly straight forward, there are just a few things that n
     ?>
     ```
 4. Ensure that you have a VHOST setup and that `anorakci.com.dev` is added to your `HOSTS` file.
-5. Your good to go.
+5. Run `php artisan migrate` to run any new database migrations.
+6. Your good to go.
 
 ## Testing
 Anorak has zero tests so far. Ideally everything should be tested using PHPUnit, but I don't have much experience in it.
