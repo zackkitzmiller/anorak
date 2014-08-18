@@ -9,19 +9,15 @@
 				<div class='panel panel-default'>
 					<div class='panel-heading'>
 						<div class='row'>
-							<div class='col-md-10'>Repositories</div>
+							<div class='col-md-10'><h3 style="margin-top: 0;">Repositories - <small>@if(Auth::user()->repos()->count() === 0)
+									Your repositories may still be syncing. &ndash; If you've just signed up to Anorak, refresh in a few seconds.
+									@else
+									<strong class="text-danger">Anorak is still in beta and as such, may not always be responsive.</span>
+									@endif</strong></h3></div>
 							<div class='col-md-2'>
 								<a href='javascript: void(0)' data-action='repo_sync' class='btn btn-info pull-right'><i class='fa fa-refresh'></i></a>
 							</div>
 						</div>
-					</div>
-					<div class='panel-body'>
-					@if(Auth::user()->repos()->count() === 0)
-						<p>Your repositories may still be syncing.</p>
-						<p>If you've just signed up to Anorak, refresh in a few seconds.</p>
-					@else
-						<p class='text-danger'>Anorak is still in beta and as such, may not always be responsive.</p>
-					@endif
 					</div>
 					<ul class='list-group'>
 						<form name='repos'>
