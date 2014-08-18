@@ -6672,8 +6672,7 @@ h3, .h3 {
   font-family: 'Advent Pro';
   text-transform: uppercase;
   font-size: 38px;
-  font-weight: 700;
-  background-color: #87d47c; }
+  font-weight: 700; }
 
 .navbar-default .navbar-brand:hover {
   color: #fff;

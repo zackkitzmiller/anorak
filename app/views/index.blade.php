@@ -7,7 +7,9 @@
 			<h1>PHP Code Checking</h1>
 			<p>Get your PHP pull requests checked on.</p>
 
+			@if(!Auth::check())
 			<a class="btn btn-green btn-outline-light" href="/auth/github"><i class='fa fa-github'></i>  Sign in with GitHub</a>
+			@endif
 
 			<div class="row">
 				<div class='col-md-12'>
@@ -18,31 +20,34 @@
 	</div>
 </section>
 
-<section id="sectionone" class="features-section">
+<section id="sectionone" class="features-section text-center">
 	<div class="container">
 		<div class='row'>
 			<div class='col-md-12'>
-				<ul class'list-unstyled'>
-					<li>
-						<h2>Activate Repos</h2>
-						<p>Tell Anorak which repositories to watch.</p>
-					</li>
-					<li>
-						<h2>Commit &amp; Pull Request</h2>
-						<p>Commit your code and create a new pull request. Anorak will automatically review your code.</p>
-					</li>
-					<li>
-						<h2>Comment</h2>
-						<p>The changed files are commented on to expose any violations against your code standards.</p>
-						<figure>
-							<img src='/images/screens/comments.png' />
-						</figure>
-					</li>
-					<li>
-						<h2>Anorak for other SCM's?</h2>
-						<p>Send me a tweet <a href='https://twitter.com/jbrooksuk'>@jbrooksuk</a>!</p>
-					</li>
-				</ul>
+				<h1>How it works</h1>
+				<p class='lead'>As soon as your Pull Request is opened, Anorak will quickly check your code against the repository owners settings.</p>
+				<div class='row'>
+					<div class='col-md-3'>
+						<h1><i class='fa fa-github'></i></h1>
+						<h3>Login</h3>
+						<p>Logging in takes two clicks, it's really fast to get started with Anorak!</p>
+					</div>
+					<div class='col-md-3'>
+						<h1><i class='fa fa-lightbulb-o'></i></h1>
+						<h3>Activate a Repo</h3>
+						<p>Click on the name of the repository that you'd like to activate Anorak on.</p>
+					</div>
+					<div class='col-md-3'>
+						<h1><i class='fa fa-code'></i></h1>
+						<h3>Commit code</h3>
+						<p>Make changes to the codebase, as you would any other project.</p>
+					</div>
+					<div class='col-md-3'>
+						<h1><i class='fa fa-mail-forward'></i></h1>
+						<h3>Pull Request</h3>
+						<p>Open a Pull Request. Anorak will do the rest for you.</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
