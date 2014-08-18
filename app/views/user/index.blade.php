@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<section id='sectiontwo' class='features-section section-colored'>
+<section id='sectionone' class='features-section'>
 	<div class='container'>
 		<div class='row'>
 			<div class='col-md-12'>
