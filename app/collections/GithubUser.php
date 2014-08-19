@@ -1,8 +1,6 @@
 <?php 
 
-	use Illuminate\Database\Eloquent\Collection;
-
-	class GithubUser extends Collection {
+	class GithubUser {
 		protected $Client;
 
 		public function __construct(GithubClient $Client) {
@@ -11,7 +9,7 @@
 		}
 
 		public function hasAdminAccessThroughTeam($TeamID) {
-			// return $this-
+			// return $this->adminTeams()-
 		}
 
 		public function adminTeams() {
