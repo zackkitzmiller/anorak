@@ -35,5 +35,5 @@ systemVariables:
   - "$HTTP_SESSION_VARS"
 
 indentation:
-  type: tabs
+  type: spaces
   number: 4 # This number is only used if the type is spaces.
