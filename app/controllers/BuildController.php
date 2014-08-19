@@ -1,7 +1,7 @@
 <?php 
 
 	use \Github\Client as GithubClient;
-	use \PHPCheckstyle;
+	use PHPCheckstyle\PHPCheckstyle;
 	use Symfony\Component\Yaml\Parser as YamlParser;
 
 	class BuildController extends BaseController {
@@ -67,18 +67,21 @@
 					continue;
 				}
 
+				print_r($FileContents);
+
 				$TMPFileName = storage_path() . '/files/' . $File['sha'] . '.cs.php';
 				file_put_contents($TMPFileName, $FileContents);
 
-				$Style = new PHPCheckstyle(array('array'), NULL, $BuildConfig, NULL, FALSE, FALSE);
-				$Violations = $Style->processFiles($TMPFileName);
+				$Style = new PHPCheckstyle(array('array'), NULL, $BuildConfig, NULL, TRUE, FALSE);
+				$Violations = head($Style->processFiles($TMPFileName, array()));
 
-				dd($Violations);
+				print_r($Violations); exit;
 
 				if(count($Violations) === 0) continue;
 
-				foreach($Violations as $LineNo => $Violation) {
-					$Msg = join("<br>", $Violation);
+				foreach($Violations as $Violation) {
+					// $Msg = join("<br>", $Violation);
+					$Msg = $Violation['message'];
 
 					// Store the violation.
 					$Build = new Build;
@@ -91,7 +94,7 @@
 						'body'      => $Msg,
 						'commit_id' => $Payload['pull_request']['head']['sha'],
 						'path'      => $FileName,
-						'position'  => $LineNo
+						'position'  => $Violations['line']
 					));
 				}
 			}
