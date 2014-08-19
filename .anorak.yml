@@ -36,4 +36,4 @@ systemVariables:
 
 indentation:
   type: tabs
-  number: 4
+  number: 4 # This number is only used if the type is spaces.
