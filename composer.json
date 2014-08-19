@@ -3,12 +3,6 @@
 	"description": "PHP code reviews with Anorak. .",
 	"keywords": ["code", "reviews", "anorak"],
 	"license": "MIT",
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "http://github.com/jbrooksuk/phpcheckstyle"
-		}
-	],
 	"require": {
 		"laravel/framework": "4.2.*",
 		"league/oauth2-client": "~0.3",
@@ -17,7 +11,7 @@
 		"squizlabs/php_codesniffer": "*",
 		"pda/pheanstalk": "2.0.*",
 		"symfony/yaml": "~2.1",
-		"phpcheckstyle/phpcheckstyle": "*",
+		"jbrooksuk/phpcheckstyle": "*",
 		"laravel/cashier": "~2.0"
 	},
 	"autoload": {
