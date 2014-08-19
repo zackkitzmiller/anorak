@@ -2,7 +2,15 @@
 
 	use Illuminate\Database\Eloquent\Collection;
 
-	class PullRequest extends Collection {
+	class PullRequest {
+		protected $Payload;
+		protected $Client;
+
+		public function __construct($Payload, $Client) {
+			$this->Payload = new Collection($Payload);
+			$this->Client = $Client;
+		}
+
 		public function headIncludes($Line) {
 
 		}
@@ -12,7 +20,8 @@
 		}
 
 		public function pullRequestFiles() {
-
+			dd($this->Payload->get('pull_request'));
+			$this->Client->api('pull_request')->files();
 		}
 
 		public function addComment($Violation) {
@@ -24,30 +33,30 @@
 		}
 
 		public function opened() {
-			return $this->items['action'] === 'opened';
+			return $this->Payload->get('action') === 'opened';
 		}
 
 		public function synchronize() {
-			return $this->items['action'] === 'synchronize';
+			return $this->Payload->get('action') === 'synchronize';
 		}
 
 		public function headCommitFiles() {
-			return $this->items['head_commit']['files'];
+			return $this->Payload->get('head_commit')['files'];
 		}
 
 		public function buildCommitFile($File) {
-			return new CommitFile($File, $this->items['head_commit']);
+			return new CommitFile($File, $this->headCommit());
 		}
 
 		public function number() {
-			return $this->items['number'];
+			return $this->Payload->get('number');
 		}
 
 		public function fullRepoName() {
-			return $this->items['full_repo_name'];
+			return $this->Payload->get('repo');
 		}
 
 		public function headCommit() {
-			// return $this->items['head_commit']
+			return new Commit($this->fullRepoName(), $this->Payload->get('head.sha'));
 		}
 	}

@@ -1,6 +1,37 @@
 <?php 
 
-	use Illuminate\Database\Eloquent\Collection;
+	class CommitFile {
+		protected $File;
+		protected $Commit;
 
-	class CommitFile extends Collection {
+		public function __construct($File, $Commit) {
+			$this->File = $File;
+			$this->Commit = $Commit;
+		}
+
+		public function filename() {
+			return $this->File['filename'];
+		}
+
+		public function content() {
+			dd($this->Commit);
+		}
+
+		public function removed() {
+			return $this->File['status'] === 'removed';
+		}
+
+		public function modifiedLines() {
+			return $this->patch()['additions'];
+		}
+
+		public function modifiedLineAt($lineNo) {
+			/*modified_lines.detect do |modified_line|
+				modified_line.line_number == line_number
+			end*/
+		}
+
+		private function patch() {
+			return new Patch($this->File['patch']);
+		}
 	}
