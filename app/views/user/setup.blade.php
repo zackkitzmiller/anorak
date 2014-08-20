@@ -40,7 +40,7 @@
 						<p>Some kind of description regarding the standard?</p>
 					</div>
 					<div class='col-md-6'>
-						<h3>PEAD</h3>
+						<h3>PEAR</h3>
 						<p>Some kind of description regarding the standard?</p>
 					</div>
 				</div>
