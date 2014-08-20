@@ -29,12 +29,17 @@
 
 				// Fix for #44
 				// Don't allow blank email addresses. No error yet.
-				if(is_null($GHu->email)) return Redirect::to('index');
+				if(is_null($GhU->email)) return Redirect::to('index');
 
 				$User = User::firstOrCreate(array(
-					'github_username' => $GhU->nickname,
-					'email_address'   => $GhU->email
+					'email_address' => $GhU->email
 				));
+
+				// Add the GitHub username to the session list
+				$Session = new Service;
+				$Session->user_id = $User->id;
+				$Session->github_username = $GhU->nickname;
+				$Session->save();
 
 				Auth::login($User);
 
