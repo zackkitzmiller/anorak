@@ -23,8 +23,7 @@
 			"app/models",
 			"app/jobs",
 			"app/database/migrations",
-			"app/database/seeds",
-			"app/collections"
+			"app/database/seeds"
 		],
 		"psr-0": {
 			"GitHub": "vendor/knplabs/github-api/lib"
