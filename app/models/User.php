@@ -13,7 +13,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Billa
 
 	protected $table = 'users';
 	protected $hidden = array('remember_token');
-	protected $fillable = array('github_username', 'email_address');
+	protected $fillable = array('email_address');
 	protected $dates = array('trial_ends_at', 'subscription_ends_at');
 
 	public function memberships() {
@@ -26,6 +26,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Billa
 
 	public function subscriptions() {
 		return $this->hasMany('Subscription', 'user_id', 'id');
+	}
+
+	public function service() {
+		return $this->hasOne('Service', 'user_id', 'id');
 	}
 
 	public function githubRepo($GithubID = NULL) {
