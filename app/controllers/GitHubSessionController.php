@@ -27,6 +27,10 @@
 
 				$GhU = $this->Provider->getUserDetails($Token);
 
+				// Fix for #44
+				// Don't allow blank email addresses. No error yet.
+				if(is_null($GHu->email)) return Redirect::to('index');
+
 				$User = User::firstOrCreate(array(
 					'github_username' => $GhU->nickname,
 					'email_address'   => $GhU->email
