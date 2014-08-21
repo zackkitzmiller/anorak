@@ -6,7 +6,7 @@ PHP code reviews with Anorak.
 Developing Anorak is fairly straight forward, there are just a few things that need setting up before you can get on your way.
 
 1. Clone the repository.
-2. Run `composer install` to install all of the dependencies needed.
+2. On first clone run `composer install`, any subsequent pulls you should run `composer update` to update all dependencies.
 3. Create a `.env.local.php` file in the root of the `anorak` directory:
     ```php
     <?php 
