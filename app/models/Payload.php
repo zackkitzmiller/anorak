@@ -4,7 +4,7 @@
 
 	class Payload extends Collection {
 		public function headSha() {
-			return $this->items['head']['sha'];
+			return $this->pullRequest()['head']['sha'];
 		}
 
 		public function githubRepoID() {

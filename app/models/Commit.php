@@ -1,13 +1,14 @@
 <?php 
 
-	use Illuminate\Database\Eloquent\Collection;
-
-	class Commit extends Collection {
+	class Commit {
 		protected $repoName;
 		protected $SHA;
+		protected $Client;
 
-		public function __construct($RepoName = NULL, $Sha = NULL) {
-			die('HELLO');
+		public function __construct($repoName, $sha, $Client) {
+			$this->repoName = $RepoName;
+			$this->SHA      = $sha;
+			$this->Client   = $Client;
 		}
 
 		public function files() {
@@ -15,14 +16,20 @@
 		}
 
 		public function fileContent($FileName) {
-			// Return file content.
+			list($Username, $RepoName) = $this->repoName;
+			$Contents = $this->Client->api('repo')->contents()->download($Username, $RepoName, $this->SHA);
+			if(!is_null($Contents)) {
+				return base64_decode($Contents);
+			}else{
+				return FALSE;
+			}
 		}
 
 		private function buildCommitFile($File) {
-			return new CommitFile($File)
+			return new CommitFile($File, $this);
 		}
 
-		private function githubFiles() {
-
-		}
+		/*private function githubFiles() {
+			return $this->Client->
+		}*/
 	}

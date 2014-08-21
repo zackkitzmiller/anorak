@@ -14,7 +14,11 @@
 		}
 
 		public function content() {
-			dd($this->Commit);
+			if(!$this->removed()) {
+				return $this->Commit->fileContent($this->filename());
+			}else{
+				return FALSE;
+			}
 		}
 
 		public function removed() {
