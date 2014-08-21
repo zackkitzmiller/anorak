@@ -7,7 +7,6 @@
 			<div class='col-md-12'>
 				<h1>Your repositories</h1>
 				<p class='lead'><strong class="text-danger">Anorak is still in beta and as such, may not always be responsive.</strong></p>
-				{{ dd(Auth::user()->service) }}
 				<div class='panel panel-default'>
 					<div class='panel-heading'>
 						<div class='row'>
