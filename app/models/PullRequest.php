@@ -32,7 +32,7 @@
 		public function addComment($Violation) {
 			list($Username, $RepoName) = $this->fullRepoName();
 			return $this->Client->pullRequest()->comments()->create($Username, $RepoName, $this->number(), array(
-				'pull_request_number' => $this->number()
+				'pull_request_number' => $this->number(),
 				'comment'             => join('<br>', $Violation['messages']),
 				'commit'              => $this->headCommit(),
 				'filename'            => $Violation['filename'],
