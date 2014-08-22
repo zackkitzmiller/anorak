@@ -56,13 +56,4 @@
 			}
 		}
 
-		public function signinAction() {
-
-		}
-
-		public function signoutAction() {
-			Auth::logout();
-			return Redirect::to('/');
-		}
-
 	}
