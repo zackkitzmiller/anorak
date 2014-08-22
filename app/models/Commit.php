@@ -6,7 +6,7 @@
 		protected $Client;
 
 		public function __construct($repoName, $sha, $Client) {
-			$this->repoName = $RepoName;
+			$this->repoName = $repoName;
 			$this->SHA      = $sha;
 			$this->Client   = $Client;
 		}
@@ -17,9 +17,9 @@
 
 		public function fileContent($FileName) {
 			list($Username, $RepoName) = $this->repoName;
-			$Contents = $this->Client->repo()->contents()->download($Username, $RepoName, $this->SHA);
+			$Contents = $this->Client->repo()->contents()->download($Username, $RepoName, $FileName);
 			if(!is_null($Contents)) {
-				return base64_decode($Contents);
+				return $Contents;
 			}else{
 				return FALSE;
 			}

@@ -21,12 +21,15 @@
 
 		public function comments() {
 			list($Username, $RepoName) = $this->fullRepoName();
-			return $this->Client->pullRequest()->comments()->all($Username, $RepoName, $this->number());			
+			return $this->api()->pullRequest()->comments()->all($Username, $RepoName, $this->number());			
 		}
 
 		public function pullRequestFiles() {
-			dd($this->Payload->get('pull_request'));
-			$this->Client->pullRequest()->files();
+			list($Username, $RepoName) = $this->fullRepoName();
+			$Files = $this->api()->pullRequest()->files($Username, $RepoName, $this->number());
+			return array_map(function($File) {
+				return $this->buildCommitFile($File);
+			}, $Files);
 		}
 
 		public function addComment($Violation) {
@@ -54,8 +57,9 @@
 
 		private function api() {
 			if($this->Client) return $this->Client;
-			$Client = new GitHub\Client();
-			return $Client->authenticate(getenv('GITHUB_CLIENT_ID'), getenv('ANORAK_GITHUB_TOKEN'));
+			$this->Client = new GitHub\Client();
+			$this->Client->authenticate(getenv('GITHUB_CLIENT_ID'), getenv('ANORAK_GITHUB_TOKEN'));
+			return $this->Client;
 		}
 
 		private function headCommitFiles() {
@@ -71,10 +75,10 @@
 		}
 
 		private function fullRepoName() {
-			return $this->Payload->get('repo');
+			return explode('/', $this->Payload->get('repository')['full_name']);
 		}
 
 		private function headCommit() {
-			return new Commit($this->fullRepoName(), $this->Payload->get('head.sha'));
+			return new Commit($this->fullRepoName(), $this->Payload->get('pull_request')['head']['sha'], $this->api());
 		}
 	}

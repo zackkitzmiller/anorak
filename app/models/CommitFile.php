@@ -9,6 +9,10 @@
 			$this->Commit = $Commit;
 		}
 
+		public function sha() {
+			return $this->File['sha'];
+		}
+
 		public function filename() {
 			return $this->File['filename'];
 		}
