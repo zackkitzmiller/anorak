@@ -4,6 +4,16 @@
 
 	class RepoController extends BaseController {
 		public function activate(Repo $Repo) {
+			// Only allow activation of repositories if you're a member of it.
+			if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+				return Response::make(array(
+					'errors' => array(
+						'You must be the owner or a collaborator to activate this repository'
+					),
+					'success' => FALSE
+				), 403);
+			}
+
 			try {
 				// Do stuff to the GitHub side of things.
 				$Repo->addAnorakToRepo($Repo->full_github_name);
@@ -11,23 +21,39 @@
 
 				// Save the hook in the repo table.
 				if($Repo->activate($Hook['id'])) {
-					return array(
-						'type' => 'success'
-					);
+					return Response::make(array(
+						'errors' => array(),
+						'success' => TRUE
+					));
 				}else{
-					return array(
-						'type' => 'error'
-					);
+					return Response::make(array(
+						'errors' => array(
+							'Repository could not be activated'
+						),
+						'success' => FALSE
+					), 500);
 				}
 			} catch (Exception $e) {
-				return array(
-					'message' => 'Unable to activate repository',
-					'type'    => 'error'
-				);
+				return Response::make(array(
+					'errors' => array(
+						$e->getMessage()
+					),
+					'success' => FALSE
+				), 403);
 			}
 		}
 
 		public function deactivate(Repo $Repo) {
+			// Only allow deactivation of repositories if you're a member of it.
+			if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+				return Response::make(array(
+					'errors' => array(
+						'You must be the owner or a collaborator to deactivate this repository'
+					),
+					'success' => FALSE
+				), 403);
+			}
+
 			try {
 				// Do stuff to the GitHub side of things.
 				$Repo->removeAnorakFromRepo($Repo->full_github_name);
@@ -35,19 +61,31 @@
 
 				// Remove the hook_id and deactivate from the repo table.
 				if($Repo->deactivate()) {
-					return array(
-						'type' => 'success'
-					);
+					// Only allow activation of repositories if you're a member of it.
+					if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+						return Response::make(array(
+							'errors' => array(),
+							'success' => TRUE
+						));
+					}
 				}else{
-					return array(
-						'type' => 'error'
-					);
+					// Only allow activation of repositories if you're a member of it.
+					if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+						return Response::make(array(
+							'errors' => array(
+								'Repository could not be deactivated'
+							),
+							'success' => FALSE
+						), 500);
+					}
 				}
 			} catch (Exception $e) {
-				return array(
-					'message' => 'Unable to activate repository',
-					'type'    => 'error'
-				);
+				return Response::make(array(
+					'errors' => array(
+						$e->getMessage()
+					),
+					'success' => FALSE
+				), 403);
 			}
 		}
 	}

@@ -21,7 +21,7 @@
 		}
 
 		public function memberships() {
-			return $this->hasMany('Membership', 'user_id', 'id');
+			return $this->hasMany('Membership');
 		}
 
 		public function builds() {
@@ -35,13 +35,13 @@
 		public function addAnorakToRepo($Repo) {
 			list($Username, $RepoName) = explode('/', $Repo);
 
-			return $this->Client->api()->collaborators()->add($Username, $RepoName, 'anorakci');
+			return $this->Client->repo()->collaborators()->add($Username, $RepoName, 'anorakci');
 		}
 
 		public function addBuildHookToRepo($Repo) {
 			list($Username, $RepoName) = explode('/', $Repo);
 
-			return $this->Client->api()->hooks()->create($Username, $RepoName, array(
+			return $this->Client->repo()->hooks()->create($Username, $RepoName, array(
 				'name' => 'web',
 				'config' => array(
 					'url' => Config::get('app.url') . '/build/' . $this->id,
@@ -54,13 +54,13 @@
 		public function removeAnorakFromRepo($Repo) {
 			list($Username, $RepoName) = explode('/', $Repo);
 
-			return $this->Client->api()->collaborators()->remove($Username, $RepoName, 'anorakci');
+			return $this->Client->repo()->collaborators()->remove($Username, $RepoName, 'anorakci');
 		}
 
 		public function removeBuildHookFromRepo($Repo) {
 			list($Username, $RepoName) = explode('/', $Repo);
 
-			return $this->Client->api()->hooks()->remove($Username, $RepoName, $this->hook_id);
+			return $this->Client->repo()->hooks()->remove($Username, $RepoName, $this->hook_id);
 		}
 
 		public function activate($HookID) {
