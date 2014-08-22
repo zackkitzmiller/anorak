@@ -9,9 +9,8 @@
 			$Client= new GitHub\Client();
 			$Client->authenticate(getenv('GITHUB_CLIENT_ID'), $data['github_token']);
 
-			$CurrentUserAPI = $Client->api('current_user');
 			$Paginator      = new Github\ResultPager($Client);
-			$Repos          = $Paginator->fetchAll($CurrentUserAPI, 'repositories');
+			$Repos          = $Paginator->fetchAll($Client->currentUser(), 'repositories');
 
 			// Clear out existing repositories before syncing.
 			if(count($Repos) > 0) {

@@ -17,7 +17,7 @@
 
 		public function fileContent($FileName) {
 			list($Username, $RepoName) = $this->repoName;
-			$Contents = $this->Client->api('repo')->contents()->download($Username, $RepoName, $this->SHA);
+			$Contents = $this->Client->repo()->contents()->download($Username, $RepoName, $this->SHA);
 			if(!is_null($Contents)) {
 				return base64_decode($Contents);
 			}else{

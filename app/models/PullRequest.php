@@ -21,17 +21,17 @@
 
 		public function comments() {
 			list($Username, $RepoName) = $this->fullRepoName();
-			return $this->Client->api('pull_request')->comments()->all($Username, $RepoName, $this->number());			
+			return $this->Client->pullRequest()->comments()->all($Username, $RepoName, $this->number());			
 		}
 
 		public function pullRequestFiles() {
 			dd($this->Payload->get('pull_request'));
-			$this->Client->api('pull_request')->files();
+			$this->Client->pullRequest()->files();
 		}
 
 		public function addComment($Violation) {
 			list($Username, $RepoName) = $this->fullRepoName();
-			return $this->Client->api('pull_request')->comments()->create($Username, $RepoName, $this->number(), array(
+			return $this->Client->pullRequest()->comments()->create($Username, $RepoName, $this->number(), array(
 				'pull_request_number' => $this->number()
 				'comment'             => join('<br>', $Violation['messages']),
 				'commit'              => $this->headCommit(),

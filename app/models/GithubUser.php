@@ -13,7 +13,7 @@
 		}
 
 		public function adminTeams() {
-			$Teams = $this->Client->api('user')->teams();
+			$Teams = $this->Client->user()->teams();
 			dd($Teams);
 		}
 	}
