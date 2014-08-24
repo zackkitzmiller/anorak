@@ -13,6 +13,9 @@
 
 		public function files() {
 			// Need to return with buildCommitFile collection
+			return array_map(function($File) {
+				// 
+			}, $this->githubFiles());
 		}
 
 		public function fileContent($FileName) {
@@ -29,7 +32,8 @@
 			return new CommitFile($File, $this);
 		}
 
-		/*private function githubFiles() {
-			return $this->Client->
-		}*/
+		private function githubFiles() {
+			list($Username, $RepoName) = explode($this->repoName);
+			return $this->Client->commit()->show($Username, $RepoName, $this->SHA);
+		}
 	}

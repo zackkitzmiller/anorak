@@ -34,4 +34,8 @@
 		public function pullRequest() {
 			return $this->items['pull_request'];
 		}
+
+		public function relevant() {
+			return in_array($this->action(), ['opened', 'synchronize']);
+		}
 	}

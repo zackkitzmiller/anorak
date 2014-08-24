@@ -15,23 +15,13 @@
 		public function build(Repo $Repo) {
 			list($User, $RepoName) = explode('/', $Repo->full_github_name);
 
-			$_Payload = json_decode(Request::getContent(), TRUE);
-			$Payload = new Payload($_Payload);
+			$Payload = new Payload(json_decode(Request::getContent(), TRUE));
 			$Event   = Request::header('X-GitHub-Event');
 
 			// It's a test (ping), say hi.
-			if($Event === 'ping') {
-				return Response::make(array(
-					'ping' => 'OK'
-				));
-			}
-
-			if(!in_array($Payload->action(), array('opened', 'synchronize'))) {
-				return Response::make(array(
-					'success' => FALSE,
-					'sniffed' => FALSE
-				));
-			}
+			if($Event === 'ping') return Response::make(['ping' => 'OK']);
+			// Only comment when the pull request is opened or synchronized.
+			if(!$Payload->relevant()) return Response::make(['success' => FALSE]);
 
 			$PullRequest = new PullRequest($_Payload, $this->Client);
 			$Files = $PullRequest->pullRequestFiles();
@@ -50,7 +40,6 @@
 
 			foreach($Files as $File) {
 				$FileName = $File->filename();
-
 
 				if(stristr($FileName, '.blade.php')) continue;
 				$Extension = pathinfo($FileName)['extension'];
@@ -92,6 +81,7 @@
 			}
 
 			return Response::make(array(
+				'errors'  => [],
 				'success' => TRUE
 			));
 		}
