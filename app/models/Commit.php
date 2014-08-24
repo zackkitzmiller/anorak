@@ -14,7 +14,7 @@
 		public function files() {
 			// Need to return with buildCommitFile collection
 			return array_map(function($File) {
-				// 
+				return $this->buildCommitFile($File);
 			}, $this->githubFiles());
 		}
 
