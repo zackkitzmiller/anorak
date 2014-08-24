@@ -37,3 +37,25 @@ systemVariables:
 indentation:
   type: spaces
   number: 4 # This number is only used if the type is spaces.
+
+# Short variable names
+localScopeVariableLength:
+  property:
+    -
+      minLength: 2
+      maxLength: 30
+  exception:
+    - "i"
+    - "j"
+    - "k"
+    - "e"
+
+# Check Cyclomatic Complexity
+cyclomaticComplexity:
+  warningLevel:
+    value: 10
+  errorLevel:
+    value: 20
+
+# Only one class declaration per PHP file
+oneClassPerFile:
