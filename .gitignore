@@ -12,3 +12,4 @@ public/compass_app_log.txt
 .sass-cache/
 config.codekit
 app/storage/files/
+app/storage/*.json

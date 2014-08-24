@@ -12,7 +12,7 @@
 			// Gives us the variables we sent through originally
 			extract($data);
 
-			$PullRequest = new PullRequest($Payload, $this->Client);
+			$PullRequest = new PullRequest($Payload, $Client);
 			$Files = $PullRequest->pullRequestFiles();
 			if(count($Files) === 0) continue;
 

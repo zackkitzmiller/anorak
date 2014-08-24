@@ -4,7 +4,8 @@
 		public function build(Repo $Repo) {
 			list($User, $RepoName) = explode('/', $Repo->full_github_name);
 
-			$Payload = new Payload(json_decode(Request::getContent(), TRUE));
+			// $Payload = new Payload(json_decode(Request::getContent(), TRUE));
+			$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-afro-11.json'), TRUE));
 			$Event = Request::header('X-GitHub-Event');
 
 			// It's a test (ping), say hi.
