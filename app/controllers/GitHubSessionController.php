@@ -15,31 +15,31 @@
 		}
 
 		public function authCallbackAction() {
-			if($Code = Input::get('code')) {
+			if($code = Input::get('code')) {
 				try {
 					$Token = $this->Provider->getAccessToken('authorization_code', array(
-						'code' => $Code,
+						'code' => $code,
 						'grant_type' => 'authorization_code'
 					));
 				}catch(Exception $e) {
 					App::abort(500);
 				}
 
-				$GhU = $this->Provider->getUserDetails($Token);
+				$GithubUser = $this->Provider->getUserDetails($Token);
 
 				// Fix for #44
 				// Don't allow blank email addresses. No error yet.
-				if(is_null($GhU->email)) return Redirect::to('index');
+				if(is_null($GithubUser->email)) return Redirect::to('index');
 
 				$User = User::firstOrCreate(array(
-					'email_address' => $GhU->email
+					'email_address' => $GithubUser->email
 				));
 
 				// Add the GitHub username to the session list
-				$Session = new Service;
-				$Session->user_id = $User->id;
-				$Session->github_username = $GhU->nickname;
-				$Session->save();
+				$GithubService = new Service;
+				$GithubService->user_id = $User->id;
+				$GithubService->github_username = $GithubUser->nickname;
+				$GithubService->save();
 
 				Auth::login($User);
 
