@@ -6,7 +6,12 @@
 		<div class='row'>
 			<div class='col-md-12'>
 				<h1>Your repositories</h1>
-				<p class='lead'><strong class="text-danger">Anorak is still in beta and as such, may not always be responsive.</strong></p>
+				<p class='lead'><strong class="text-danger">Anorak is still in beta and as such may not always be responsive.</strong></p>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-md-3'></div>
+			<div class='col-md-6'>
 				<div class='panel panel-default'>
 					<div class='panel-heading'>
 						<div class='row'>
@@ -27,13 +32,11 @@
 										@if($Repo->private)
 										<i class='fa fa-lock'></i>
 										@endif
-										<a href='/repo/{{ $Repo->id }}/{{ $Repo->active ? "deactivate" : "activate" }}'>{{ $Repo->full_github_name }}</a>
+										{{ $Repo->full_github_name }}
 									</div>
 									<div class='col-lg-4'>
-										<div class='btn-group btn-group-sm pull-right'>
-											<button type='button' class='btn {{ $Repo->active ? "btn-success" : "btn-default" }}' {{ $Repo->active ? "disabled" : "" }}>On</button>
-											<button type='button' class='btn {{ !$Repo->active ? "btn-success" : "btn-default" }}' {{ !$Repo->active ? "disabled" : "" }}>Off</button>
-										</div>
+										<?php $Active = $Repo->active; ?>
+										<button type='submit' class='btn btn-{{ $Active ? "danger" : "primary" }} pull-right' name='repo' data-action="{{ $Active ? 'deactivate' : 'activate' }}" data-repoid='{{ $Repo->id }}'>{{ $Active ? "Deactivate" : "Activate" }}</button>
 									</div>
 								</div>
 							</li>
@@ -44,6 +47,7 @@
 					</ul>
 				</div>
 			</div>
+			<div class='col-md-3'></div>
 		</div>
 	</div>
 </section>

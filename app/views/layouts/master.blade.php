@@ -38,5 +38,9 @@
 			</div>
 		</div>
 	</div>
+
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<!-- <script src="/javascripts/bootstrap.js"></script> -->
+	<script src="/javascripts/app.js"></script>
 </body>
 </html>
