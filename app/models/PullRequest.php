@@ -21,12 +21,12 @@
 
 		public function comments() {
 			list($Username, $RepoName) = $this->fullRepoName();
-			return $this->api()->pullRequest()->comments()->all($Username, $RepoName, $this->number());			
+			return $this->pullRequest()->comments()->all($Username, $RepoName, $this->number());			
 		}
 
 		public function pullRequestFiles() {
 			list($Username, $RepoName) = $this->fullRepoName();
-			$Files = $this->api()->pullRequest()->files($Username, $RepoName, $this->number());
+			$Files = $this->pullRequest()->files($Username, $RepoName, $this->number());
 			return array_map(function($File) {
 				return $this->buildCommitFile($File);
 			}, $Files);
