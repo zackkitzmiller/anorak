@@ -35,11 +35,10 @@
 		public function addComment($Violation) {
 			list($Username, $RepoName) = $this->fullRepoName();
 			return $this->api()->pullRequest()->comments()->create($Username, $RepoName, $this->number(), array(
-				'pull_request_number' => $this->number(),
-				'comment'             => join('<br>', $Violation['messages']),
-				'commit'              => $this->headCommit(),
-				'filename'            => $Violation['filename'],
-				'position'            => $Violation['line']['patch_position']
+				'body'      => join('<br>', $Violation['messages']),
+				'commit_id' => $this->Payload->get('pull_request')['head']['sha'],
+				'path'      => $Violation['filename'],
+				'position'  => $Violation['line']['patchPosition']
 			));
 		}
 
