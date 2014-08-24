@@ -30,13 +30,13 @@
 		}
 
 		public function modifiedLines() {
-			return $this->patch()['additions'];
+			return $this->patch()->additions();
 		}
 
-		public function modifiedLineAt($lineNo) {
-			/*modified_lines.detect do |modified_line|
-				modified_line.line_number == line_number
-			end*/
+		public function modifiedLineAt($lineNumber) {
+			return array_map(function($modifiedLine) {
+				return $modifiedLine->lineNumber === (int)$lineNumber;
+			}, $this->modifiedLines());
 		}
 
 		private function patch() {

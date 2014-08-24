@@ -19,4 +19,4 @@
 		Route::get('repo/{repo_id}/deactivate', 'RepoController@deactivate');
 	});
 
-	Route::post('build/{repo_id}', 'BuildController@build');
+	Route::any('build/{repo_id}', 'BuildController@build');

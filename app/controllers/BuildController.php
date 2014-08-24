@@ -15,7 +15,8 @@
 		public function build(Repo $Repo) {
 			list($User, $RepoName) = explode('/', $Repo->full_github_name);
 
-			$Payload = new Payload(json_decode(Request::getContent(), TRUE));
+			// $Payload = new Payload(json_decode(Request::getContent(), TRUE));
+			$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-43.json'), TRUE));
 			$Event   = Request::header('X-GitHub-Event');
 
 			// It's a test (ping), say hi.
@@ -39,11 +40,13 @@
 			}
 
 			foreach($Files as $File) {
-				$FileName = $File->filename();
+				$filename = $File->filename();
 
-				if(stristr($FileName, '.blade.php')) continue;
-				$Extension = pathinfo($FileName)['extension'];
+				if(stristr($filename, '.blade.php')) continue;
+				$Extension = pathinfo($filename)['extension'];
 				if($Extension !== 'php') continue;
+
+				dd($File->modifiedLines());
 
 				// Don't run on removed files.
 				if($File->removed()) continue;
@@ -57,7 +60,7 @@
 				$Violations = $Style->_reporter->reporters[0]->outputFile[$TMPFileName];
 				unlink($TMPFileName);
 
-				dd($Violations);
+				// dd($Violations);
 				// The file is 100% great! Don't do anything.
 				if(count($Violations) === 0) continue;
 
@@ -71,12 +74,17 @@
 					$Build->save();
 
 					// @TODO: Replace this with PullRequest->addComment()
-					$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload->number(), array(
+					/*$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload->number(), array(
 						'body'      => $Msg,
 						'commit_id' => $ShaRef,
-						'path'      => $FileName,
+						'path'      => $filename,
 						'position'  => $LineNo
-					));
+					));*/
+					$PullRequest->addComment([
+						'messages' => array_get($Violation, 'message'),
+						'filename' => $filename,
+						'line'     => $LineNo
+					]);
 				}
 			}
 

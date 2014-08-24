@@ -1,7 +1,9 @@
 <?php 
 
+	use Illuminate\Database\Eloquent\Collection;
+
 	class Patch {
-		const RANGE_INFORMATION_LINE = "/^@@ .+\+(?<line_number>\d+),/";
+		const RANGE_INFORMATION_LINE = "/^@@ .+\+(\d+),/";
 		const MODIFIED_LINE = "/^\+(?!\+|\+)/";
 		const NOT_REMOVED_LINE = "/^[^-]/";
 
@@ -13,25 +15,23 @@
 
 		public function additions() {
 			$lineNumber = 0;
+			$additions  = [];
 
-			dd($this->lines());
+			foreach($this->lines() as $patchPos => $content) {
+				if($line = preg_match(self::RANGE_INFORMATION_LINE, $content)) {
+					$lineNumber = (int)$line[$lineNumber];
+				}elseif($line = preg_match(self::MODIFIED_LINE, $content)) {
+					$additions[] = new Line($content, $lineNumber, $patchPos);
+					$lineNumber++;
+				}elseif($line = preg_match(self::NOT_REMOVED_LINE, $content)) {
+					$lineNumber++;
+				}
+			}
 
-			/*lines.each_with_index.inject([]) do |additions, (content, patch_position)|
-				case content
-				when RANGE_INFORMATION_LINE
-					line_number = Regexp.last_match[:line_number].to_i
-				when MODIFIED_LINE
-					additions << Line.new(content, line_number, patch_position)
-					line_number += 1
-				when NOT_REMOVED_LINE
-					line_number += 1
-				end
-
-				additions
-			end*/
+			return $additions;
 		}
 
 		private function lines() {
-			return new Collection($this->Body->lines);
+			return preg_split("/\n/", $this->Body);
 		}
 	}
