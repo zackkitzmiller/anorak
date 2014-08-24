@@ -123,7 +123,7 @@ docBlocks:
 
 # Indentation
 indentation:
-  type: "space"
+  type: "tab"
   number: 4
 
 # Check the position of the open curly brace in a control structure (if)
