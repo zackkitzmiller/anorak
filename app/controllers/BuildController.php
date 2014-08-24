@@ -18,9 +18,10 @@
 			if(App::environment() === 'local') {
 				$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-49.json'), TRUE));
 			}else{
-				$Payload = new Payload(json_decode(Request::getContent(), TRUE));
+				$pl = json_decode(Request::getContent(), TRUE);
+				$Payload = new Payload($pl);
 			}
-			$Event   = Request::header('X-GitHub-Event');
+			$Event = Request::header('X-GitHub-Event');
 
 			// It's a test (ping), say hi.
 			if($Event === 'ping') return Response::make(['ping' => 'OK']);
