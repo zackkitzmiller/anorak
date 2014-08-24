@@ -17,29 +17,29 @@
 			try {
 				// Do stuff to the GitHub side of things.
 				$Repo->addAnorakToRepo($Repo->full_github_name);
-				$Hook = $Repo->addBuildHookToRepo($Repo->full_github_name);
+				$hook = $Repo->addBuildHookToRepo($Repo->full_github_name);
 
 				// Save the hook in the repo table.
-				if($Repo->activate($Hook['id'])) {
-					return Response::make(array(
-						'errors' => array(),
+				if($Repo->activate($hook['id'])) {
+					return Response::make([
+						'errors'  => [],
 						'success' => TRUE
-					));
+					]);
 				}else{
-					return Response::make(array(
-						'errors' => array(
+					return Response::make([
+						'errors' => [
 							'Repository could not be activated'
-						),
+						],
 						'success' => FALSE
-					), 500);
+					], 500);
 				}
 			} catch (Exception $e) {
-				return Response::make(array(
-					'errors' => array(
+				return Response::make([
+					'errors' => [
 						$e->getMessage()
-					),
+					],
 					'success' => FALSE
-				), 403);
+				], 403);
 			}
 		}
 
