@@ -23,7 +23,7 @@
 			// Only comment when the pull request is opened or synchronized.
 			if(!$Payload->relevant()) return Response::make(['success' => FALSE]);
 
-			$PullRequest = new PullRequest($_Payload, $this->Client);
+			$PullRequest = new PullRequest($Payload->toArray(), $this->Client);
 			$Files = $PullRequest->pullRequestFiles();
 			if(count($Files) === 0) continue;
 
