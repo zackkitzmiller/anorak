@@ -21,14 +21,19 @@
 				if($line = preg_match(self::RANGE_INFORMATION_LINE, $content)) {
 					$lineNumber = (int)$line[$lineNumber];
 				}elseif($line = preg_match(self::MODIFIED_LINE, $content)) {
-					$additions[] = new Line($content, $lineNumber, $patchPos);
+					$additions[] = [
+						'content'       => $content, 
+						'lineNumber'    => $lineNumber,
+						'patchPosition' => $patchPos
+					];
+					
 					$lineNumber++;
 				}elseif($line = preg_match(self::NOT_REMOVED_LINE, $content)) {
 					$lineNumber++;
 				}
 			}
 
-			return $additions;
+			return new Collection($additions);
 		}
 
 		private function lines() {

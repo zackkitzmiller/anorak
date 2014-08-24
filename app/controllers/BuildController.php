@@ -49,8 +49,6 @@
 				$Extension = pathinfo($filename)['extension'];
 				if($Extension !== 'php') continue;
 
-				dd($File->modifiedLines());
-
 				// Don't run on removed files.
 				if($File->removed()) continue;
 
@@ -63,12 +61,22 @@
 				$Violations = $Style->_reporter->reporters[0]->outputFile[$TMPFileName];
 				unlink($TMPFileName);
 
-				// dd($Violations);
 				// The file is 100% great! Don't do anything.
 				if(count($Violations) === 0) continue;
 
-				foreach($Violations as $LineNo => $Violation) {
+				foreach($Violations as $lineNumber => $Violation) {
 					$Msg = join("<br>", array_pluck($Violation, 'message'));
+
+					// If the violated line number is not in our patch, don't do anything.
+					// if(!in_array($lineNumber, $modLineNo)) continue;
+					$violationLine = $File->modifiedLines()->filter(function($Line) use ($lineNumber) {
+						return $Line['lineNumber'] == $lineNumber;
+					});
+
+					if($violationLine->isEmpty()) continue;
+
+                    die('LOL');
+
 
 					// Store the violation.
 					$Build = new Build;
@@ -81,13 +89,16 @@
 						'body'      => $Msg,
 						'commit_id' => $ShaRef,
 						'path'      => $filename,
-						'position'  => $LineNo
+						'position'  => $lineNumber
 					));*/
-					$PullRequest->addComment([
+
+					/*$PullRequest->addComment([
 						'messages' => array_get($Violation, 'message'),
 						'filename' => $filename,
-						'line'     => $LineNo
-					]);
+						'line'     => [
+							// 'patch_position' => 
+						]
+					]);*/
 				}
 			}
 
