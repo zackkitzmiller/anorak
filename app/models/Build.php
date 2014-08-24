@@ -1,5 +1,11 @@
 <?php 
 
+	/**
+	 * Build Model
+	 * Stores all of the repository builds in which have violations.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Build extends Eloquent {
 		public static function boot() {
 			parent::boot();

@@ -2,6 +2,12 @@
 
 	use Illuminate\Database\Eloquent\Collection;
 
+	/**
+	 * Patch
+	 * Allows us to comment specifically on the patch line.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Patch {
 		const RANGE_INFORMATION_LINE = "/^@@ .+\+(\d+),/";
 		const MODIFIED_LINE = "/^\+(?!\+|\+)/";

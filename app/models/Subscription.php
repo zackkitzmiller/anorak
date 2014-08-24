@@ -1,5 +1,11 @@
 <?php 
 
+	/**
+	 * Subscription Model
+	 * Used to handle all of the subscriptions that a user is paying for a repo.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Subcription extends Eloquent {
 		protected $table = 'subscriptions';
 		

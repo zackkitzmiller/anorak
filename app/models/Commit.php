@@ -1,5 +1,11 @@
 <?php 
 
+	/**
+	 * Commit
+	 * Handles storing of a commit from within a PullRequest model.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Commit {
 		protected $repoName;
 		protected $SHA;

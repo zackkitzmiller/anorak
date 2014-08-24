@@ -7,6 +7,12 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 use Laravel\Cashier\BillableTrait;
 use Laravel\Cashier\BillableInterface;
 
+/**
+ * User Model
+ * Default Laravel model for handling the authenticated user.
+ *
+ * @author James Brooks <jbrooksuk@me.com>
+ */
 class User extends Eloquent implements UserInterface, RemindableInterface, BillableInterface {
 
 	use UserTrait, RemindableTrait, BillableTrait;

@@ -1,5 +1,11 @@
 <?php 
 
+	/**
+	 * Membership Model
+	 * Links up all of the Repo to Users.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Membership extends Eloquent {
 		protected $fillable = array('user_id', 'repo_id');
 

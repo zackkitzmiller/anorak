@@ -1,5 +1,11 @@
 <?php 
 
+	/**
+	 * CommitFile
+	 * Every file in a Commit is wrapped in this.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class CommitFile {
 		protected $File;
 		protected $Commit;
