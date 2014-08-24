@@ -15,8 +15,11 @@
 		public function build(Repo $Repo) {
 			list($User, $RepoName) = explode('/', $Repo->full_github_name);
 
-			// $Payload = new Payload(json_decode(Request::getContent(), TRUE));
-			$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-43.json'), TRUE));
+			if(App::environment() === 'local') {
+				$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-43.json'), TRUE));
+			}else{
+				$Payload = new Payload(json_decode(Request::getContent(), TRUE));
+			}
 			$Event   = Request::header('X-GitHub-Event');
 
 			// It's a test (ping), say hi.
