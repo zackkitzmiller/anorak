@@ -15,12 +15,7 @@
 		public function build(Repo $Repo) {
 			list($User, $RepoName) = explode('/', $Repo->full_github_name);
 
-			if(App::environment() === 'local') {
-				$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-49.json'), TRUE));
-			}else{
-				$pl = json_decode(Request::getContent(), TRUE);
-				$Payload = new Payload($pl);
-			}
+			$Payload = new Payload(json_decode(Request::getContent(), TRUE));
 			$Event = Request::header('X-GitHub-Event');
 
 			// It's a test (ping), say hi.
