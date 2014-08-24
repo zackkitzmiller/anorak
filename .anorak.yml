@@ -35,7 +35,7 @@ systemVariables:
   - "$HTTP_SESSION_VARS"
 
 indentation:
-  type: spaces
+  type: tabs
   number: 4 # This number is only used if the type is spaces.
 
 # Short variable names
