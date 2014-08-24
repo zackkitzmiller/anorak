@@ -16,7 +16,7 @@
 			list($User, $RepoName) = explode('/', $Repo->full_github_name);
 
 			if(App::environment() === 'local') {
-				$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-43.json'), TRUE));
+				$Payload = new Payload(json_decode(file_get_contents(storage_path() . '/pullrequest-49.json'), TRUE));
 			}else{
 				$Payload = new Payload(json_decode(Request::getContent(), TRUE));
 			}
@@ -68,15 +68,11 @@
 					$Msg = join("<br>", array_pluck($Violation, 'message'));
 
 					// If the violated line number is not in our patch, don't do anything.
-					// if(!in_array($lineNumber, $modLineNo)) continue;
 					$violationLine = $File->modifiedLines()->filter(function($Line) use ($lineNumber) {
 						return $Line['lineNumber'] == $lineNumber;
 					});
 
 					if($violationLine->isEmpty()) continue;
-
-                    die('LOL');
-
 
 					// Store the violation.
 					$Build = new Build;
@@ -84,21 +80,11 @@
 					$Build->repo_id = $Repo->id;
 					$Build->save();
 
-					// @TODO: Replace this with PullRequest->addComment()
-					/*$this->Client->api('pull_request')->comments()->create('jbrooksuk', $RepoName, $Payload->number(), array(
-						'body'      => $Msg,
-						'commit_id' => $ShaRef,
-						'path'      => $filename,
-						'position'  => $lineNumber
-					));*/
-
-					/*$PullRequest->addComment([
-						'messages' => array_get($Violation, 'message'),
+					$PullRequest->addComment([
+						'messages' => array_pluck($Violation, 'message'),
 						'filename' => $filename,
-						'line'     => [
-							// 'patch_position' => 
-						]
-					]);*/
+						'line'     => $violationLine->first()
+					]);
 				}
 			}
 
