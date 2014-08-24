@@ -1,4 +1,4 @@
-# Zend Configuration
+# Default Configuration
 phpException:
   level: "error"
 
@@ -93,6 +93,18 @@ fileNaming:
   level: "error"
   regexp: "/^[a-zA-Z][a-zA-Z0-9._]*$/"
 
+# Short variable names
+localScopeVariableLength:
+  property:
+    -
+      minLength: 2
+      maxLength: 30
+  exception:
+    - "i"
+    - "j"
+    - "k"
+    - "e"
+
 # Test if a short php code open tag is used (<? instead of <?php )
 noShortPhpCodeTag:
 
@@ -130,7 +142,7 @@ controlCloseCurly:
 
 # Check the position of the open curly brace after a function
 funcDefintionOpenCurly:
-  position: "nl"
+  position: "sl"
 
 # Check the position of the else
 controlStructElse:
