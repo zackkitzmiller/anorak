@@ -2,6 +2,12 @@
 
 	use Illuminate\Database\Eloquent\Collection;
 
+	/**
+	 * Payload
+	 * Wraps the actual Payload JSON data sent to us via the Web Hook.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Payload extends Collection {
 		public function headSha() {
 			return $this->pullRequest()['head']['sha'];

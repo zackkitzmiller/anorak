@@ -1,5 +1,11 @@
 <?php 
 
+	/**
+	 * GithubUser
+	 * Easy way of interacting with a GitHub user account.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class GithubUser {
 		protected $Client;
 

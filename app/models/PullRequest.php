@@ -3,6 +3,13 @@
 	use Illuminate\Database\Eloquent\Collection;
 	use \Github;
 
+	/**
+	 * PullRequest
+	 * Allows us to manipulate the actual PullRequest itself.
+	 * Some methods wrap certain parts of the PR.
+	 *
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class PullRequest {
 		const CONFIG_FILE = '.anorak.yml';
 
