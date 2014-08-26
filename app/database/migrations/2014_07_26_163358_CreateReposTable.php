@@ -18,7 +18,7 @@ class CreateReposTable extends Migration {
 
 			$table->integer('github_id')->nullable(FALSE);
 			$table->tinyInteger('active')->default(0)->nullable(FALSE);
-			$table->integer('hook_id');
+			$table->integer('hook_id')->default(NULL)->nullable(TRUE);
 			$table->string('full_github_name')->nullable(FALSE);
 			$table->tinyInteger('private');
 			$table->tinyInteger('in_organization');
