@@ -35,7 +35,6 @@
 				}
 
 				foreach($repos as $repo) {
-					print_r($repo);
 					$githubRepo = Repo::updateOrCreate(array(
 						'github_id' => $repo['id'],
 					), array(
