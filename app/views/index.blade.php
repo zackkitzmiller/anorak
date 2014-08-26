@@ -3,18 +3,19 @@
 @section('content')
 <section id="intro" class="intro-section">
 	<div class='container'>
-		<div class='row hero-section'>
-			<h1>Review your PHP code against custom style guides.</h1>
+		<div class='hero-section'>
+			<h1>Keep your Pull Requests up to standard!</h1>
 
 			@if(!Auth::check())
-			<p>Login to get started!</p>
 			<a class="btn btn-green btn-outline-light" href="/auth/github"><i class='fa fa-github'></i>  Sign in with GitHub</a>
 			@endif
 
 			<div class="row">
-				<div class='col-md-12'>
+				<div class='col-lg-1'></div>
+				<div class='col-lg-10'>
 					<img src="/images/main_laptop.png" class="img-responsive hero-section-laptop" />
 				</div>
+				<div class='col-lg-1'></div>
 			</div>
 		</div>
 	</div>
@@ -29,27 +30,35 @@
 				<div class='row'>
 					<div class='col-md-3'>
 						<h1><i class='fa fa-github'></i></h1>
-						<h3>Login</h3>
-						<p>Logging in takes two clicks, it's really fast to get started with Anorak!</p>
+						<h3>Sign up</h3>
+						<p>Signing up takes two clicks. It's really fast to get started with Anorak!</p>
 					</div>
 					<div class='col-md-3'>
 						<h1><i class='fa fa-lightbulb-o'></i></h1>
-						<h3>Activate a Repo</h3>
+						<h3>Activate a Repository</h3>
 						<p>Click on the name of the repository that you'd like to activate Anorak on.</p>
 					</div>
 					<div class='col-md-3'>
 						<h1><i class='fa fa-code'></i></h1>
 						<h3>Commit code</h3>
-						<p>Make changes to the codebase, as you would any other project.</p>
+						<p>Make changes to the codebase in a different branch, as you usually would.</p>
 					</div>
 					<div class='col-md-3'>
 						<h1><i class='fa fa-mail-forward'></i></h1>
 						<h3>Pull Request</h3>
-						<p>Open a Pull Request. Anorak will do the rest for you.</p>
+						<p>Open a Pull Request and Anorak will do the rest for you.</p>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		@if(!Auth::check())
+		<div class='row'>
+			<div class='col-md-12 text-center'>
+				<a class="btn btn-green btn-outline-light" href="/auth/github"><i class='fa fa-github'></i>  Sign in with GitHub</a>
+			</div>
+		</div>
+		@endif
 	</div>
 </section>
 @stop
