@@ -61,7 +61,7 @@
 			$this->track([
 				'event' => 'Activated Public Repo',
 				'properties' => [
-					'name' => $Repo->full_github_name,
+					'name' => $repo->full_github_name,
 				]
 			]);
 		}
@@ -73,7 +73,7 @@
 			$this->track([
 				'event' => 'Deactivated Public Repo',
 				'properties' => [
-					'name' => $Repo->full_github_name,
+					'name' => $repo->full_github_name,
 				]
 			]);
 		}
@@ -85,7 +85,7 @@
 			$this->track([
 				'event' => 'Reviewed Repo',
 				'properties' => [
-					'name' => $Repo->full_github_name,
+					'name' => $repo->full_github_name,
 				]
 			]);
 		}
@@ -97,8 +97,8 @@
 			$this->track([
 				'event' => 'Subscribed Private Repo',
 				'properties' => [
-					'name' => $Repo->full_github_name,
-					'revenue' => $Repo->price,
+					'name' => $repo->full_github_name,
+					'revenue' => $repo->price,
 				]
 			]);
 		}
@@ -110,8 +110,8 @@
 			$this->track([
 				'event' => 'Unsubscribed Private Repo',
 				'properties' => [
-					'name' => $Repo->full_github_name,
-					'revenue' => 0 - ($Repo->price),
+					'name' => $repo->full_github_name,
+					'revenue' => 0 - ($repo->price),
 				]
 			]);
 		}
