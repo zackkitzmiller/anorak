@@ -44,9 +44,9 @@
 						'in_organization'  => $repo['owner']['type'] == "Organization" ? 1 : 0
 					));
 
-					$githubRepo->creating(function() use ($repo, $data) {
+					$githubRepo->created(function($repo) use ($data) {
 						Membership::firstOrCreate(array(
-							'repo_id' => $repo['id'],
+							'repo_id' => $repo->id,
 							'user_id' => $data['user_id']
 						));
 					});
