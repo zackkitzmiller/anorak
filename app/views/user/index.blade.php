@@ -16,7 +16,7 @@
 					<div class='panel-heading'>
 						<div class='row'>
 							<div class='col-lg-10 col-sm-6'>
-								<h3>Repositories {{ Auth::user()->repos()->count() === 0 ? "<small>- Your repositories may still be syncing. &ndash; If you've just signed up to Anorak, refresh in a few seconds.</small>" : "" }}</h3>
+								<h3>Repositories</h3>
 							</div>
 							<div class='col-lg-2 col-sm-6'>
 								<a href='javascript: void(0)' data-action='repo_sync' class='btn btn-info btn-lg pull-right'><i class='fa fa-refresh'></i></a>
@@ -41,6 +41,9 @@
 								</div>
 							</li>
 							@empty
+							<li class='list-group-item'>
+								Your repositories may still be syncing. &ndash; If you've just signed up to Anorak, refresh in a few seconds
+							</li>
 							@endforelse
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						</form>
