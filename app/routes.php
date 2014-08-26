@@ -12,9 +12,10 @@
 		Route::get('user/setup', 'UserController@showSetup');
 	});
 
-	Route::group(array('before' => 'csrf|auth'), function() {
-		Route::post('repo/{repo_id}/activate', 'RepoController@activate');
-		Route::post('repo/{repo_id}/deactivate', 'RepoController@deactivate');
+	// Route::group(array('before' => 'csrf|auth'), function() {
+	Route::group(array('before' => 'auth'), function() {
+		Route::any('repo/{repo_id}/activate', 'RepoController@activate');
+		Route::any('repo/{repo_id}/deactivate', 'RepoController@deactivate');
 	});
 
 	Route::post('build/{repo_id}', 'BuildController@build');
