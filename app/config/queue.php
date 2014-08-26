@@ -15,7 +15,8 @@ return array(
 	|
 	*/
 
-	'default' => 'beanstalkd',
+	// 'default' => 'beanstalkd',
+	'default' => 'sync',
 
 	/*
 	|--------------------------------------------------------------------------
