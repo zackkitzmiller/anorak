@@ -18,8 +18,8 @@
 			extract($data);
 
 			$pullRequest = new PullRequest($payload, $client);
-			$Files = $pullRequest->pullRequestFiles();
-			if(count($Files) === 0) continue;
+			$files = $pullRequest->pullRequestFiles();
+			if(count($files) === 0) continue;
 
 			try {
 				$ymlParser = new YamlParser();
@@ -45,18 +45,18 @@
 				$buildConfig = $tmpBuildConfig;
 			}
 
-			foreach($Files as $File) {
-				$filename = $File->filename();
+			foreach($files as $file) {
+				$filename = $file->filename();
 
 				if(stristr($filename, '.blade.php')) continue;
-				$Extension = pathinfo($filename)['extension'];
-				if($Extension !== 'php') continue;
+				$extension = pathinfo($filename)['extension'];
+				if($extension !== 'php') continue;
 
 				// Don't run on removed files.
-				if($File->removed()) continue;
+				if($file->removed()) continue;
 
-				$tmpFileName = storage_path() . '/files/' . $File->sha() . '.cs.php';
-				file_put_contents($tmpFileName, $File->content());
+				$tmpFileName = storage_path() . '/files/' . $file->sha() . '.cs.php';
+				file_put_contents($tmpFileName, $file->content());
 				$style = new PHPCheckstyle(array('array'), NULL, $buildConfig, NULL, FALSE, FALSE);
 				$style->processFiles(array($tmpFileName), array());
 				$violations = $style->_reporter->reporters[0]->outputFile[$tmpFileName];
@@ -69,8 +69,8 @@
 					$Msg = join("<br>", array_pluck($violation, 'message'));
 
 					// If the violated line number is not in our patch, don't do anything.
-					$violationLine = $File->modifiedLines()->filter(function($Line) use ($lineNumber) {
-						return $Line['lineNumber'] == $lineNumber;
+					$violationLine = $file->modifiedLines()->filter(function($line) use ($lineNumber) {
+						return $line['lineNumber'] == $lineNumber;
 					});
 
 					if($violationLine->isEmpty()) continue;
