@@ -25,7 +25,7 @@
 
 			Queue::push('BuildRunnerJob', ['repo' => $repo, 'payload' => $payload->toArray()]);
 
-			Tracking::trackReviewed($Repo);
+			Tracking::trackReviewed($repo);
 
 			return Response::make(array(
 				'errors'     => [],
