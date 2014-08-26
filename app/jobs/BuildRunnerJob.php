@@ -5,14 +5,19 @@
 	use Symfony\Component\Yaml\Parser as YamlParser;
 	
 	class BuildRunnerJob {
+		/**
+		 * Execute the job.
+		 *
+		 * @return void
+		 */
 		public function fire($job, $data) {
-			$Client = new GithubClient;
-			$Client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), NULL, GithubClient::AUTH_HTTP_TOKEN);
+			$client = new GithubClient;
+			$client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), NULL, GithubClient::AUTH_HTTP_TOKEN);
 
 			// Gives us the variables we sent through originally
 			extract($data);
 
-			$pullRequest = new PullRequest($Payload, $Client);
+			$pullRequest = new PullRequest($payload, $client);
 			$Files = $pullRequest->pullRequestFiles();
 			if(count($Files) === 0) continue;
 
