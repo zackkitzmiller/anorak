@@ -3,21 +3,21 @@
 	use \League\OAuth2\Client\Provider\GitHub as OAuth;
 
 	class GitHubSessionController extends BaseController {
-		private $Provider;
+		private $provider;
 
 		public function __construct() {
-			$this->Provider = new GitHubOAuth(Config::get('social.github'));
+			$this->provider = new GitHubOAuth(Config::get('social.github'));
 		}
 
 		public function authAction() {
-			header('Location: ' . $this->Provider->getAuthorizationUrl());
+			header('Location: ' . $this->provider->getAuthorizationUrl());
 			exit;
 		}
 
 		public function authCallbackAction() {
 			if($code = Input::get('code')) {
 				try {
-					$Token = $this->Provider->getAccessToken('authorization_code', array(
+					$token = $this->provider->getAccessToken('authorization_code', array(
 						'code' => $code,
 						'grant_type' => 'authorization_code'
 					));
@@ -25,31 +25,33 @@
 					App::abort(500);
 				}
 
-				$GithubUser = $this->Provider->getUserDetails($Token);
+				$ghUser = $this->provider->getUserDetails($token);
 
 				// Fix for #44
 				// Don't allow blank email addresses. No error yet.
-				if(is_null($GithubUser->email)) return Redirect::to('index');
+				if(is_null($ghUser->email)) return Redirect::to('index');
 
-				$User = User::firstOrCreate(array(
-					'email_address' => $GithubUser->email
+				$user = User::firstOrCreate(array(
+					'email_address' => $ghUser->email
 				));
 
 				// Add the GitHub username to the session list
-				$GithubService = new Service;
-				$GithubService->user_id = $User->id;
-				$GithubService->github_username = $GithubUser->nickname;
-				$GithubService->save();
+				$user->created(function($user) use ($ghUser) {
+					$ghService = new Service;
+					$ghService->user_id = $user->id;
+					$ghService->github_username = $ghUser->nickname;
+					$ghService->save();
+				});
 
-				Auth::login($User);
+				Auth::login($user);
 
 				Tracking::trackSignedIn();
 
-				Session::put('github.token', $Token->accessToken);
+				Session::put('github.token', $token->accessToken);
 
 				// If the user currently has repositories, don't sync.
 				if(Auth::user()->repos->count() === 0) {
-					Queue::push('RepoSynchronizationJob', array('github_token' => $Token->accessToken, 'user_id' => Auth::user()->id));
+					Queue::push('RepoSynchronizationJob', array('github_token' => $token->accessToken, 'user_id' => Auth::user()->id));
 				}
 
 				return Redirect::to('user');
