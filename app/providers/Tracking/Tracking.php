@@ -3,6 +3,7 @@
 	namespace Anorak\Tracking;
 
 	use Auth;
+	use Repo;
 
 	/**
 	 * Tracking Model
