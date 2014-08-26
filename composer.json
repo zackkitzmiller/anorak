@@ -12,14 +12,14 @@
 		"pda/pheanstalk": "2.0.*",
 		"symfony/yaml": "~2.1",
 		"jbrooksuk/phpcheckstyle": "dev-master",
-		"laravel/cashier": "~2.0"
+		"laravel/cashier": "~2.0",
+		"segmentio/analytics-php": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
-			"app/providers",
 			"app/controllers",
-			"app/policies",
+			"app/providers",
 			"app/models",
 			"app/jobs",
 			"app/database/migrations",

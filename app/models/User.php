@@ -57,4 +57,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Billa
 	public function getIsGitLabUserAttribute() {
 		return !empty($this->service->gitlab_username);
 	}
+
+	public function getGitHubUsernameAttribute() {
+		return $this->isGitHubUser ? $this->service->github_username : "";
+	}
+
+	public function getBitBucketUsernameAttribute() {
+		return $this->isBitBucketUser ? $this->service->bitbucket_username : "";
+	}
+
+	public function getGitLabUsernameAttribute() {
+		return $this->isGitLabUser ? $this->service->gitlab_username : "";
+	}
 }

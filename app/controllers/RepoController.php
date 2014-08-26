@@ -21,6 +21,7 @@
 
 				// Save the hook in the repo table.
 				if($Repo->activate($hook['id'])) {
+					Tracking::trackActivated($Repo);
 					return Response::make([
 						'errors'  => [],
 						'success' => TRUE
@@ -63,6 +64,7 @@
 				if($Repo->deactivate()) {
 					// Only allow activation of repositories if you're a member of it.
 					if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+						Tracking::trackDeactivated($Repo);
 						return Response::make(array(
 							'errors' => array(),
 							'success' => TRUE

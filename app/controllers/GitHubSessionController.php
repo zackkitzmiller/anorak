@@ -43,6 +43,8 @@
 
 				Auth::login($User);
 
+				Tracking::trackSignedIn();
+
 				Session::put('github.token', $Token->accessToken);
 
 				// If the user currently has repositories, don't sync.
