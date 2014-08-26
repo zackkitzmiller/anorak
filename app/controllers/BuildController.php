@@ -1,14 +1,20 @@
 <?php 
 
 	class BuildController extends BaseController {
-		public function build(Repo $Repo) {
-			$Payload = new Payload(json_decode(Request::getContent(), TRUE));
+		/**
+		 * "Builds" a repository.
+		 * The job is placed in a queue.
+		 *
+		 * @return array
+		 */
+		public function build(Repo $repo) {
+			$payload = new Payload(json_decode(Request::getContent(), TRUE));
 
 			// It's a test (ping), say hi.
 			if(Request::header('X-GitHub-Event') === 'ping') return Response::make(['ping' => 'OK']);
 
 			// Only comment when the pull request is opened or synchronized.
-			if(!$Payload->relevant()) {
+			if(!$payload->relevant()) {
 				return Response::make([
 					'errors'  => [
 						"Irrelevant pull request"
@@ -17,7 +23,7 @@
 				], 403);
 			}
 
-			Queue::push('BuildRunnerJob', ['Repo' => $Repo, 'Payload' => $Payload->toArray()]);
+			Queue::push('BuildRunnerJob', ['repo' => $repo, 'payload' => $payload->toArray()]);
 
 			return Response::make(array(
 				'errors'     => [],
