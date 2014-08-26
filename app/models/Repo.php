@@ -34,7 +34,7 @@
 			return $this->hasMany('Build', 'build_id', 'id');
 		}
 
-		public function scopeAction($query) {
+		public function scopeActive($query) {
 			return $query->where('active', 1);
 		}
 
