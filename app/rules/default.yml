@@ -119,10 +119,12 @@ docBlocks:
   testReturn: true
   testParam: true
   testThrow: true
+  exception:
+    - "__toString"
 
 # Indentation
 indentation:
-  type: "space"
+  type: "tabs"
   number: 4
 
 # Check the position of the open curly brace in a control structure (if)
@@ -169,7 +171,7 @@ noSpaceAfterToken:
 # Check that the length of the line doesn't pass the max value
 lineLength:
   level: "info"
-  maxLineLength: 120
+  maxLineLength: 160
   checkHTMLLines: false
 
 # Function length
