@@ -20,7 +20,7 @@
 						"Irrelevant pull request"
 					],
 					'success' => FALSE
-				], 403);
+				], 200);
 			}
 
 			Queue::push('BuildRunnerJob', ['repo' => $repo, 'payload' => $payload->toArray()]);
