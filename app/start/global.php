@@ -80,12 +80,6 @@ App::down(function()
 
 require app_path().'/filters.php';
 
-/*
-|--------------------------------------------------------------------------
-| Startup Cashier integration
-|--------------------------------------------------------------------------
-*/
-User::setStripeKey(getenv('STRIPE_SECRET_KEY'));
 
 /**
  * Log to Paper Trail
