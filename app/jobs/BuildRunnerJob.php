@@ -78,7 +78,7 @@
 					// Store the violation.
 					$build = new Build;
 					$build->violations = $Msg;
-					$build->repo_id = $Repo['id'];
+					$build->repo_id = $repo['id'];
 					$build->save();
 
 					$pullRequest->addComment([
