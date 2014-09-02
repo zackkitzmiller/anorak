@@ -29,7 +29,7 @@
 
 				// Fix for #44
 				// Don't allow blank email addresses. No error yet.
-				if(is_null($ghUser->email)) return Redirect::to('index');
+				if(is_null($ghUser->email)) return Redirect::to('/');
 
 				$user = User::firstOrCreate(array(
 					'email_address' => $ghUser->email
