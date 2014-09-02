@@ -15,6 +15,10 @@
 		}
 
 		public function authCallbackAction() {
+			if (Auth::check()) {
+				return Redirect::to('/user');
+			}
+
 			if($code = Input::get('code')) {
 				try {
 					$token = $this->provider->getAccessToken('authorization_code', array(
