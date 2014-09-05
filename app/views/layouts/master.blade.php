@@ -34,6 +34,7 @@
 			<div class='row text-center'>
 				<div class='col-md-12 footer-text'>
 					<p>Anorak is maintained by <a href='http://james-brooks.uk'>James Brooks</a>. Anorak is Copyright &copy; {{ date('Y') }} James Brooks.</p>
+					<p><a href='/privacy'>Privacy Policy</a></p>
 				</div>
 			</div>
 		</div>
