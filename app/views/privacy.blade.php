@@ -16,7 +16,6 @@
 					<li>We transfer information about you if Anorak is acquired by or merged with another company. In this event, Anorak will notify you before information about you is transferred and becomes subject to a different privacy policy.</li>
 				</ul>
 
-
 				<h2>Information Gathering and Usage</h2>
 
 				<p>Anorak uses collected information for the following general purposes: products and services provision, billing, identification and authentication, services improvement, contact, and research.</p>
@@ -30,14 +29,13 @@
 					<li>We use cookies to record current session information, but do not use permanent cookies. You are required to re-login to your Anorak account after the browser session has ended to protect you against others accidentally accessing your account contents.</li>
 				</ul>
 
-
 				<h2>Data Storage</h2>
 
-				<p>Anorak uses third party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run Anorak. Although Anorak owns the code, databases, and all rights to the Anorak application, you retain all rights to your data.</p>
+				<p>We use third party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run Anorak. Although Anorak owns the code, databases, and all rights to the Anorak application, you retain all rights to your data.</p>
 
 				<h2>Source Code</h2>
 				<ul>
-					<li>Anorak employees do not access Anorak users&#8217; private source code unless Anorak users give Anorak employees explicit written permission to access their source code in order to provide support.</li>
+					<li>Anorak employees do not access Anorak users&#8217; private source code unless our users give employees explicit written permission to access their source code in order to provide support.</li>
 					<li>Anorak does not store GitHub credentials.</li>
 				</ul>
 
