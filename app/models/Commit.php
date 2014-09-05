@@ -26,7 +26,7 @@
 
 		public function fileContent($FileName) {
 			list($Username, $RepoName) = $this->repoName;
-			$Contents = $this->Client->repo()->contents()->download($Username, $RepoName, $FileName);
+			$Contents = $this->Client->repo()->contents()->download($Username, $RepoName, $FileName, $this->SHA);
 			if(!is_null($Contents)) {
 				return $Contents;
 			}else{

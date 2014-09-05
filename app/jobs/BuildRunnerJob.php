@@ -55,7 +55,7 @@
 				// Don't run on removed files.
 				if($file->removed()) continue;
 
-				$tmpFileName = storage_path() . '/files/' . $file->sha() . '.cs.php';
+				$tmpFileName = storage_path() . '/files/' . basename($filename);
 				file_put_contents($tmpFileName, $file->content());
 				$style = new PHPCheckstyle(array('array'), NULL, $buildConfig, NULL, FALSE, FALSE);
 				$style->processFiles(array($tmpFileName), array());
@@ -70,7 +70,7 @@
 
 					// If the violated line number is not in our patch, don't do anything.
 					$violationLine = $file->modifiedLines()->filter(function($line) use ($lineNumber) {
-						return $line['lineNumber'] == $lineNumber;
+						return $line['patchPosition'] == $lineNumber;
 					});
 
 					if($violationLine->isEmpty()) continue;
