@@ -6,4 +6,8 @@
 			return View::make('index');
 		}
 
+		public function showPrivacy() {
+			return View::make('privacy');
+		}
+
 	}

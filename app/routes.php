@@ -3,6 +3,7 @@
 	Route::model('repo_id', 'Repo');
 
 	Route::get('/', 'HomeController@showIndex');
+	Route::get('privacy', 'HomeController@showPrivacy');
 	Route::get('auth/github', 'GitHubSessionController@authAction');
 	Route::get('auth/github/callback', 'GitHubSessionController@authCallbackAction');
 	
