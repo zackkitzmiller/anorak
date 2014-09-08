@@ -4,7 +4,7 @@
 	"keywords": ["code", "reviews", "anorak"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*",
+		"laravel/framework": "4.2.1",
 		"league/oauth2-client": "~0.3",
 		"knplabs/github-api": "*",
 		"webpatser/laravel-uuid": "dev-master",
