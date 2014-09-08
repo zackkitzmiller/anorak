@@ -12,7 +12,9 @@
 				<li><a href="/user">Repositories</a></li>
 				<li><a href="/user/setup">Setup</a></li>
 				@else
+				{{--
 				<li class='login-btn'><a class="" href="/auth/github" role="button"><i class='fa fa-github'></i> Sign in with GitHub</a></li>
+				--}}
 				@endif
 			</ul>
 		</div>
