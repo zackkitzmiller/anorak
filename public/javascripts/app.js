@@ -3,7 +3,7 @@
 	 * This file should only be used for logged in users.
 	 */
 
-	$('button[type=submit]').on('click', function(e) {
+	$('button[type=submit][name=repo]').on('click', function(e) {
 		e.preventDefault();
 
 		var $this = $(this);

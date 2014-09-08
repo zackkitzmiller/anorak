@@ -6,9 +6,25 @@
 		<div class='hero-section'>
 			<h1>Keep your Pull Requests up to standard!</h1>
 
-			@if(!Auth::check())
+			{{--@if(!Auth::check())
 			<a class="btn btn-green btn-outline-light" href="/auth/github"><i class='fa fa-github'></i>  Sign in with GitHub</a>
-			@endif
+			@endif--}}
+
+			<div class='row'>
+				<div class='col-lg-3'></div>
+				<div class='col-lg-6'>
+					<form action="//anorakci.us9.list-manage.com/subscribe/post?u=ddd8a158582080105308f31b9&amp;id=393211c960" method="post" name="mc-embedded-subscribe-form" class="form-horizontal col-lg-12" target="_blank" novalidate role='form'>
+						<div class='form-group form-group-lg'>
+							<input type="email" value="" name="EMAIL" class="form-control" placeholder="Your email address" required>
+						</div>
+					    <div style="position: absolute; left: -5000px;">
+					    	<input type="text" name="b_ddd8a158582080105308f31b9_393211c960" tabindex="-1" value="">
+					    </div>
+					    <button type='submit' name='subscribe' class='btn btn-green btn-outline-light'>Register interest</button>
+					</form>
+				</div>
+				<div class='col-lg-3'></div>
+			</div>
 
 			<div class="row">
 				<div class='col-lg-1'></div>
@@ -52,6 +68,7 @@
 			</div>
 		</div>
 
+		{{--
 		@if(!Auth::check())
 		<div class='row'>
 			<div class='col-md-12 text-center'>
@@ -59,6 +76,7 @@
 			</div>
 		</div>
 		@endif
+		--}}
 	</div>
 </section>
 @stop
