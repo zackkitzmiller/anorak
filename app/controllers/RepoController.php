@@ -2,10 +2,20 @@
 
 	use \Github;
 
+	/**
+	 * All Repository access is handled by this controller.
+	 * Activations/Deactivations etc.
+	 */
 	class RepoController extends BaseController {
-		public function activate(Repo $Repo) {
+		/**
+		 * Activates a repository. With auth checking.
+		 * Setups a GitHub web hook, assigns the id in our db. Done.
+		 * @param  Repo $repo
+		 * @return Response
+		 */
+		public function activate(Repo $repo) {
 			// Only allow activation of repositories if you're a member of it.
-			if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+			if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 				return Response::make(array(
 					'errors' => array(
 						'You must be the owner or a collaborator to activate this repository'
@@ -16,17 +26,17 @@
 
 			try {
 				// Do stuff to the GitHub side of things.
-				$Repo->addAnorakToRepo($Repo->full_github_name);
-				$hook = $Repo->addBuildHookToRepo($Repo->full_github_name);
+				$repo->addAnorakToRepo($repo->full_github_name);
+				$hook = $repo->addBuildHookToRepo($repo->full_github_name);
 
 				// Save the hook in the repo table.
-				if($Repo->activate($hook['id'])) {
-					Tracking::trackActivated($Repo);
+				if ($repo->activate($hook['id'])) {
+					Tracking::trackActivated($repo);
 					return Response::make([
 						'errors'  => [],
 						'success' => TRUE
 					]);
-				}else{
+				} else {
 					return Response::make([
 						'errors' => [
 							'Repository could not be activated'
@@ -34,19 +44,25 @@
 						'success' => FALSE
 					], 500);
 				}
-			} catch (Exception $e) {
+			} catch (Exception $exception) {
 				return Response::make([
 					'errors' => [
-						$e->getMessage()
+						$exception->getMessage()
 					],
 					'success' => FALSE
 				], 403);
 			}
 		}
 
-		public function deactivate(Repo $Repo) {
+		/**
+		 * Deactivates a repository. With auth checking.
+		 * Removes the GitHub web hook, unassigns the id in our db. Done.
+		 * @param  Repo $repo
+		 * @return Response
+		 */
+		public function deactivate(Repo $repo) {
 			// Only allow deactivation of repositories if you're a member of it.
-			if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+			if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 				return Response::make(array(
 					'errors' => array(
 						'You must be the owner or a collaborator to deactivate this repository'
@@ -57,22 +73,22 @@
 
 			try {
 				// Do stuff to the GitHub side of things.
-				$Repo->removeAnorakFromRepo($Repo->full_github_name);
-				$Repo->removeBuildHookFromRepo($Repo->full_github_name);
+				$repo->removeAnorakFromRepo($repo->full_github_name);
+				$repo->removeBuildHookFromRepo($repo->full_github_name);
 
 				// Remove the hook_id and deactivate from the repo table.
-				if($Repo->deactivate()) {
+				if ($repo->deactivate()) {
 					// Only allow activation of repositories if you're a member of it.
-					if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
-						Tracking::trackDeactivated($Repo);
+					if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+						Tracking::trackDeactivated($repo);
 						return Response::make(array(
 							'errors' => array(),
 							'success' => TRUE
 						));
 					}
-				}else{
+				} else {
 					// Only allow activation of repositories if you're a member of it.
-					if($Repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
+					if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 						return Response::make(array(
 							'errors' => array(
 								'Repository could not be deactivated'
@@ -81,10 +97,10 @@
 						), 500);
 					}
 				}
-			} catch (Exception $e) {
+			} catch (Exception $exception) {
 				return Response::make(array(
 					'errors' => array(
-						$e->getMessage()
+						$exception->getMessage()
 					),
 					'success' => FALSE
 				), 403);

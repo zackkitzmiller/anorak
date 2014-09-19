@@ -1,5 +1,8 @@
 <?php 
 
+	/**
+	 * The BuildController is what handles all routes to the builder.
+	 */
 	class BuildController extends BaseController {
 		/**
 		 * "Builds" a repository.
@@ -11,10 +14,12 @@
 			$payload = new Payload(json_decode(Request::getContent(), TRUE));
 
 			// It's a test (ping), say hi.
-			if(Request::header('X-GitHub-Event') === 'ping') return Response::make(['ping' => 'OK']);
+			if (Request::header('X-GitHub-Event') === 'ping') {
+				return Response::make(['ping' => 'OK']);
+			}
 
 			// Only comment when the pull request is opened or synchronized.
-			if(!$payload->relevant()) {
+			if (!$payload->relevant()) {
 				return Response::make([
 					'errors'  => [
 						"Irrelevant pull request"
