@@ -4,6 +4,10 @@
 	use PHPCheckstyle\PHPCheckstyle;
 	use Symfony\Component\Yaml\Parser as YamlParser;
 	
+	/**
+	 * When the /build/{id} route is requested, we kick off this job.
+	 * This is what does all of the work.
+	 */
 	class BuildRunnerJob {
 		/**
 		 * Execute the job.
