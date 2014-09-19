@@ -13,3 +13,5 @@ public/compass_app_log.txt
 config.codekit
 app/storage/files/*.php
 app/storage/*.json
+checkstyle_result/
+checkstyle_resultncss.xml
