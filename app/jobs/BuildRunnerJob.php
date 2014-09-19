@@ -47,7 +47,7 @@
 
 			foreach($files as $file) {
 				$startTime = microtime(TRUE);
-				
+
 				$filename = $file->filename();
 
 				if(stristr($filename, '.blade.php')) continue;
@@ -72,7 +72,7 @@
 
 					// If the violated line number is not in our patch, don't do anything.
 					$violationLine = $file->modifiedLines()->filter(function($line) use ($lineNumber) {
-						return $line['patchPosition'] == $lineNumber;
+						return (int)$line['patchPosition'] === (int)$lineNumber;
 					});
 
 					if($violationLine->isEmpty()) continue;
