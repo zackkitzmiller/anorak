@@ -19,21 +19,23 @@
 
 			$pullRequest = new PullRequest($payload, $client);
 			$files = $pullRequest->pullRequestFiles();
-			if(count($files) === 0) continue;
+			if (count($files) === 0) {
+				continue;
+			}
 
 			try {
 				$ymlParser = new YamlParser();
 				$tmpBuildConfig = $ymlParser->parse($pullRequest->config());
-			}catch(Exception $e) {
+			} catch(Exception $e) {
 				// Something went wrong, let's just stop
 				$job->delete();
 				return FALSE;
 			}
 
 			// If we have a key for "standards" then we should use this, then merge our changes on top.
-			if(isset($tmpBuildConfig['standards'])) {
+			if (isset($tmpBuildConfig['standards'])) {
 				$standard = $tmpBuildConfig['standards'];
-				if(in_array(Config::get('standards'), $standard)) {
+				if (in_array(Config::get('standards'), $standard)) {
 					$baseBuildConfig = $ymlParser->parse(file_get_contents(app_path() . '/rules/' . $standard . '.yml'));
 					$buildConfig = array_merge_recursive($baseBuildConfig, $tmpBuildConfig);
 				}else{
@@ -45,17 +47,14 @@
 				$buildConfig = $tmpBuildConfig;
 			}
 
-			foreach($files as $file) {
+			foreach ($files as $file) {
 				$startTime = microtime(TRUE);
 
 				$filename = $file->filename();
-
-				if(stristr($filename, '.blade.php')) continue;
 				$extension = pathinfo($filename)['extension'];
-				if($extension !== 'php') continue;
-
-				// Don't run on removed files.
-				if($file->removed()) continue;
+				if (stristr($filename, '.blade.php') || $extension !== 'php' || $file->removed()) {
+					continue;
+				}
 
 				$tmpFileName = storage_path() . '/files/' . basename($filename);
 				file_put_contents($tmpFileName, $file->content());
@@ -65,10 +64,12 @@
 				unlink($tmpFileName);
 
 				// The file is 100% great! Don't do anything.
-				if(count($violations) === 0) continue;
+				if (count($violations) === 0) {
+					continue;
+				}
 
-				foreach($violations as $violation) {
-					foreach($violation as $violater) {
+				foreach ($violations as $violation) {
+					foreach ($violation as $violater) {
 						$Msg = $violater['message'];
 
 						$lineNumber = $violater['line'];
@@ -78,7 +79,9 @@
 							return (int)$line['patchPosition'] === (int)$lineNumber;
 						});
 
-						if($violationLine->isEmpty()) continue;
+						if ($violationLine->isEmpty()) {
+							continue;
+						}
 
 						// Store the violation.
 						$build = new Build;
