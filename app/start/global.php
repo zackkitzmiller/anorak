@@ -90,3 +90,5 @@ $formatter = new \Monolog\Formatter\LineFormatter('%channel%.%level_name%: %mess
 $syslog->setFormatter($formatter);
 
 $monolog->pushHandler($syslog);
+
+User::setStripeKey(getenv('STRIPE_SECRET_KEY'));
