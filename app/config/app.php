@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Anorak\Tracking\TrackingServiceProvider',
+		'Laravel\Cashier\CashierServiceProvider',
 
 	),
 
