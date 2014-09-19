@@ -70,7 +70,7 @@
 
 				foreach ($violations as $violation) {
 					foreach ($violation as $violater) {
-						$Msg = $violater['message'];
+						$violationMsg = $violater['message'];
 
 						$lineNumber = $violater['line'];
 
@@ -85,7 +85,7 @@
 
 						// Store the violation.
 						$build = new Build;
-						$build->violations = $Msg;
+						$build->violations = $violationMsg;
 						$build->repo_id = $repo['id'];
 						$build->time_taken = microtime(TRUE) - $startTime;
 						$build->save();
