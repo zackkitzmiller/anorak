@@ -46,6 +46,8 @@
 			}
 
 			foreach($files as $file) {
+				$startTime = microtime(TRUE);
+				
 				$filename = $file->filename();
 
 				if(stristr($filename, '.blade.php')) continue;
@@ -79,6 +81,7 @@
 					$build = new Build;
 					$build->violations = $Msg;
 					$build->repo_id = $repo['id'];
+					$build->time_taken = microtime(TRUE) - $startTime;
 					$build->save();
 
 					$pullRequest->addComment([
