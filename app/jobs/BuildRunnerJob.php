@@ -67,28 +67,32 @@
 				// The file is 100% great! Don't do anything.
 				if(count($violations) === 0) continue;
 
-				foreach($violations as $lineNumber => $violation) {
-					$Msg = join("<br>", array_pluck($violation, 'message'));
+				foreach($violations as $violation) {
+					foreach($violation as $violater) {
+						$Msg = $violater['message'];
 
-					// If the violated line number is not in our patch, don't do anything.
-					$violationLine = $file->modifiedLines()->filter(function($line) use ($lineNumber) {
-						return (int)$line['patchPosition'] === (int)$lineNumber;
-					});
+						$lineNumber = $violater['line'];
 
-					if($violationLine->isEmpty()) continue;
+						// If the violated line number is not in our patch, don't do anything.
+						$violationLine = $file->modifiedLines()->filter(function($line) use ($lineNumber) {
+							return (int)$line['patchPosition'] === (int)$lineNumber;
+						});
 
-					// Store the violation.
-					$build = new Build;
-					$build->violations = $Msg;
-					$build->repo_id = $repo['id'];
-					$build->time_taken = microtime(TRUE) - $startTime;
-					$build->save();
+						if($violationLine->isEmpty()) continue;
 
-					$pullRequest->addComment([
-						'messages' => array_pluck($violation, 'message'),
-						'filename' => $filename,
-						'line'     => $violationLine->first()
-					]);
+						// Store the violation.
+						$build = new Build;
+						$build->violations = $Msg;
+						$build->repo_id = $repo['id'];
+						$build->time_taken = microtime(TRUE) - $startTime;
+						$build->save();
+
+						$pullRequest->addComment([
+							'messages' => array_pluck($violation, 'message'),
+							'filename' => $filename,
+							'line'     => $violationLine->first()
+						]);
+					}
 				}
 			}
 
