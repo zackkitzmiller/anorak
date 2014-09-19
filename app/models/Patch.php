@@ -29,8 +29,8 @@
 				}elseif($line = preg_match(self::MODIFIED_LINE, $content)) {
 					$additions[] = [
 						'content'       => $content, 
-						'lineNumber'    => $lineNumber,
-						'patchPosition' => $patchPos
+						'lineNumber'    => (int)$lineNumber,
+						'patchPosition' => (int)$patchPos
 					];
 					
 					$lineNumber++;
