@@ -8,7 +8,7 @@
 		"league/oauth2-client": "~0.3",
 		"knplabs/github-api": "*",
 		"webpatser/laravel-uuid": "dev-master",
-		"pda/pheanstalk": "2.0.*",
+		"pda/pheanstalk": "3.0.*",
 		"symfony/yaml": "~2.1",
 		"jbrooksuk/phpcheckstyle": "dev-master",
 		"segmentio/analytics-php": "dev-master",
