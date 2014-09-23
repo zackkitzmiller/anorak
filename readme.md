@@ -1,6 +1,6 @@
 ![Anorak](http://anorakci.com/images/AnorakFull.png)
 
-![Dependencies](https://www.versioneye.com/user/projects/54213d0b3a1a2c496b000286#dialog_dependency_badge)
+[![Dependency Status](https://www.versioneye.com/user/projects/54213d0b3a1a2c496b000286/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54213d0b3a1a2c496b000286)
 
 PHP code reviews with Anorak. 
 
