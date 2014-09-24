@@ -68,7 +68,7 @@
 				unlink($tmpFileName);
 
 				// The file is 100% great! Don't do anything.
-				if (count($violations) === 0) {
+				if ($violations === NULL || count($violations) === 0) {
 					continue;
 				}
 
