@@ -35,14 +35,14 @@
 			return $this->File['status'] === 'removed';
 		}
 
-		public function modifiedLines() {
-			return $this->patch()->additions();
+		public function changedLines() {
+			return $this->patch()->changedLines();
 		}
 
-		public function modifiedLineAt($lineNumber) {
+		public function lineAt($lineNumber) {
 			return array_map(function($modifiedLine) {
 				return $modifiedLine->lineNumber === (int)$lineNumber;
-			}, $this->modifiedLines());
+			}, $this->changedLines());
 		}
 
 		private function patch() {
