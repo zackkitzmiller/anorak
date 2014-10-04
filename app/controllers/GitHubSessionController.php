@@ -36,7 +36,7 @@
 			}
 
 			if (Input::has('code')) {
-				$code = Input::get('code')
+				$code = Input::get('code');
 				try {
 					$token = $this->provider->getAccessToken('authorization_code', array(
 						'code' => $code,
