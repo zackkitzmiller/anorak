@@ -102,7 +102,7 @@ hr {
 
 /* HEADER SECTION */
 header {
-	background: url(../../images/header.jpg) no-repeat center top;
+	background: url(/images/header.jpg) no-repeat center top;
 	padding-top: 200px;
 	text-align:center;
 	background-attachment: relative;
@@ -207,6 +207,34 @@ section, footer {
 				font-size: 18px;
 			}
 		}
+	}
+
+	&.testimonials {
+		background: url(/images/plain-header.jpg) no-repeat center top;
+		text-align:center;
+		background-attachment: relative;
+		background-position: center center;
+		min-height: 600px;
+		width: 100%;
+		color: white;
+		
+	    -webkit-background-size: 100%;
+	    -moz-background-size: 100%;
+	    -o-background-size: 100%;
+	    background-size: 100%;
+
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+
+	    p {
+	    	color: white;
+	    }
+
+	    hr {
+	    	border-color: white;
+	    }
 	}
 }
 
@@ -328,36 +356,6 @@ form.signup-form {
 	h3 {
 		color: $primary-green;
 	}
-}
-
-/* Testimonial Section */
-#t {
-	background: url(../../images/testimonials.jpg) no-repeat center top;
-	padding-top: 100px;
-	text-align:center;
-	background-attachment: relative;
-	background-position: center center;
-	min-height: 600px;
-	width: 100%;
-	color: white;
-	
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
-
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-#t p {
-	color: white;
-}
-
-#t hr {
-	border-color: white;
 }
 
 .example {

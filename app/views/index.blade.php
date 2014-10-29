@@ -131,9 +131,9 @@ line:
 	</div>
 </section>
 
-<div id="t">
+<section class="testimonials">
 	<div class="container">
-		<div class="row mt">
+		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 centered">
 				<div class="item active">
 					<h1 class='mb'>Built by</h1>
@@ -144,5 +144,5 @@ line:
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 @stop
