@@ -10,11 +10,12 @@
 	<meta name="author" content="james-brooks.uk">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<title>Anorak</title>
+	<link rel='stylesheet' href='/stylesheets/css/bootstrap.css' />
 	<link rel='stylesheet' href='/stylesheets/css/styles.css' />
 	<link href='http://fonts.googleapis.com/css?family=Advent+Pro:400,700,300,600' rel='stylesheet' type='text/css'>
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body data-spy="scroll" data-offset="0" data-target="#theMenu">
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -24,21 +25,13 @@
 		ga('create', 'UA-42158883-3', 'auto');
 		ga('send', 'pageview');
 	</script>
-	@include('nav')
+	
+	@include('header')
 
 	@section('content')
 	@show
 
-	<div class="footer">
-		<div class='container'>
-			<div class='row text-center'>
-				<div class='col-md-12 footer-text'>
-					<p>Anorak is maintained by <a href='http://james-brooks.uk'>James Brooks</a>. Anorak is Copyright &copy; {{ date('Y') }} James Brooks.</p>
-					<p><a href='/privacy'>Privacy Policy</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
+	@include('footer')
 
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- <script src="/javascripts/bootstrap.js"></script> -->
