@@ -1,6 +1,26 @@
 @import 'compass/css3';
 @import 'font-awesome/font-awesome';
 
+/**
+ * Mixins
+ */
+
+@mixin color-variant($color: #555, $lt-percent: 10%, $lter-percent: 15%, $dk-percent: 10%, $dker-percent: 15%) {
+	background-color: $color;
+	&.light, .light {
+		background-color: lighten($color, $lt-percent);
+	}
+	&.lighter, .lighter {
+		background-color: lighten($color, $lter-percent);
+	}
+	&.dark, .dark {
+		background-color: darken($color, $dk-percent);
+	}
+	&.darker, .darker {
+		background-color: darken($color, $dker-percent);
+	}
+}
+
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
 
 $primary-green: #87D47C;
@@ -12,13 +32,18 @@ $primary-grey: #6C7A89;
 	margin: 0;
 	padding: 0px;
 } 
-body { 
-	background: #fff; 
-	margin: 0; 
-	color: #5a5a5a;
+
+html, body {
+	height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+body { 
+	background: #FFF; 
+	margin: 0; 
+	color: #343434;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
 }
@@ -26,41 +51,12 @@ h1, h2, h3, h4, h5, h6 {
 p { 
 	padding: 0; 
 	margin-bottom: 12px; 
-	font-family: 'Lato', sans-serif;
-	font-weight: 300;
 	font-size: 18px; 
 	line-height: 28px;
-	color: #666; 
+	color: #343434; 
 	margin-top: 10px; 
 }
 
-html, body {
-	height: 100%;
-}
-
-.alignleft { float: left; }
-.alignright { float: right; }
-.aligncenter {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	clear: both;
-}
-.centered {text-align: center}
-.mt {margin-top: 50px;}
-.mb {margin-bottom: 50px;}
-.mtb {margin-top: 50px; margin-bottom: 50px;}
-.mtb2 { margin-top: 100px; margin-bottom: 100px;}
-.ptb {padding-top: 80px; padding-bottom: 80px;}
-
-.clear {
-	clear: both;
-	display: block;
-	font-size: 0;
-	height: 0;
-	line-height: 0;
-	width:100%;
-}
 
 *, *:after, *:before {
 	@include box-sizing(border-box);
@@ -140,20 +136,12 @@ section, footer {
 	padding-bottom: 50px;
 
 	&.grey {
-		background: #f2f2f2;
-	}
-
-	&.dark-grey {
-		background-color: darken($primary-grey, 30%);
+		@include color-variant(#f2f2f2, 10%, 15%, 30%, 40%);
 	}
 
 	&.green {
-		background: $primary-green;
+		@include color-variant($primary-green, 10%, 30%);
 		color: white;
-	}
-
-	&.light-green {
-		background-color: $light-green;
 	}
 
 	&.showcase {
@@ -327,6 +315,9 @@ form.signup-form {
 	}
 }
 
+/**
+ * Code example block.
+ */
 .example {
 	@include border-radius(6px);
 	position: relative;
@@ -413,6 +404,38 @@ form.signup-form {
 	}
 }
 
+/**
+ * Utilities classes.
+ */
+.align-left { float: left; }
+.align-right { float: right; }
+.align-center {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	clear: both;
+}
+
+.centered {text-align: center}
+.mt {margin-top: 50px;}
+.mb {margin-bottom: 50px;}
+.mtb {margin-top: 50px; margin-bottom: 50px;}
+.mtb2 { margin-top: 100px; margin-bottom: 100px;}
+.ptb {padding-top: 80px; padding-bottom: 80px;}
+.pt2 {padding-top: 160px; padding-bottom: 160px;}
+
+.clear {
+	clear: both;
+	display: block;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	width:100%;
+}
+
+/**
+ * Responsive sizes.
+ */
 @media screen and (max-width: 740px) {
 	.features {
 		.f-r {

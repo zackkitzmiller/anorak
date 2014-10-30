@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row centered">
 			<h1>Register for updates</h1>
-			<hr class="aligncenter mb">
+			<hr class="align-center mb">
 			<p class="lead">We're not quite ready to open yet so sign up for our newsletter and we'll keep you up to date with the latest Anorak news.</p>
 			<div class="col-md-6 col-md-offset-3">
 				<form role="form" action="//anorakci.us9.list-manage.com/subscribe/post?u=ddd8a158582080105308f31b9&amp;id=393211c960" method="post" enctype="plain" class='signup-form'> 
@@ -53,40 +53,42 @@
 	</div>
 </section>
 
-<div class="container">
-	<div class="row mtb2">
-		<h1 class="centered">Using Anorak</h1>
-		<hr class="aligncenter mb">
-		
-		<div class="col-md-5 hidden-xs">
-			<!-- <img class="img-responsive aligncenter" src="/images/Anorak.png"> -->
-			<div class='example'>
-				<div class="command">
-					<label>.anorak.yml</label>
-				</div>
-				<div class="code">
-					<pre><code>standards: "PSR1"
+<section class=''>
+	<div class="container">
+		<div class="row mtb">
+			<h1 class="centered">Using Anorak</h1>
+			<hr class="align-center mb">
+			
+			<div class="col-md-5 hidden-xs">
+				<!-- <img class="img-responsive align-center" src="/images/Anorak.png"> -->
+				<div class='example'>
+					<div class="command">
+						<label>.anorak.yml</label>
+					</div>
+					<div class="code">
+						<pre><code>standards: "PSR1"
 file:
 	lineEndings: "\n"
 
 line:
 	maxLength: 80</code></pre>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-7">
-			<div class="features f-l">
-				<h3>Good standards by default</h3>
-				<p>By default, Anorak uses PSR-1 as a standard. Don't worry though, you can override the default with one line of code.</p>
+			<div class="col-md-7">
+				<div class="features f-l">
+					<h3>Good standards by default</h3>
+					<p>By default, Anorak uses PSR-1 as a standard. Don't worry though, you can override the default with one line of code.</p>
+				</div>
+				<div class="features f-l">
+					<h3>Override individual settings</h3>
+					<p>Love a standard, but hate just one part? No problem, Anorak allows you to set your own individual settings.</p>
+				</div>
 			</div>
-			<div class="features f-l">
-				<h3>Override individual settings</h3>
-				<p>Love a standard, but hate just one part? No problem, Anorak allows you to set your own individual settings.</p>
-			</div>
+			
 		</div>
-		
 	</div>
-</div>
+</section>
 
 <section class='grey pricing'>
 	<div class="container">
@@ -137,9 +139,9 @@ line:
 			<div class="col-lg-8 col-lg-offset-2 centered">
 				<div class="item active">
 					<h1 class='mb'>Built by</h1>
-					<img src="https://gravatar.com/avatar/{{ md5('jbrooksuk@me.com') }}.png" class="img-circle aligncenter" width="120" alt="First slide">
+					<img src="https://gravatar.com/avatar/{{ md5('jbrooksuk@me.com') }}.png" class="img-circle align-center" width="120" alt="First slide">
 					<h3>James Brooks</h3>
-					<hr class="aligncenter">
+					<hr class="align-center">
 				</div>
 			</div>
 		</div>
