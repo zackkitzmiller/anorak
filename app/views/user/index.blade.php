@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.page')
 
 @section('content')
-<section id='sectionone' class='features-section'>
+<section>
 	<div class='container'>
 		<div class='row'>
 			<div class='col-md-12'>
@@ -36,7 +36,7 @@
 									</div>
 									<div class='col-lg-4'>
 										<?php $Active = $Repo->active; ?>
-										<button type='submit' class='btn btn-{{ $Active ? "danger" : "primary" }} pull-right' name='repo' data-action="{{ $Active ? 'deactivate' : 'activate' }}" data-repoid='{{ $Repo->id }}'>{{ $Active ? "Deactivate" : "Activate" }}</button>
+										<button type='submit' class='btn btn-{{ $Active ? "danger" : "trans" }} pull-right' name='repo' data-action="{{ $Active ? 'deactivate' : 'activate' }}" data-repoid='{{ $Repo->id }}'>{{ $Active ? "Deactivate" : "Activate" }}</button>
 									</div>
 								</div>
 							</li>

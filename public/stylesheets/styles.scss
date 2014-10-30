@@ -291,6 +291,9 @@ form.signup-form {
 		background: $primary-green;
 	}
 
+	&.btn-danger {
+		border-color: #d43f3a;
+	}
 
 	&.btn-green {
 		background: $primary-green;
