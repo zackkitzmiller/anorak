@@ -7,7 +7,6 @@
 		
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="hidden"><a href="#page-top"><i class="fa fa-arrow-up"></i></a></li>
 				@if(Auth::check())
 				<li><a href="/user">Repositories</a></li>
 				<li><a href="/user/setup">Setup</a></li>

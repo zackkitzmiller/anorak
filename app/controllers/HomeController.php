@@ -21,4 +21,12 @@
 			return View::make('privacy');
 		}
 
+		/**
+		 * Shows the FAQ Page
+		 * @return View
+		 */
+		public function showFaq() {
+			return View::make('faq');
+		}
+
 	}
