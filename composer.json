@@ -9,7 +9,7 @@
 		"knplabs/github-api": "*",
 		"webpatser/laravel-uuid": "dev-master",
 		"pda/pheanstalk": "2.0.*",
-		"symfony/yaml": "~2.1",
+		"symfony/yaml": "~2.5",
 		"jbrooksuk/phpcheckstyle": "dev-master",
 		"segmentio/analytics-php": "dev-master",
 		"laravel/cashier": "~2.0"
