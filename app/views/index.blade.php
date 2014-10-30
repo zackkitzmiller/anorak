@@ -121,7 +121,7 @@ line:
 					<h1>$15</h1>
 					<h6>each per month</h6>
 					<p class="mt">
-						For the private organisational repositories.<br />
+						Design for private organisation repositories.<br />
 						<small><em>Not-for-profit can benefit from free repos, just talk to us!</em></small>
 					</p>
 					{{-- <p class="mt"><button class="btn btn-lg btn-green">Buy It Now!</button></p> --}}
