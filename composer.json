@@ -1,6 +1,6 @@
 {
 	"name": "jbrooksuk/anorak",
-	"description": "PHP code reviews with Anorak. .",
+	"description": "PHP code reviews with Anorak.",
 	"keywords": ["code", "reviews", "anorak"],
 	"license": "MIT",
 	"require": {
