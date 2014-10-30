@@ -46,4 +46,10 @@ Some basic rules to code:
 2. Create a merge request with your changes.
 
 ## License
-I'm not sure what the license on this will be. For now, you are **forbidden** from sharing the code beyond any contributors to this repository.
+
+Copyright 2014 James Brooks
+
+Simple license agreement:
+
+- You may not distribute this source code.
+- You may not modify it to create a competitor product.
