@@ -11,7 +11,6 @@ $primary-grey: #6C7A89;
 * { 
 	margin: 0;
 	padding: 0px;
-	font-family: 'Lato', sans-serif;
 } 
 body { 
 	background: #fff; 
@@ -64,9 +63,7 @@ html, body {
 }
 
 *, *:after, *:before {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+	@include box-sizing(border-box);
 	padding: 0;
 	margin: 0;
 }
@@ -75,17 +72,13 @@ a {
 	padding: 0;
 	margin: 0;
 	text-decoration: none; 
-	-webkit-transition: background-color .4s linear, color .4s linear;
-	-moz-transition: background-color .4s linear, color .4s linear;
-	-o-transition: background-color .4s linear, color .4s linear;
-	-ms-transition: background-color .4s linear, color .4s linear;
-	transition: background-color .4s linear, color .4s linear;
 	color: $darker-green;
+	@include transition(background-color .4s linear, color .4s linear);
 
 	&:hover,
 	&:focus {
-	  text-decoration: none;
-	  color:#696E74;
+		text-decoration: none;
+		color:darken($darker-green, 10%);
 	}
 }
 
@@ -133,13 +126,12 @@ header {
 		border: 2px solid white;
 		width: 120px;
 	}
+	h1, h2 {
+		color: white;
+	}
 	h1 {
 		font-weight: 900;
 		font-size: 60px;
-		color: white;
-	}
-	h2 {
-		color: white;
 	}
 }
 
@@ -223,7 +215,7 @@ form.signup-form {
 	input {
 		font-size: 18px;
 		min-height: 60px;
-		border-radius: 40px;
+		@include border-radius(40px);
 		line-height: 24px;
 		padding: 16px 30px 20px;
 		border: none;
@@ -268,7 +260,6 @@ form.signup-form {
 	}
 }
 
-/* Button used in the footer - contact form */
 .btn {
 	border-radius: 30px;
 	font-size: 16px;
@@ -417,18 +408,19 @@ form.signup-form {
 			font-size: 15px;
 			line-height: 1.5em;
 			position: relative;
-
 			@include flex(1 1 auto);
 		}
 	}
 }
 
-@media screen and (max-width: 740px){ 
-	.f-r {
-		text-align: center;
-	}
+@media screen and (max-width: 740px) {
+	.features {
+		.f-r {
+			text-align: center;
+		}
 
-	.f-l {
-		text-align: center;
-	}
+		.f-l {
+			text-align: center;
+		}
+	} 
 }
