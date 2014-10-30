@@ -312,17 +312,6 @@ form.signup-form {
 	}
 }
 
-/* features */
-.f-r {
-	text-align: right;
-	margin: 15px;
-}
-
-.f-l {
-	text-align: left;
-	margin: 15px;
-}
-
 .features {
 	padding: 10px;
 
@@ -335,6 +324,16 @@ form.signup-form {
 	h3 {
 		color: $primary-green;
 	}
+
+	&.f-r {
+		text-align: right;
+		margin: 15px;
+	}
+
+	&.f-l {
+		text-align: left;
+		margin: 15px;
+	}
 }
 
 .example {
@@ -343,13 +342,10 @@ form.signup-form {
 	border: 1px solid #e9e9e9;
 	background: #fff;
 	min-height: 235px;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-	-moz-flex-direction: column;
-	-o-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
+
+	@include display-flex;
+	@include flex-direction(column);
+
 	margin: 40px auto 0 auto;
 
 	&:last-child {
@@ -362,11 +358,8 @@ form.signup-form {
 		color: #343434;
 		font-size: 15px;
 		border-bottom: 1px solid #e9e9e9;
-		-webkit-flex: 0 0 auto;
-		-moz-flex: 0 0 auto;
-		-o-flex: 0 0 auto;
-		-ms-flex: 0 0 auto;
-		flex: 0 0 auto;
+
+		@include flex(0 0 auto);
 
 		label {
 			font-weight: 400;
@@ -380,11 +373,7 @@ form.signup-form {
 		position: relative;
 		overflow-y: auto;
 		max-height: 425px;
-		-webkit-flex: 1 1 auto;
-		-moz-flex: 1 1 auto;
-		-o-flex: 1 1 auto;
-		-ms-flex: 1 1 auto;
-		flex: 1 1 auto;
+		@include flex(1 1 auto);
 
 		pre {
 			&:before {
@@ -428,11 +417,8 @@ form.signup-form {
 			font-size: 15px;
 			line-height: 1.5em;
 			position: relative;
-			-webkit-flex: 1 1 auto;
-			-moz-flex: 1 1 auto;
-			-o-flex: 1 1 auto;
-			-ms-flex: 1 1 auto;
-			flex: 1 1 auto;
+
+			@include flex(1 1 auto);
 		}
 	}
 }
