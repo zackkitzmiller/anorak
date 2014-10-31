@@ -400,6 +400,11 @@ form.signup-form {
 			line-height: 1.5em;
 			position: relative;
 			@include flex(1 1 auto);
+
+			code {
+				padding: 0;
+				background-color: inherit;
+			}
 		}
 	}
 }

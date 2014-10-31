@@ -18,8 +18,10 @@
 
 	@include('footer')
 
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- <script src="/javascripts/bootstrap.js"></script> -->
-	<script src="/javascripts/app.js"></script>
+	<script src="/javascripts/main.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<title>Anorak</title>
 	<link rel='stylesheet' href='/stylesheets/css/bootstrap.css' />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
 	<link rel='stylesheet' href='/stylesheets/css/styles.css' />
 	<link href='http://fonts.googleapis.com/css?family=Advent+Pro:400,700,300,600' rel='stylesheet' type='text/css'>
 </head>

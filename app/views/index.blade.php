@@ -66,7 +66,7 @@
 						<label>.anorak.yml</label>
 					</div>
 					<div class="code">
-						<pre><code>standards: "PSR1"
+						<pre><code class='yml'>standards: "PSR1"
 file:
 	lineEndings: "\n"
 

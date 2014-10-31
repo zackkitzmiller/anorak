@@ -2103,58 +2103,62 @@ form.signup-form .subscribe-submit {
         padding: 0 22px;
         color: rgba(5, 41, 62, 0.27);
         white-space: normal; }
+      /* line 404, ../styles.scss */
+      .example .code pre code {
+        padding: 0;
+        background-color: transparent; }
 
 /**
  * Utilities classes.
  */
-/* line 410, ../styles.scss */
+/* line 415, ../styles.scss */
 .align-left {
   float: left; }
 
-/* line 411, ../styles.scss */
+/* line 416, ../styles.scss */
 .align-right {
   float: right; }
 
-/* line 412, ../styles.scss */
+/* line 417, ../styles.scss */
 .align-center {
   margin-left: auto;
   margin-right: auto;
   display: block;
   clear: both; }
 
-/* line 419, ../styles.scss */
+/* line 424, ../styles.scss */
 .centered {
   text-align: center; }
 
-/* line 420, ../styles.scss */
+/* line 425, ../styles.scss */
 .mt {
   margin-top: 50px; }
 
-/* line 421, ../styles.scss */
+/* line 426, ../styles.scss */
 .mb {
   margin-bottom: 50px; }
 
-/* line 422, ../styles.scss */
+/* line 427, ../styles.scss */
 .mtb {
   margin-top: 50px;
   margin-bottom: 50px; }
 
-/* line 423, ../styles.scss */
+/* line 428, ../styles.scss */
 .mtb2 {
   margin-top: 100px;
   margin-bottom: 100px; }
 
-/* line 424, ../styles.scss */
+/* line 429, ../styles.scss */
 .ptb {
   padding-top: 80px;
   padding-bottom: 80px; }
 
-/* line 425, ../styles.scss */
+/* line 430, ../styles.scss */
 .pt2 {
   padding-top: 160px;
   padding-bottom: 160px; }
 
-/* line 427, ../styles.scss */
+/* line 432, ../styles.scss */
 .clear {
   clear: both;
   display: block;
@@ -2167,9 +2171,9 @@ form.signup-form .subscribe-submit {
  * Responsive sizes.
  */
 @media screen and (max-width: 740px) {
-  /* line 441, ../styles.scss */
+  /* line 446, ../styles.scss */
   .features .f-r {
     text-align: center; }
-  /* line 445, ../styles.scss */
+  /* line 450, ../styles.scss */
   .features .f-l {
     text-align: center; } }
