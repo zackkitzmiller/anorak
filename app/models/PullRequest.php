@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	use Illuminate\Database\Eloquent\Collection;
 	use \Github;
@@ -28,7 +28,7 @@
 
 		public function comments() {
 			list($Username, $RepoName) = $this->fullRepoName();
-			return $this->api()->pullRequest()->comments()->all($Username, $RepoName, $this->number());			
+			return $this->api()->pullRequest()->comments()->all($Username, $RepoName, $this->number());
 		}
 
 		public function pullRequestFiles() {

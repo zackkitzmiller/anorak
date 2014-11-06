@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	use \Github\Client as GithubClient;
 
@@ -19,7 +19,7 @@
 				$this->Client = new GithubClient;
 				$this->Client->authenticate(getenv('GITHUB_CLIENT_ID'), Session::get('github.token'));
 			} catch (Exception $e) {
-				
+
 			}
 		}
 

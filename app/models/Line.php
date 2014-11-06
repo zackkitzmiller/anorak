@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	/**
 	 * Lines which are changed are represented by this class.

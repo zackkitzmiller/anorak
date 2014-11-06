@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	class Violations {
 		public $violations = array();
@@ -21,7 +21,7 @@
 					// What is this?
 					$this->violations[$identifier]->addMessages($violation->messages);
 				}
-			} 
+			}
 
 			return $this;
 		}

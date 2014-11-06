@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	/**
 	 * Subscription Model
@@ -8,7 +8,7 @@
 	 */
 	class Subcription extends Eloquent {
 		protected $table = 'subscriptions';
-		
+
 		public function user() {
 			return $this->belongsTo('user', 'user_id', 'id');
 		}

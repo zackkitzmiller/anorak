@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	use \League\OAuth2\Client\Provider\GitHub as OAuth;
 

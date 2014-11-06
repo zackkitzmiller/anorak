@@ -7,7 +7,7 @@
 	Route::get('faq', 'HomeController@showFaq');
 	Route::get('auth/github', 'GitHubSessionController@authAction');
 	Route::get('auth/github/callback', 'GitHubSessionController@authCallbackAction');
-	
+
 	Route::group(array('before' => 'auth'), function() {
 		Route::get('user', 'UserController@showIndex');
 		Route::get('user/logout', 'UserController@logoutAction');

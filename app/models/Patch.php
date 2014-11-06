@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	use Illuminate\Database\Eloquent\Collection;
 
@@ -28,11 +28,11 @@
 					$lineNumber = (int)$line[$lineNumber];
 				} elseif ($line = preg_match(self::MODIFIED_LINE, $content)) {
 					$lines[] = [
-						'content'       => $content, 
+						'content'       => $content,
 						'lineNumber'    => (int)$lineNumber,
 						'patchPosition' => (int)$patchPos
 					];
-					
+
 					$lineNumber++;
 				} elseif ($line = preg_match(self::NOT_REMOVED_LINE, $content)) {
 					$lineNumber++;
