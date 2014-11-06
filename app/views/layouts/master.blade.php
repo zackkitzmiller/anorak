@@ -10,7 +10,7 @@
 		ga('create', 'UA-42158883-3', 'auto');
 		ga('send', 'pageview');
 	</script>
-	
+
 	@include('header')
 
 	@section('content')
