@@ -1,6 +1,12 @@
 @extends('layouts.page')
 
 @section('content')
+<script>
+	Settings = {
+		stripePublishableKey: '{{ Config::get("services.stripe.publishable") }}',
+		userEmailAddress: "{{ Auth::user()->email_address }}"
+	};
+</script>
 <section>
 	<div class='container'>
 		<div class='row'>

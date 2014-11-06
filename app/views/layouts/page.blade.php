@@ -10,7 +10,7 @@
 		ga('create', 'UA-42158883-3', 'auto');
 		ga('send', 'pageview');
 	</script>
-	
+
 	@include('nav')
 
 	@section('content')
@@ -18,6 +18,7 @@
 
 	{{-- @include('footer') --}}
 
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js'></script>
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- <script src="/javascripts/bootstrap.js"></script> -->
 	<script src="/javascripts/app.js"></script>
