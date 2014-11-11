@@ -8,7 +8,7 @@
 			<hr class="align-center mb">
 			<p class="lead">We're not quite ready to open yet so sign up for our newsletter and we'll keep you up to date with the latest Anorak news.</p>
 			<div class="col-md-6 col-md-offset-3">
-				<form role="form" action="//anorakci.us9.list-manage.com/subscribe/post?u=ddd8a158582080105308f31b9&amp;id=393211c960" method="post" enctype="plain" class='signup-form'> 
+				<form role="form" action="//anorakci.us9.list-manage.com/subscribe/post?u=ddd8a158582080105308f31b9&amp;id=393211c960" method="post" enctype="plain" class='signup-form'>
 					<input type="email" name="EMAIL" class="subscribe-input" placeholder="Enter your e-mail address..." required>
 					<button class='btn btn-submit subscribe-submit' type="submit">Subscribe</button>
 				</form>
@@ -17,7 +17,7 @@
 	</div>
 </section>
 
-<section class="grey">  
+<section class="grey">
 	<div class="container">
 		<div class="row mtb centered">
 			<div class="col-md-3">
@@ -58,7 +58,7 @@
 		<div class="row mtb">
 			<h1 class="centered">Using Anorak</h1>
 			<hr class="align-center mb">
-			
+
 			<div class="col-md-5 hidden-xs">
 				<!-- <img class="img-responsive align-center" src="/images/Anorak.png"> -->
 				<div class='example'>
@@ -85,7 +85,7 @@ line:
 					<p>Love a standard, but hate just one part? No problem, Anorak allows you to set your own individual settings.</p>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </section>
@@ -93,7 +93,7 @@ line:
 <section class='grey pricing'>
 	<div class="container">
 		<div class="row mtb">
-		<div class="col-md-4">
+			<div class="col-md-4">
 				<div class="price">
 					<h5>Personal Public</h5>
 					<h1>Free</h1>
@@ -108,7 +108,7 @@ line:
 			<div class="col-md-4">
 				<div class="price">
 					<h5>Private Personal</h5>
-					<h1>$5</h1>
+					<h1>${{ Config::get('subscriptions.personal') }}</h1>
 					<h6>each per month</h6>
 					<p class="mt">
 						Designed for private personal repositories.
@@ -116,11 +116,11 @@ line:
 					{{-- <p class="mt"><button class="btn btn-lg btn-green">Buy It Now!</button></p> --}}
 				</div>
 			</div>
-			
+
 			<div class="col-md-4">
 				<div class="price">
 					<h5>Private Organisation</h5>
-					<h1>$15</h1>
+					<h1>${{ Config::get('subscriptions.organization') }}</h1>
 					<h6>each per month</h6>
 					<p class="mt">
 						Design for private organisation repositories.<br />
