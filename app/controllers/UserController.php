@@ -33,12 +33,24 @@
 			return View::make('user.setup');
 		}
 
+		/**
+		 * Syncs up user repositories.
+		 * @return array
+		 */
 		public function syncAction() {
 			Queue::push('RepoSynchronizationJob', array('github_token' => Session::get('github.token'), 'user_id' => Auth::user()->id));
 
 			return [
-				'success' => TRUE
+				'success' => true
 			];
+		}
+
+		/**
+		 * Returns all of a users repositories.
+		 * @return array
+		 */
+		public function reposAction() {
+			return Auth::user()->repos;
 		}
 
 	}

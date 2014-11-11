@@ -13,6 +13,7 @@
 		Route::get('user/logout', 'UserController@logoutAction');
 		Route::get('user/setup', 'UserController@showSetup');
 		Route::get('user/sync', 'UserController@syncAction');
+		Route::get('user/repos', 'UserController@reposAction');
 	});
 
 	Route::group(array('before' => 'csrf|auth'), function() {
