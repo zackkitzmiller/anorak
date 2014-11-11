@@ -103,6 +103,16 @@ hr {
 			font-weight: 900;
 			font-size: 30px;
 		}
+
+		ul.nav.navbar-nav {
+			li {
+				a {
+					color: white;
+					font-weight: bold;
+					font-size: 1.2em;
+				}
+			}
+		}
 	}
 }
 
