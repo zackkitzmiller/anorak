@@ -48,7 +48,7 @@
 			// If we have a key for "standards" then we should use this, then merge our changes on top.
 			if (isset($tmpBuildConfig['standards'])) {
 				$standard = $tmpBuildConfig['standards'];
-				if (in_array(Config::get('standards'), $standard)) {
+				if (in_array($standard, Config::get('standards'))) {
 					$baseBuildConfig = $ymlParser->parse(file_get_contents(app_path() . '/rules/' . $standard . '.yml'));
 					$buildConfig = array_merge_recursive($baseBuildConfig, $tmpBuildConfig);
 				}else{
