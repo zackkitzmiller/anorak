@@ -1,7 +1,7 @@
 <?php
 
 	return array(
-		'personal' => 9,
-		'organization' => 12,
-		'free' => 0
+		'personal' => 9, // Private personal repository.
+		'organization' => 12, // Private organization repository.
+		'free' => 0 // Public repository.
 	);
