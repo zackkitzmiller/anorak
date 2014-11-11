@@ -10,14 +10,8 @@
 		 *
 		 * @return array
 		 */
-		public function build($github_id) {
+		public function build(Repo $repo) {
 			$payload = new Payload(json_decode(Request::getContent(), TRUE));
-
-			try {
-				$repo = Repo::where('github_id', $github_id)->first();
-			} catch (Exception $e) {
-				App::abort(404, "Repository not found");
-			}
 
 			// It's a test (ping), say hi.
 			if (Request::header('X-GitHub-Event') === 'ping') {

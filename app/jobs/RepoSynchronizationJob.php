@@ -24,8 +24,8 @@
 			$repos = array_merge($this->userRepos(), array_values($this->orgRepos()));
 
 			// Clear out existing repositories before syncing.
-			if(count($repos) > 0) {
-				foreach($repos as $repo) {
+			if (count($repos) > 0) {
+				foreach ($repos as $repo) {
 					$githubRepo = Repo::updateOrCreate(array(
 						'github_id' => $repo['id'],
 					), array(
@@ -37,7 +37,7 @@
 
 					$githubRepo->created(function($repo) use ($data) {
 						Membership::firstOrCreate(array(
-							'repo_id' => $repo->github_id,
+							'repo_id' => $repo->id,
 							'user_id' => $data['user_id']
 						));
 					});
@@ -59,8 +59,10 @@
 
 			$results = [];
 			// Ensure that we have admin access
-			foreach($repos as $repo) {
-				if($repo['permissions']['admin']) $results[] = $repo;
+			foreach ($repos as $repo) {
+				if ($repo['permissions']['admin']) {
+					$results[] = $repo;
+				}
 			}
 
 			return $results;
@@ -76,14 +78,16 @@
 			$orgs = $orgPaginator->fetchAll($this->client->currentUser(), 'organizations');
 
 			$results = [];
-			foreach($orgs as $org) {
+			foreach ($orgs as $org) {
 				// Ensure that we have admin access
 
 				$paginator = new Github\ResultPager($this->client);
 				$repos = $paginator->fetchAll($this->client->organization(), 'repositories', ['organization' => $org['login']]);
 
-				foreach($repos as $repo) {
-					if($repo['permissions']['admin']) $results[] = $repo;
+				foreach ($repos as $repo) {
+					if ($repo['permissions']['admin']) {
+						$results[] = $repo;
+					}
 				}
 			}
 

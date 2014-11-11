@@ -13,13 +13,7 @@
 		 * @param  int $github_id
 		 * @return Response
 		 */
-		public function activate($github_id) {
-			try {
-				$Repo = Repo::where('github_id')->first();
-			} catch (Exception $e) {
-				App::abort(404, 'Repo not found.');
-			}
-
+		public function activate(Repo $repo) {
 			// Only allow activation of repositories if you're a member of it.
 			if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 				return Response::make(array(
@@ -66,12 +60,7 @@
 		 * @param  int $github_id
 		 * @return Response
 		 */
-		public function deactivate($github_id) {
-			try {
-				$Repo = Repo::where('github_id')->first();
-			} catch (Exception $e) {
-				App::abort(404, 'Repo not found.');
-			}
+		public function deactivate(Repo $repo) {
 			// Only allow deactivation of repositories if you're a member of it.
 			if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 				return Response::make(array(
