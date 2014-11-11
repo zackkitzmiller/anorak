@@ -19,7 +19,7 @@
 			$client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), null, GithubClient::AUTH_HTTP_TOKEN);
 
 			// Gives us the variables we sent through originally
-			extract($data);
+			extract($data);]
 
 			$pullRequest = new PullRequest($payload, $client);
 			$files = $pullRequest->pullRequestFiles();
@@ -63,6 +63,7 @@
 
 				$tmpFileName = storage_path() . '/files/' . basename($filename);
 				file_put_contents($tmpFileName, $file->content());
+				// TODO: Replace this with Hippo (#92)
 				$style = new PHPCheckstyle(array('array'), null, $buildConfig, null, false, false);
 				$style->processFiles(array($tmpFileName), array());
 				$violations = $style->_reporter->reporters[0]->outputFile[$tmpFileName];
