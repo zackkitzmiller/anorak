@@ -25,15 +25,6 @@
 
 			// Clear out existing repositories before syncing.
 			if(count($repos) > 0) {
-				try {
-					User::find($data['user_id'])->repos->each(function($repo) {
-						$repo->memberships()->delete();
-						$repo->delete();
-					});
-				}catch(Exception $e) {
-					// Do nothing since there may be no repo's to delete.
-				}
-
 				foreach($repos as $repo) {
 					$githubRepo = Repo::updateOrCreate(array(
 						'github_id' => $repo['id'],
@@ -46,7 +37,7 @@
 
 					$githubRepo->created(function($repo) use ($data) {
 						Membership::firstOrCreate(array(
-							'repo_id' => $repo->id,
+							'repo_id' => $repo->github_id,
 							'user_id' => $data['user_id']
 						));
 					});

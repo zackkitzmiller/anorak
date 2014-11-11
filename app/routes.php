@@ -12,11 +12,12 @@
 		Route::get('user', 'UserController@showIndex');
 		Route::get('user/logout', 'UserController@logoutAction');
 		Route::get('user/setup', 'UserController@showSetup');
+		Route::get('user/sync', 'UserController@syncAction');
 	});
 
 	Route::group(array('before' => 'csrf|auth'), function() {
-		Route::post('repo/{repo_id}/activate', 'RepoController@activate');
-		Route::post('repo/{repo_id}/deactivate', 'RepoController@deactivate');
+		Route::post('repo/{github_id}/activate', 'RepoController@activate');
+		Route::post('repo/{github_id}/deactivate', 'RepoController@deactivate');
 	});
 
-	Route::post('build/{repo_id}', 'BuildController@build');
+	Route::any('build/{github_id}', 'BuildController@build');

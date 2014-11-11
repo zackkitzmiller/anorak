@@ -16,7 +16,7 @@
 		 */
 		public function fire($job, $data) {
 			$client = new GithubClient;
-			$client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), NULL, GithubClient::AUTH_HTTP_TOKEN);
+			$client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), null, GithubClient::AUTH_HTTP_TOKEN);
 
 			// Gives us the variables we sent through originally
 			extract($data);
@@ -62,13 +62,13 @@
 
 				$tmpFileName = storage_path() . '/files/' . basename($filename);
 				file_put_contents($tmpFileName, $file->content());
-				$style = new PHPCheckstyle(array('array'), NULL, $buildConfig, NULL, FALSE, FALSE);
+				$style = new PHPCheckstyle(array('array'), null, $buildConfig, null, FALSE, FALSE);
 				$style->processFiles(array($tmpFileName), array());
 				$violations = $style->_reporter->reporters[0]->outputFile[$tmpFileName];
 				unlink($tmpFileName);
 
 				// The file is 100% great! Don't do anything.
-				if ($violations === NULL || count($violations) === 0) {
+				if ($violations === null || count($violations) === 0) {
 					continue;
 				}
 

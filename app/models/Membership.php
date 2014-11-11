@@ -14,6 +14,6 @@
 		}
 
 		public function repo() {
-			return $this->belongsTo('repo', 'user_id', 'id');
+			return $this->belongsTo('repo', 'user_id', 'github_id');
 		}
 	}

@@ -10,10 +10,16 @@
 		/**
 		 * Activates a repository. With auth checking.
 		 * Setups a GitHub web hook, assigns the id in our db. Done.
-		 * @param  Repo $repo
+		 * @param  int $github_id
 		 * @return Response
 		 */
-		public function activate(Repo $repo) {
+		public function activate($github_id) {
+			try {
+				$Repo = Repo::where('github_id')->first();
+			} catch (Exception $e) {
+				App::abort(404, 'Repo not found.');
+			}
+
 			// Only allow activation of repositories if you're a member of it.
 			if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 				return Response::make(array(
@@ -57,10 +63,15 @@
 		/**
 		 * Deactivates a repository. With auth checking.
 		 * Removes the GitHub web hook, unassigns the id in our db. Done.
-		 * @param  Repo $repo
+		 * @param  int $github_id
 		 * @return Response
 		 */
-		public function deactivate(Repo $repo) {
+		public function deactivate($github_id) {
+			try {
+				$Repo = Repo::where('github_id')->first();
+			} catch (Exception $e) {
+				App::abort(404, 'Repo not found.');
+			}
 			// Only allow deactivation of repositories if you're a member of it.
 			if ($repo->memberships()->where('user_id', Auth::user()->id)->count() === 0) {
 				return Response::make(array(

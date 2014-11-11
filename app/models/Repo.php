@@ -19,7 +19,8 @@
 				$this->Client = new GithubClient;
 				$this->Client->authenticate(getenv('GITHUB_CLIENT_ID'), Session::get('github.token'));
 			} catch (Exception $e) {
-
+				// TODO: Throw some kind of Internal Server Error.
+				// Use StatusPage.io
 			}
 		}
 
@@ -51,7 +52,7 @@
 			return $this->Client->repo()->hooks()->create($Username, $RepoName, array(
 				'name' => 'web',
 				'config' => array(
-					'url' => Config::get('app.url') . '/build/' . $this->id,
+					'url' => Config::get('app.url') . '/build/' . $this->github_id,
 					'content_type' => 'json',
 				),
 				'events' => array('pull_request')
@@ -78,7 +79,7 @@
 
 		public function deactivate() {
 			$this->active = 0;
-			$this->hook_id = NULL;
+			$this->hook_id = null;
 			return $this->update();
 		}
 

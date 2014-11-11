@@ -33,4 +33,12 @@
 			return View::make('user.setup');
 		}
 
+		public function syncAction() {
+			Queue::push('RepoSynchronizationJob', array('github_token' => Session::get('github.token'), 'user_id' => Auth::user()->id));
+
+			return [
+				'success' => TRUE
+			];
+		}
+
 	}

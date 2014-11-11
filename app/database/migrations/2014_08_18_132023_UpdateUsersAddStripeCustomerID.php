@@ -14,7 +14,7 @@ class UpdateUsersAddStripeCustomerID extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->string('stripe_customer_id')->nullable()->default(NULL)->after('email_address');
+			$table->string('stripe_customer_id')->nullable()->default(null)->after('email_address');
 		});
 	}
 

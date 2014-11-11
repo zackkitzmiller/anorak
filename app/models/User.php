@@ -38,7 +38,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('Service', 'user_id', 'id');
 	}
 
-	public function githubRepo($GithubID = NULL) {
+	public function githubRepo($GithubID = null) {
 		return Repo::where('github_id', $GithubID);
 	}
 

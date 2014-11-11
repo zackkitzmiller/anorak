@@ -10,8 +10,14 @@
 		 *
 		 * @return array
 		 */
-		public function build(Repo $repo) {
+		public function build($github_id) {
 			$payload = new Payload(json_decode(Request::getContent(), TRUE));
+
+			try {
+				$repo = Repo::where('github_id', $github_id)->first();
+			} catch (Exception $e) {
+				App::abort(404, "Repository not found");
+			}
 
 			// It's a test (ping), say hi.
 			if (Request::header('X-GitHub-Event') === 'ping') {
@@ -22,7 +28,7 @@
 			if (!$payload->relevant()) {
 				return Response::make([
 					'errors'  => [
-						"Irrelevant pull request"
+						'Irrelevant pull request'
 					],
 					'success' => FALSE
 				], 200);
