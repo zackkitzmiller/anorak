@@ -147,4 +147,13 @@ line:
 		</div>
 	</div>
 </section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+<script>
+// Highlight sample code.
+// TODO: Inline colours as it's only YAML.
+(function() {
+	hljs.initHighlightingOnLoad();
+}());
+</script>
 @stop
