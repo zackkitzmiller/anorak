@@ -440,6 +440,15 @@ form.signup-form {
 }
 
 /**
+ * User
+ */
+.list-group-item {
+	.repo-name {
+		vertical-align: middle;
+	}
+}
+
+/**
  * Responsive sizes.
  */
 @media screen and (max-width: 740px) {

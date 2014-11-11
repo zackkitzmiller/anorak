@@ -2169,12 +2169,19 @@ form.signup-form .subscribe-submit {
   width: 100%; }
 
 /**
+ * User
+ */
+/* line 446, ../styles.scss */
+.list-group-item .repo-name {
+  vertical-align: middle; }
+
+/**
  * Responsive sizes.
  */
 @media screen and (max-width: 740px) {
-  /* line 447, ../styles.scss */
+  /* line 456, ../styles.scss */
   .features .f-r {
     text-align: center; }
-  /* line 451, ../styles.scss */
+  /* line 460, ../styles.scss */
   .features .f-l {
     text-align: center; } }
