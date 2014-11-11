@@ -16,6 +16,15 @@
 		}
 
 		/**
+		 * Shows the users account information.
+		 * Mainly, what they're subscribed to and how much they're paying.
+		 * @return View
+		 */
+		public function showAccount() {
+			return View::make('user.account');
+		}
+
+		/**
 		 * Logs the user out and returns them to the homepage
 		 * @return Redirect
 		 */

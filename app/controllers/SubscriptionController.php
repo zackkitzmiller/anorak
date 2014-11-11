@@ -13,4 +13,8 @@
 		public function subscribe(Repo $repo) {
 			return $repo;
 		}
+
+		public function unsubscribe(Repo $repo) {
+			return $repo;
+		}
 	}
