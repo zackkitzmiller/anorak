@@ -6,9 +6,7 @@
 	 *
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class Subcription extends Eloquent {
-		protected $table = 'subscriptions';
-
+	class Subscription extends Eloquent {
 		public function user() {
 			return $this->belongsTo('user', 'user_id', 'id');
 		}
