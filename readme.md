@@ -2,7 +2,7 @@
 
 [![Dependency Status](https://www.versioneye.com/user/projects/54213d0b3a1a2c496b000286/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54213d0b3a1a2c496b000286)
 
-PHP code reviews with Anorak. 
+PHP code reviews with Anorak.
 
 ## Development
 Developing Anorak is fairly straight forward, there are just a few things that need setting up before you can get on your way.
@@ -11,7 +11,7 @@ Developing Anorak is fairly straight forward, there are just a few things that n
 2. On first clone run `composer install`, any subsequent pulls you should run `composer update` to update all dependencies.
 3. Create a `.env.local.php` file in the root of the `anorak` directory:
     ```php
-    <?php 
+    <?php
 
         return array(
             // KEEP THESE SECRET!
@@ -34,7 +34,17 @@ Developing Anorak is fairly straight forward, there are just a few things that n
     ```
 4. Ensure that you have a VHOST setup and that `anorakci.com.dev` is added to your `HOSTS` file.
 5. Run `php artisan migrate` to run any new database migrations.
-6. Your good to go.
+6. Install Node.js dependencies (Gulp and Elixir), `npm install`
+7. Your good to go.
+
+## Gulp
+Anorak uses Gulp & Elixir to compile the JavaScript code into one file.
+
+If you don't already have the `gulp` command installed, you'll need to run this:
+
+```bash
+$ npm install --global gulp
+```
 
 ## Testing
 Anorak has zero tests so far. Ideally everything should be tested using PHPUnit, but I don't have much experience in it.
@@ -43,7 +53,7 @@ Anorak has zero tests so far. Ideally everything should be tested using PHPUnit,
 Some basic rules to code:
 
 1. Don't squash your commits. You're rewriting history.
-2. Create a merge request with your changes.
+2. Create a merge request with your changes. Anorak should comment on itself if it's working.
 
 ## License
 
