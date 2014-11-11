@@ -2,6 +2,6 @@
 
 	return array(
 		'personal' => 9,
-		'organization' => 24,
+		'organization' => 12,
 		'free' => 0
 	);
