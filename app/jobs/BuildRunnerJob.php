@@ -19,7 +19,7 @@
 			$client->authenticate(getenv('ANORAK_GITHUB_TOKEN'), null, GithubClient::AUTH_HTTP_TOKEN);
 
 			// Gives us the variables we sent through originally
-			extract($data);]
+			extract($data);
 
 			$pullRequest = new PullRequest($payload, $client);
 			$files = $pullRequest->pullRequestFiles();
