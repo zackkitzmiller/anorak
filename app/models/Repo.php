@@ -11,6 +11,7 @@
 	class Repo extends Eloquent {
 		protected $fillable = array('github_id', 'full_github_name', 'private', 'active', 'hook_id', 'in_organization');
 		protected $guarded  = array();
+		protected $appends  = array('username', 'reponame');
 
 		protected $Client;
 
@@ -87,6 +88,14 @@
 			return Config::get('subscriptions')[$this->plan];
 		}
 
+		public function getUsernameAttribute() {
+			return $this->_getName()[0];
+		}
+
+		public function getReponameAttribute() {
+			return $this->_getName()[1];
+		}
+
 		public function plan() {
 			if($this->private === 1) {
 				if($this->in_organization === 1) {
@@ -97,5 +106,9 @@
 			}else{
 				return "free";
 			}
+		}
+
+		private function _getName() {
+			return explode('/', $this->full_github_name);
 		}
 	}

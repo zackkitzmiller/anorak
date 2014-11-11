@@ -21,6 +21,14 @@
 			// Gives us the variables we sent through originally
 			extract($data);
 
+			// Only run Anorak against the master .anorak.yml configuration
+			$masterConfig = $client->api('repo')->contents()->show(
+				$repo['username'],
+				$repo['reponame'],
+				PullRequest::CONFIG_FILE
+			);
+			$configFile = base64_decode($masterConfig['content']);
+
 			$pullRequest = new PullRequest($payload, $client);
 			$files = $pullRequest->pullRequestFiles();
 			// No files to modify.
@@ -30,7 +38,7 @@
 
 			try {
 				$ymlParser = new YamlParser();
-				$tmpBuildConfig = $ymlParser->parse($pullRequest->config());
+				$tmpBuildConfig = $ymlParser->parse($configFile);
 			} catch(Exception $e) {
 				// Something went wrong, let's just stop
 				$job->delete();
