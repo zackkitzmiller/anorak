@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.page')
 
 @section('content')
 <section id="sectionone" class="features-section">
