@@ -77,7 +77,6 @@
 				foreach ($violations as $violation) {
 					foreach ($violation as $violater) {
 						$violationMsg = $violater['message'];
-
 						$lineNumber = $violater['line'];
 
 						// If the violated line number is not in our patch, don't do anything.
