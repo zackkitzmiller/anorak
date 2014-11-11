@@ -14,6 +14,9 @@
 		Route::get('user/setup', 'UserController@showSetup');
 		Route::get('user/sync', 'UserController@syncAction');
 		Route::get('user/repos', 'UserController@reposAction');
+
+		Route::get('repo/{repo_id}/subscription', 'SubscriptionController@get');
+		Route::post('repo/{repo_id}/subscription', 'SubscriptionController@subscribe');
 	});
 
 	Route::group(array('before' => 'csrf|auth'), function() {

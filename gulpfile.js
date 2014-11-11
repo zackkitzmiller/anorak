@@ -17,5 +17,12 @@ elixir(function(mix) {
 			'javascripts/app/angular.js',
 			'javascripts/app/angular-resource.js',
 			'javascripts/app/application.js',
+			'javascripts/app/directives/repo.js',
+			'javascripts/app/directives/repo_list.js',
+			'javascripts/app/services/repo.js',
+			'javascripts/app/services/stripe_checkout.js',
+			'javascripts/app/services/subscription.js',
+			'javascripts/app/services/sync.js',
+			'javascripts/app/services/user.js'
 		]);
 });

@@ -33,6 +33,10 @@
 			return $this->hasMany('Membership');
 		}
 
+		public function subscription() {
+			return $this->hasOne('Subscription', 'repo_id', 'id');
+		}
+
 		public function builds() {
 			return $this->hasMany('Build', 'build_id', 'id');
 		}

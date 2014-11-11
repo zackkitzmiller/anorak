@@ -248,8 +248,204 @@ J(e),c;if(a&&H(a)){c=Array(a.length);for(var d=0,f=a.length;d<f;d++)c[d]=h(E,d,a
 Ud=da({restrict:"E",terminal:!1});T.angular.bootstrap?console.log("WARNING: Tried to load angular more than once."):(Kd(),Md(wa),z(U).ready(function(){Gd(U,sc)}))})(window,document);!window.angular.$$csp()&&window.angular.element(document).find("head").prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>');
 //# sourceMappingURL=angular.min.js.map
 
+/*
+ AngularJS v1.2.16
+ (c) 2010-2014 Google, Inc. http://angularjs.org
+ License: MIT
+*/
+(function(H,a,A){'use strict';function D(p,g){g=g||{};a.forEach(g,function(a,c){delete g[c]});for(var c in p)!p.hasOwnProperty(c)||"$"===c.charAt(0)&&"$"===c.charAt(1)||(g[c]=p[c]);return g}var v=a.$$minErr("$resource"),C=/^(\.[a-zA-Z_$][0-9a-zA-Z_$]*)+$/;a.module("ngResource",["ng"]).factory("$resource",["$http","$q",function(p,g){function c(a,c){this.template=a;this.defaults=c||{};this.urlParams={}}function t(n,w,l){function r(h,d){var e={};d=x({},w,d);s(d,function(b,d){u(b)&&(b=b());var k;if(b&&
+b.charAt&&"@"==b.charAt(0)){k=h;var a=b.substr(1);if(null==a||""===a||"hasOwnProperty"===a||!C.test("."+a))throw v("badmember",a);for(var a=a.split("."),f=0,c=a.length;f<c&&k!==A;f++){var g=a[f];k=null!==k?k[g]:A}}else k=b;e[d]=k});return e}function e(a){return a.resource}function f(a){D(a||{},this)}var F=new c(n);l=x({},B,l);s(l,function(h,d){var c=/^(POST|PUT|PATCH)$/i.test(h.method);f[d]=function(b,d,k,w){var q={},n,l,y;switch(arguments.length){case 4:y=w,l=k;case 3:case 2:if(u(d)){if(u(b)){l=
+b;y=d;break}l=d;y=k}else{q=b;n=d;l=k;break}case 1:u(b)?l=b:c?n=b:q=b;break;case 0:break;default:throw v("badargs",arguments.length);}var t=this instanceof f,m=t?n:h.isArray?[]:new f(n),z={},B=h.interceptor&&h.interceptor.response||e,C=h.interceptor&&h.interceptor.responseError||A;s(h,function(a,b){"params"!=b&&("isArray"!=b&&"interceptor"!=b)&&(z[b]=G(a))});c&&(z.data=n);F.setUrlParams(z,x({},r(n,h.params||{}),q),h.url);q=p(z).then(function(b){var d=b.data,k=m.$promise;if(d){if(a.isArray(d)!==!!h.isArray)throw v("badcfg",
+h.isArray?"array":"object",a.isArray(d)?"array":"object");h.isArray?(m.length=0,s(d,function(b){m.push(new f(b))})):(D(d,m),m.$promise=k)}m.$resolved=!0;b.resource=m;return b},function(b){m.$resolved=!0;(y||E)(b);return g.reject(b)});q=q.then(function(b){var a=B(b);(l||E)(a,b.headers);return a},C);return t?q:(m.$promise=q,m.$resolved=!1,m)};f.prototype["$"+d]=function(b,a,k){u(b)&&(k=a,a=b,b={});b=f[d].call(this,b,this,a,k);return b.$promise||b}});f.bind=function(a){return t(n,x({},w,a),l)};return f}
+var B={get:{method:"GET"},save:{method:"POST"},query:{method:"GET",isArray:!0},remove:{method:"DELETE"},"delete":{method:"DELETE"}},E=a.noop,s=a.forEach,x=a.extend,G=a.copy,u=a.isFunction;c.prototype={setUrlParams:function(c,g,l){var r=this,e=l||r.template,f,p,h=r.urlParams={};s(e.split(/\W/),function(a){if("hasOwnProperty"===a)throw v("badname");!/^\d+$/.test(a)&&(a&&RegExp("(^|[^\\\\]):"+a+"(\\W|$)").test(e))&&(h[a]=!0)});e=e.replace(/\\:/g,":");g=g||{};s(r.urlParams,function(d,c){f=g.hasOwnProperty(c)?
+g[c]:r.defaults[c];a.isDefined(f)&&null!==f?(p=encodeURIComponent(f).replace(/%40/gi,"@").replace(/%3A/gi,":").replace(/%24/g,"$").replace(/%2C/gi,",").replace(/%20/g,"%20").replace(/%26/gi,"&").replace(/%3D/gi,"=").replace(/%2B/gi,"+"),e=e.replace(RegExp(":"+c+"(\\W|$)","g"),function(a,c){return p+c})):e=e.replace(RegExp("(/?):"+c+"(\\W|$)","g"),function(a,c,d){return"/"==d.charAt(0)?d:c+d})});e=e.replace(/\/+$/,"")||"/";e=e.replace(/\/\.(?=\w+($|\?))/,".");c.url=e.replace(/\/\\\./,"/.");s(g,function(a,
+e){r.urlParams[e]||(c.params=c.params||{},c.params[e]=a)})}};return t}])})(window,window.angular);
+//# sourceMappingURL=angular-resource.min.js.map
+
 App = angular.module('Anorak', ['ngResource']);
 
 App.config(['$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.common.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+}]);
+
+App.directive('repo', ['Subscription', 'StripeCheckout', function(Subscription, StripeCheckout) {
+	return {
+		scope: true,
+		templateUrl: '/templates/repo',
+		link: function(scope, element, attributes) {
+			var activateRepo, createSubscription, deactivateRepo, deleteSubscription;
+			activateRepo = function() {
+				scope.processing = true;
+				return scope.repo.$activate()["catch"](function() {
+					return alert('Your repo failed to activate.');
+				})["finally"](function() {
+					return scope.processing = false;
+				});
+			};
+			deactivateRepo = function() {
+				scope.processing = true;
+				return scope.repo.$deactivate()["catch"](function() {
+					return alert('Your repo failed to deactivate.');
+				})["finally"](function() {
+					return scope.processing = false;
+				});
+			};
+			createSubscription = function(stripeToken) {
+				var subscription;
+				scope.processing = true;
+				subscription = new Subscription({
+					repo_id: scope.repo.id,
+					card_token: stripeToken.id,
+					email_address: stripeToken.email
+				});
+				return subscription.$save().then(function(response) {
+					scope.repo.active = true;
+					return scope.repo.stripe_subscription_id = response.stripe_subscription_id;
+				})["catch"](function() {
+					return alert('Your subscription failed.');
+				})["finally"](function() {
+					return scope.processing = false;
+				});
+			};
+			deleteSubscription = function() {
+				var subscription;
+				scope.processing = true;
+				subscription = new Subscription({
+					repo_id: scope.repo.id
+				});
+				return subscription.$delete().then(function() {
+					scope.repo.active = false;
+					return scope.repo.stripe_subscription_id = null;
+				})["catch"](function() {
+					return alert('Your repo could not be disabled');
+				})["finally"](function() {
+					return scope.processing = false;
+				});
+			};
+			return scope.toggle = function() {
+				if (scope.repo.active) {
+					if (scope.repo.stripe_subscription_id) {
+						return deleteSubscription();
+					} else {
+						return deactivateRepo();
+					}
+				} else {
+					if (scope.repo.price_in_cents > 0) {
+						return StripeCheckout.open({
+							name: scope.repo.full_plan_name,
+							amount: scope.repo.price_in_cents
+						}, createSubscription);
+					} else {
+						return activateRepo();
+					}
+				}
+			};
+		}
+	};
+}]);
+
+App.directive('repoList', ['Repo', 'Sync', 'User', '$timeout', function(Repo, Sync, User, $timeout) {
+	return {
+		scope: {},
+		templateUrl: '/templates/repo_list',
+		link: function(scope, element, attributes) {
+			var loadRepos, pollSyncStatus;
+			loadRepos = function() {
+				var repos;
+				scope.syncingRepos = false;
+				repos = Repo.query();
+				return repos.$promise.then(function(results) {
+					return scope.repos = results;
+				}, function() {
+					return alert('Your repos failed to load.');
+				});
+			};
+			pollSyncStatus = function() {
+				var failedSync, getSyncs, successfulSync;
+				successfulSync = function(user) {
+					if (user.refreshing_repos) {
+						return pollSyncStatus();
+					} else {
+						return loadRepos();
+					}
+				};
+				failedSync = function() {
+					return pollSyncStatus();
+				};
+				getSyncs = function() {
+					var user;
+					user = User.get();
+					return user.$promise.then(successfulSync, failedSync);
+				};
+				return $timeout(getSyncs, 3000);
+			};
+			scope.sync = function() {
+				var sync;
+				scope.syncingRepos = true;
+				return sync = Sync.save().$promise.then(function() {
+					return pollSyncStatus();
+				}, function() {
+					scope.syncingRepos = false;
+					return alert('Your repos failed to sync.');
+				});
+			};
+			scope.$watch('syncingRepos', function(newValue, oldValue) {
+				if (newValue) {
+					return scope.syncButtonText = 'Sycning repos';
+				} else {
+					return scope.syncButtonText = 'Sync';
+				}
+			});
+			return loadRepos().then(function() {
+				if (scope.repos.length < 1) {
+					return scope.sync();
+				}
+			});
+		}
+	};
+}]);
+
+App.factory('Repo', ['$resource', function($resource) {
+	return $resource('/repos/:id', {
+		id: '@id'
+	}, {
+		activate: {
+			method: 'POST',
+			url: 'repos/:id/activate'
+		},
+		deactivate: {
+			method: 'POST',
+			url: 'repos/:id/deactivate'
+		}
+	});
+}]);
+
+App.factory('StripeCheckout', function() {
+	return {
+		open: function(options, successCallback) {
+			return StripeCheckout.configure({
+				key: setup.stripePublishableKey,
+				image: '/images/Anorak.png',
+				token: successCallback
+			}).open(angular.extend(options, {
+				email: setup.userEmailAddress,
+				panelLabel: '{{amount}} per month',
+				allowRememberMe: false
+			}));
+		}
+	};
+});
+
+App.factory('Subscription', ['$resource', function($resource) {
+	return $resource('/repos/:repo_id/subscription', {
+		repo_id: '@repo_id'
+	});
+}]);
+
+App.factory('Sync', ['$resource', function($resource) {
+	return $resource('/user/sync');
+}]);
+
+App.factory('User', ['$resource', function($resource) {
+	return $resource('/user');
 }]);
