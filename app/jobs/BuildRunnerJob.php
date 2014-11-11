@@ -23,8 +23,9 @@
 
 			$pullRequest = new PullRequest($payload, $client);
 			$files = $pullRequest->pullRequestFiles();
-			if (count($files) === 0) {
-				continue;
+			// No files to modify.
+			if (empty($files)) {
+				return false;
 			}
 
 			try {
@@ -33,7 +34,7 @@
 			} catch(Exception $e) {
 				// Something went wrong, let's just stop
 				$job->delete();
-				return FALSE;
+				return false;
 			}
 
 			// If we have a key for "standards" then we should use this, then merge our changes on top.
@@ -45,14 +46,14 @@
 				}else{
 					// TODO: Send an email explaining that standards are incorrect.
 					$job->delete();
-					return FALSE;
+					return false;
 				}
 			}else{
 				$buildConfig = $tmpBuildConfig;
 			}
 
 			foreach ($files as $file) {
-				$startTime = microtime(TRUE);
+				$startTime = microtime(true);
 
 				$filename = $file->filename();
 				$extension = pathinfo($filename)['extension'];
@@ -62,7 +63,7 @@
 
 				$tmpFileName = storage_path() . '/files/' . basename($filename);
 				file_put_contents($tmpFileName, $file->content());
-				$style = new PHPCheckstyle(array('array'), null, $buildConfig, null, FALSE, FALSE);
+				$style = new PHPCheckstyle(array('array'), null, $buildConfig, null, false, false);
 				$style->processFiles(array($tmpFileName), array());
 				$violations = $style->_reporter->reporters[0]->outputFile[$tmpFileName];
 				unlink($tmpFileName);
@@ -91,7 +92,7 @@
 						$build = new Build;
 						$build->violations = $violationMsg;
 						$build->repo_id = $repo['id'];
-						$build->time_taken = microtime(TRUE) - $startTime;
+						$build->time_taken = microtime(true) - $startTime;
 						$build->save();
 
 						$pullRequest->addComment([
