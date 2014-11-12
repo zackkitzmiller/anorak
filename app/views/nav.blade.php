@@ -16,3 +16,9 @@
 		@endif
 	</div>
 </nav>
+
+@if($error = Session::get('error'))
+<div class='alert alert-danger'>
+	<strong>Error, whoops!</strong> {{ $error }}
+</div>
+@endif
