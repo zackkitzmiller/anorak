@@ -23,16 +23,16 @@
 			$lineNumber = 0;
 			$lines  = [];
 
-			foreach($this->lines() as $patchPos => $content) {
+			foreach($this->_lines() as $patchPos => $content) {
 				if ($line = preg_match(self::RANGE_INFORMATION_LINE, $content)) {
 					$lineNumber = (int)$line[$lineNumber];
 				} elseif ($line = preg_match(self::MODIFIED_LINE, $content)) {
-					$lines[] = [
-						'content'       => $content,
-						'lineNumber'    => (int)$lineNumber,
-						'patchPosition' => (int)$patchPos
-					];
-
+					$saneContent = preg_replace(self::MODIFIED_LINE, '', $content);
+					$lines[] = new Line(
+						(int) $lineNumber,
+						$saneContent,
+						(int) $patchPos
+					);
 					$lineNumber++;
 				} elseif ($line = preg_match(self::NOT_REMOVED_LINE, $content)) {
 					$lineNumber++;
@@ -42,7 +42,7 @@
 			return new Collection($lines);
 		}
 
-		private function lines() {
+		private function _lines() {
 			return preg_split("/\n/", $this->Body);
 		}
 	}

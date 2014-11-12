@@ -39,7 +39,7 @@
 			try {
 				$ymlParser = new YamlParser();
 				$tmpBuildConfig = $ymlParser->parse($configFile);
-			} catch(Exception $e) {
+			} catch (Exception $e) {
 				// Something went wrong, let's just stop
 				$job->delete();
 				return false;
@@ -88,12 +88,32 @@
 						$lineNumber = $violater['line'];
 
 						// If the violated line number is not in our patch, don't do anything.
-						$violationLine = $file->modifiedLines()->filter(function($line) use ($lineNumber) {
-							return (int)$line['patchPosition'] === (int)$lineNumber;
+						$violationLine = $file->changedLines()->filter(function($line) use ($lineNumber) {
+							return (int)$line->getPatchPos() === (int)$lineNumber;
 						});
 
 						if ($violationLine->isEmpty()) {
 							continue;
+						}
+
+						// Check whether we've commented on this message before.
+						$messages = array_pluck($violation, 'message');
+						$previousComments = $pullRequest->comments();
+						foreach($messages as $messageID => $message) {
+							foreach ($previousComments as $comment) {
+								/**
+								 * If we commented before and the comment is on the same line.
+								 * Don't include the comment.
+								 */
+								if ($comment['user']['login'] === getenv('ANORAK_GITHUB_USERNAME')) {
+									if ($violationLine->first()->getLineNumber() === (int) $comment['position']) {
+										if (stristr($comment['body'], $message)) {
+											unset($messages[$messageID]);
+											continue 2;
+										}
+									}
+								}
+							}
 						}
 
 						// Store the violation.
@@ -104,7 +124,7 @@
 						$build->save();
 
 						$pullRequest->addComment([
-							'messages' => array_pluck($violation, 'message'),
+							'messages' => $messages,
 							'filename' => $filename,
 							'line'     => $violationLine->first()
 						]);

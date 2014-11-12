@@ -61,6 +61,10 @@
 			return $this->Payload->get('action') === 'synchronize';
 		}
 
+		public function number() {
+			return $this->Payload->get('number');
+		}
+
 		private function api() {
 			if($this->Client) return $this->Client;
 			$this->Client = new GitHub\Client();
@@ -74,10 +78,6 @@
 
 		private function buildCommitFile($File) {
 			return new CommitFile($File, $this->headCommit());
-		}
-
-		private function number() {
-			return $this->Payload->get('number');
 		}
 
 		private function fullRepoName() {

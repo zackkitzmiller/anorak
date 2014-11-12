@@ -4,8 +4,8 @@
 	 * Lines which are changed are represented by this class.
 	 */
 	class Line {
-		public $number;
 		public $content;
+		public $lineNumber;
 		public $patchPosition;
 
 		/**
@@ -14,12 +14,20 @@
 		 * @param string $content       changes
 		 * @param integer $patchPosition where is the patch?
 		 */
-		public function __construct($number, $content, $patchPosition) {
-			$this->number = $number;
+		public function __construct($lineNumber, $content, $patchPosition) {
+			$this->lineNumber = (int) $lineNumber;
 			$this->content = $content;
-			$this->patchPosition = $patchPosition;
+			$this->patchPosition = (int) $patchPosition;
 
 			return $this;
+		}
+
+		public function getLineNumber() {
+			return $this->lineNumber;
+		}
+
+		public function getPatchPos() {
+			return $this->patchPosition;
 		}
 
 		/**
