@@ -51,7 +51,7 @@
 				// Fix for #44
 				// Don't allow blank email addresses. No error yet.
 				if (is_null($ghUser->email)) {
-					return Redirect::to('/');
+					return Redirect::to('/')->withError('You need to set an email address in your profile.');
 				}
 
 				$user = User::firstOrCreate(array(
