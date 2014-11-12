@@ -41,12 +41,14 @@
 
 		public function addComment($Violation) {
 			list($Username, $RepoName) = $this->fullRepoName();
-			return $this->api()->pullRequest()->comments()->create($Username, $RepoName, $this->number(), array(
-				'body'      => join('<br>', $Violation['messages']),
-				'commit_id' => $this->Payload->get('pull_request')['head']['sha'],
-				'path'      => $Violation['filename'],
-				'position'  => $Violation['line']['patchPosition']
-			));
+			if (!empty($Violation['messages'])) {
+				return $this->api()->pullRequest()->comments()->create($Username, $RepoName, $this->number(), array(
+					'body'      => join('<br>', $Violation['messages']),
+					'commit_id' => $this->Payload->get('pull_request')['head']['sha'],
+					'path'      => $Violation['filename'],
+					'position'  => $Violation['line']->getPatchPos()
+				));
+			}
 		}
 
 		public function config() {
