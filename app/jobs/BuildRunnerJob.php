@@ -1,7 +1,7 @@
 <?php
 
 	use \Github\Client as GithubClient;
-	use PHPCheckstyle\PHPCheckstyle;
+	use HippoPHP\Hippo;
 	use Symfony\Component\Yaml\Parser as YamlParser;
 
 	/**
@@ -33,31 +33,17 @@
 			$files = $pullRequest->pullRequestFiles();
 			// No files to modify.
 			if (empty($files)) {
+				$job->delete();
 				return false;
 			}
 
 			try {
 				$ymlParser = new YamlParser();
-				$tmpBuildConfig = $ymlParser->parse($configFile);
+				$buildConfig = $ymlParser->parse($configFile);
 			} catch(Exception $e) {
 				// Something went wrong, let's just stop
 				$job->delete();
 				return false;
-			}
-
-			// If we have a key for "standards" then we should use this, then merge our changes on top.
-			if (isset($tmpBuildConfig['standards'])) {
-				$standard = $tmpBuildConfig['standards'];
-				if (in_array($standard, Config::get('standards'))) {
-					$baseBuildConfig = $ymlParser->parse(file_get_contents(app_path() . '/rules/' . $standard . '.yml'));
-					$buildConfig = array_merge_recursive($baseBuildConfig, $tmpBuildConfig);
-				}else{
-					// TODO: Send an email explaining that standards are incorrect.
-					$job->delete();
-					return false;
-				}
-			}else{
-				$buildConfig = $tmpBuildConfig;
 			}
 
 			foreach ($files as $file) {
@@ -72,7 +58,7 @@
 				$tmpFileName = storage_path() . '/files/' . basename($filename);
 				file_put_contents($tmpFileName, $file->content());
 				// TODO: Replace this with Hippo (#92)
-				$style = new PHPCheckstyle(array('array'), null, $buildConfig, null, false, false);
+				$style = new Hippo(array('array'), null, $buildConfig, null, false, false);
 				$style->processFiles(array($tmpFileName), array());
 				$violations = $style->_reporter->reporters[0]->outputFile[$tmpFileName];
 				unlink($tmpFileName);
