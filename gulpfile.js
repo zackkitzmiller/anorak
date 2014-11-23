@@ -14,8 +14,8 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
 	mix.sass('styles.scss')
 	   .scripts([
-			'js/app/angular.js',
-			'js/app/angular-resource.js',
+			'js/bower_components/angular/angular.js',
+			'js/bower_components/angular-resource/angular-resource.js',
 			'js/app/application.js',
 			'js/app/directives/repo.js',
 			'js/app/directives/repo_list.js',
@@ -23,7 +23,7 @@ elixir(function(mix) {
 			'js/app/services/stripe_checkout.js',
 			'js/app/services/subscription.js',
 			'js/app/services/sync.js',
-			'js/app/services/user.js'
+			'js/app/services/user.js',
 		]).version([
 			'js/all.js',
 			'css/styles.css'
