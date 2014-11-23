@@ -10,16 +10,13 @@
 		ga('create', 'UA-42158883-3', 'auto');
 		ga('send', 'pageview');
 	</script>
-	
+
 	@include('nav')
 
 	@section('content')
 	@show
 
-	{{-- @include('footer') --}}
-
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<!-- <script src="/javascripts/bootstrap.js"></script> -->
-	<script src="/javascripts/app.js"></script>
+	<script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>

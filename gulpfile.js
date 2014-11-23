@@ -12,17 +12,20 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-	mix.sass('stylesheets/styles.scss')
+	mix.sass('styles.scss')
 	   .scripts([
-			'javascripts/app/angular.js',
-			'javascripts/app/angular-resource.js',
-			'javascripts/app/application.js',
-			'javascripts/app/directives/repo.js',
-			'javascripts/app/directives/repo_list.js',
-			'javascripts/app/services/repo.js',
-			'javascripts/app/services/stripe_checkout.js',
-			'javascripts/app/services/subscription.js',
-			'javascripts/app/services/sync.js',
-			'javascripts/app/services/user.js'
+			'js/app/angular.js',
+			'js/app/angular-resource.js',
+			'js/app/application.js',
+			'js/app/directives/repo.js',
+			'js/app/directives/repo_list.js',
+			'js/app/services/repo.js',
+			'js/app/services/stripe_checkout.js',
+			'js/app/services/subscription.js',
+			'js/app/services/sync.js',
+			'js/app/services/user.js'
+		]).version([
+			'js/all.js',
+			'css/styles.css'
 		]);
 });

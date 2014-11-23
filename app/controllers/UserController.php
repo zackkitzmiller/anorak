@@ -59,7 +59,7 @@
 		 * @return array
 		 */
 		public function reposAction() {
-			return Auth::user()->repos;
+			return Auth::user()->repos()->orderBy('full_github_name')->get();
 		}
 
 	}

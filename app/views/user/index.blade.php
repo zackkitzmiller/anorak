@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<ul class='list-group'>
-						<form name='repos'>
+						<form name='ReposList'>
 							@forelse(Auth::user()->repos()->orderBy('full_github_name')->get() as $Repo)
 							@include('user.repo')
 							@empty
