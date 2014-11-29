@@ -1,14 +1,14 @@
 App.factory('Repo', ['$resource', function($resource) {
-	return $resource('/repos/:id', {
+	return $resource('/user/repos/:id', {
 		id: '@id'
 	}, {
 		activate: {
 			method: 'POST',
-			url: 'repos/:id/activate'
+			url: '/repos/:id/activate'
 		},
 		deactivate: {
 			method: 'POST',
-			url: 'repos/:id/deactivate'
+			url: '/repos/:id/deactivate'
 		}
 	});
 }]);
