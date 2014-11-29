@@ -30,18 +30,9 @@
 							</div>
 						</div>
 					</div>
-					<ul class='list-group'>
-						<form name='ReposList'>
-							@forelse(Auth::user()->repos()->orderBy('full_github_name')->get() as $Repo)
-							@include('user.repo')
-							@empty
-							<li class='list-group-item'>
-								Your repositories may still be syncing. &ndash; If you've just signed up to Anorak, refresh in a few seconds
-							</li>
-							@endforelse
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						</form>
-					</ul>
+					<div class='panel-body'>
+						@{{(repos | filter:{active: true}).length}} of @{{repos.length}}
+					</div>
 				</div>
 			</div>
 			<div class='col-md-3'></div>
