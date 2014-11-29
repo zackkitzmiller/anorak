@@ -21,8 +21,6 @@
 	}
 }
 
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
-
 $primary-green: #87D47C;
 $darker-green: darken($primary-green, 7.5%);
 $light-green: lighten($primary-green, 30%);
@@ -31,6 +29,7 @@ $primary-grey: #6C7A89;
 * {
 	margin: 0;
 	padding: 0px;
+	box-sizing: border-box;
 }
 
 html, body {
@@ -38,17 +37,18 @@ html, body {
 }
 
 body {
+	font-family: 'Helvetica Neue', Helvetica, 'Open Sans', sans-serif;
+	font-weight: 300;
 	background: #FFF;
 	margin: 0;
 	color: #343434;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5 {
 	font-family: 'Raleway';
 }
 
 p {
-	font-family: 'Lato', sans-serif;
 	font-weight: 300;
 	padding: 0;
 	margin-bottom: 12px;
@@ -85,8 +85,8 @@ a {
 }
 
 hr {
-	border: 1px solid #5a5a5a;
-	width: 120px;
+	border: 1px solid rgba(white, 0.6) !important;
+	width: 220px;
 }
 
 .navbar {
@@ -129,10 +129,6 @@ header {
 	background-size: 100%;
 	background-size: cover;
 
-	hr {
-		border: 2px solid white;
-		width: 120px;
-	}
 	h1, h2 {
 		color: white;
 	}

@@ -12,10 +12,10 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-	mix.sass('styles.scss').version('css/styles.css');
-	  /* .scripts([
-			'js/bower_components/angular-resource/angular-resource.min.js',
-			'js/bower_components/angular/angular.min.js',
+	mix.sass('styles.scss')
+	   .scripts([
+			'assets/js/bower_components/angular-resource/angular-resource.min.js',
+			'assets/js/bower_components/angular/angular.min.js',
 			// 'js/app/application.js',
 			// 'js/app/directives/repo.js',
 			// 'js/app/directives/repo_list.js',
@@ -24,8 +24,5 @@ elixir(function(mix) {
 			// 'js/app/services/subscription.js',
 			// 'js/app/services/sync.js',
 			// 'js/app/services/user.js',
-		]).version(
-			'js/all.js'
-			// 'css/styles.css'
-		);*/
+		]).version(['css/styles.css', 'js/all.js']);
 });
