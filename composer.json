@@ -1,48 +1,49 @@
 {
-	"name": "jbrooksuk/anorak",
-	"description": "PHP code reviews with Anorak.",
-	"keywords": ["code", "reviews", "anorak"],
-	"license": "MIT",
-	"require": {
-		"laravel/framework": "4.2.*",
-		"league/oauth2-client": "~0.3",
-		"knplabs/github-api": "*",
-		"webpatser/laravel-uuid": "dev-master",
-		"pda/pheanstalk": "2.0.*",
-		"symfony/yaml": "~2",
-		"jbrooksuk/phpcheckstyle": "dev-master",
-		"segmentio/analytics-php": "dev-master",
-		"laravel/cashier": "~2.0"
-	},
-	"autoload": {
-		"classmap": [
-			"app/commands",
-			"app/controllers",
-			"app/providers",
-			"app/models",
-			"app/jobs",
-			"app/database/migrations",
-			"app/database/seeds"
-		],
-		"psr-0": {
-			"GitHub": "vendor/knplabs/github-api/lib"
-		}
-	},
-	"scripts": {
-		"post-install-cmd": [
-			"php artisan clear-compiled",
-			"php artisan optimize"
-		],
-		"post-update-cmd": [
-			"php artisan clear-compiled",
-			"php artisan optimize"
-		],
-		"post-create-project-cmd": [
-			"php artisan key:generate"
-		]
-	},
-	"config": {
-		"preferred-install": "dist"
-	},
-	"minimum-stability": "dev"
+  "name": "jbrooksuk/anorak",
+  "description": "PHP code reviews with Anorak.",
+  "type": "project",
+  "keywords": ["code", "reviews", "anorak"],
+  "license": "MIT",
+  "require": {
+    "laravel/framework": "4.2.*",
+    "league/oauth2-client": "~0.3",
+    "knplabs/github-api": "*",
+    "webpatser/laravel-uuid": "dev-master",
+    "pda/pheanstalk": "2.0.*",
+    "symfony/yaml": "~2",
+    "jbrooksuk/phpcheckstyle": "dev-master",
+    "segmentio/analytics-php": "dev-master",
+    "laravel/cashier": "~2.0"
+  },
+  "autoload": {
+    "classmap": [
+      "app/commands",
+      "app/controllers",
+      "app/providers",
+      "app/models",
+      "app/jobs",
+      "app/database/migrations",
+      "app/database/seeds"
+    ],
+    "psr-0": {
+      "GitHub": "vendor/knplabs/github-api/lib"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "php artisan clear-compiled",
+      "php artisan optimize"
+    ],
+    "post-update-cmd": [
+      "php artisan clear-compiled",
+      "php artisan optimize"
+    ],
+    "post-create-project-cmd": [
+      "php artisan key:generate"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev"
 }
