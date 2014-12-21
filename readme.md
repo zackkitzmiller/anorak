@@ -47,6 +47,11 @@ If you don't already have the `gulp` command installed, you'll need to run this:
 $ npm install --global gulp
 ```
 
+## Vagrant
+If you're using vagrant, a `Vagrantfile` is provided. You can start the Anorak Virtual Machine with `$ vagrant up`
+
+Works with both VMWare and VirtualBox
+
 ## Testing
 Anorak has zero tests so far. Ideally everything should be tested using PHPUnit, but I don't have much experience in it.
 
