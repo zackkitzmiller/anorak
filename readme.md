@@ -27,9 +27,9 @@ Developing Anorak is fairly straight forward, there are just a few things that n
             'MYSQL_USERNAME' => 'mysql-user',
             'MYSQL_PASSWORD' => 'mysql-pass',
 
-            // STRIPE
-            'STRIPE_SECRET_KEY'      => 'sk_test_Uko8d0VdFq3reGahtVPmOO1r',
-            'STRIPE_PUBLISHABLE_KEY' => 'pk_test_qjI4B7vuJyKsn2xFjj8Dxk77',
+            // STRIPE - CHANGE THESE
+            'STRIPE_SECRET_KEY'      => 'sk_test_foobar',
+            'STRIPE_PUBLISHABLE_KEY' => 'pk_test_foobar',
         );
     ?>
     ```
