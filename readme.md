@@ -15,8 +15,8 @@ Developing Anorak is fairly straight forward, there are just a few things that n
 
         return array(
             // KEEP THESE SECRET!
-            'GITHUB_CLIENT_ID'     => '0dd6c37721a10448290e',
-            'GITHUB_CLIENT_SECRET' => '25423ebc112be234906fe61f6c2763b012d6a0a9',
+            'GITHUB_CLIENT_ID'     => '', // CHANGE THIS
+            'GITHUB_CLIENT_SECRET' => '', // CHANGE THIS
             'ANORAK_GITHUB_TOKEN'  => 'YOUR-USER-TOKEN',
             'ANORAK_GITHUB_USERNAME' => 'anorakci',
 
